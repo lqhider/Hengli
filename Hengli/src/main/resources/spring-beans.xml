@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="1" />
+		<property name="locations">
+			<list>
+				<value>classpath:dbContext.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName">
+			<value>${db.driverClassName}</value>
+		</property>
+		<property name="defaultAutoCommit" >
+			<value>false</value>
+		</property>
+		<property name="url">
+			<value>${db.url}</value>
+		</property>
+		<property name="username">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+		<property name="initialSize">
+			<!--初始化最大的连接数量-->
+			<value>${db.initialSize}</value>
+		</property>
+        <property name="maxActive">
+        	<!--最大的活跃的数量-->
+        	<value>${db.maxActive}</value>
+        </property>
+        <property name="maxWait">
+        	<!--最长的等待时间-->
+        	<value>${db.maxWait}</value>
+        </property>
+        <property name="timeBetweenEvictionRunsMillis">
+        	<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，相当于C3P0的idleConnectionTestPeriod 参数，单位是毫秒 -->
+        	<value>${db.timeBetweenEvictionRunsMillis}</value>
+        </property>
+        <property name="minEvictableIdleTimeMillis">
+        	<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        	<value>${db.minEvictableIdleTimeMillis}</value>
+        </property>
+    </bean>
+    
+	<!-- 事务管理器  -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- mybatis配置  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+<!-- 		<property name="transactionFactory">
+			<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
+		</property>  --> 
+		<property name="mapperLocations">
+			<array>
+				<value>classpath:mybatis/resultMapXML/*.xml</value>
+				<value>classpath:mybatis/mapperXML/*.xml</value>
+			</array>
+		</property>
+		
+ 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<property name="typeAliasesPackage" value="com.hengli.db.dto" />
+		<!-- 分页插件 -->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+		
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hengli.db.mapper" />
+	</bean>
+
+
+	<!-- 配置国际化资源文件路径 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <!-- 定义消息资源文件的相对路径 -->
+            <value>messages</value>
+        </property>
+        <property name="fallbackToSystemLocale" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="180"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>
+    <!-- 基于Cookie的本地化解析器 -->
+     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+       <property name="cookieMaxAge" value="604800"/>
+       <property name="defaultLocale" value="en"/>
+       <property name="cookieName" value="Language"></property>
+     </bean>
+     
+	<!-- 语言编码拦截器 -->
+    <bean id="EncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">
+       <property name="encoding" value="UTF-8"/>
+       <property name="forceEncoding" value="true"/>
+    </bean>
+    <mvc:interceptors>  
+    	<!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 --> 
+    	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />  
+	</mvc:interceptors>
+	
+    <!-- 启动对@AspectJ注解的支持  -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    
+    <!-- 启动对传统切面注解的支持 -->
+    <aop:config proxy-target-class="true"></aop:config>
+
+    
+    <!-- Spring MVC使用ViewResolver来根据controller中返回的view名关联到具体的View对象。
+    `使用View对象来渲染返回值以生成最终的视图，如html,json或pdf等 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/pages/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+	<!-- 使用ViewResolver时，必须使用资源指示排除对资源路径的路由  -->
+    <mvc:resources location="/resources/" mapping="/resources/**"/>
+    
+</beans>
