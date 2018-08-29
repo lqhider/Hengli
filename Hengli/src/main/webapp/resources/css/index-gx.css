@@ -74,7 +74,7 @@
 }
 .menu {
     position: absolute;
-    width: 500px;
+    width: 400px;
     background-color: #fff;
     left: 0;
     top: 0;
@@ -268,19 +268,12 @@
 }
 
 .con_box {
-    padding: 20px 10px;
+	padding-left:250px;
     overflow: hidden;
-    height: 100%;
 }
 
 .content {
     padding-left: 160px;
-}
-
-.con_box {
-    padding: 20px;
-    overflow: hidden;
-    height: 100%;
 }
 
 .con_tit {
@@ -927,14 +920,6 @@ a:active {
     position: relative;
 }
 
-.pop_img .img {
-    float: left;
-    width: 52px;
-    height: 52px;
-    border-radius: 4px;
-    background-color: #E4EEF0;
-}
-
 .img_up {
     text-align: center;
     border: 1px solid #bddaeb;
@@ -972,13 +957,6 @@ a:active {
 .app_info {
     padding: 20px 40px;
     overflow: hidden;
-}
-
-.app_info .img {
-    width: 52px;
-    height: 52px;
-    float: left;
-    margin-right: 20px;
 }
 
 .app_info .txt {
@@ -1444,12 +1422,7 @@ a:active {
 	display: none;
 }
 .con_left{
-    width: 270px;
-    background-color: #fff;
-    border-radius: 10px 0 0 10px;
-    border-right: 1px solid #d6e8f3;
-    box-sizing: border-box;
-    position: absolute;
+    padding-top: 750px;
 }
 .con_right{
     padding-left: 270px;

@@ -26,9 +26,10 @@
 	
 			<div class="topRight">
 		     <!-- 切换租户 -->
-			<div class="changeSelect changeUser">
+			<div class="changeSelect">
 			<span>切换租户</span>
-			<div></div>
+			<input type="text" id="companyName">
+			<span id="sub">提交</span>
 			</div>
 			
 			</div>
@@ -37,10 +38,14 @@
 
 		<!--系统显示区域-->
 		<div class="main-page">
-			<iframe src="${pageContext.request.contextPath}/gxIndex" frameborder="0"
+			<%-- <iframe src="${pageContext.request.contextPath}/gxIndex" frameborder="0"
 				marginheight="0" scrolling="no" marginwidth="0" width="100%"
-				height="100%" id="mainFrame" name="mainFrame"></iframe>
+				height="100%" id="mainFrame" name="mainFrame"></iframe> --%>
+			<jsp:include page="gx/gxlist.jsp"/>
 		</div>
 	</div>
 	</body>
+<script type="text/javascript">
+var contextPath="${pageContext.request.contextPath }";
+</script>
 </html>
