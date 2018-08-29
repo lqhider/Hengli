@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
@@ -73,7 +75,6 @@
 		</property>  --> 
 		<property name="mapperLocations">
 			<array>
-				<value>classpath:mybatis/resultMapXML/*.xml</value>
 				<value>classpath:mybatis/mapperXML/*.xml</value>
 			</array>
 		</property>
@@ -128,12 +129,17 @@
     	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />  
 	</mvc:interceptors>
 	
+	<mvc:annotation-driven/>
+	<!-- 配置要扫描的包 -->
+	<context:component-scan base-package="com.hengli"></context:component-scan>
+	
     <!-- 启动对@AspectJ注解的支持  -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     
     <!-- 启动对传统切面注解的支持 -->
     <aop:config proxy-target-class="true"></aop:config>
 
+    <mvc:default-servlet-handler/>
     
     <!-- Spring MVC使用ViewResolver来根据controller中返回的view名关联到具体的View对象。
     `使用View对象来渲染返回值以生成最终的视图，如html,json或pdf等 -->
