@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengli.db.mapper.CompanyMapper">
+	
+	<!-- 查询企业 -->
+	<select id="selectCompany" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			company 
+		<where>
+			<if test="first_classification != null and first_classification !='' ">
+				AND first_classification = #{first_classification}
+			</if>
+			<if test="second_classification != null and second_classification !='' ">
+				AND second_classification = #{second_classification}
+			</if>
+		</where>
+	</select>
+</mapper>  

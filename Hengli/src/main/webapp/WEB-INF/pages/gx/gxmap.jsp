@@ -32,8 +32,155 @@ var contextPath="${pageContext.request.contextPath }";
 
 	//百度地图API功能
 	var map = new BMap.Map("container");    // 创建Map实例
-	var point = new BMap.Point(117.162252,39.166211);
-	map.centerAndZoom(point,19);  // 初始化地图,设置中心点坐标和地图级别
+	
+	map.setMapStyle({
+		styleJson:[
+	          {
+                  "featureType": "water",
+                  "elementType": "all",
+                  "stylers": {
+                            "color": "#292081"
+                  }
+        },
+        {
+                  "featureType": "highway",
+                  "elementType": "geometry.fill",
+                  "stylers": {
+                            "color": "#000000"
+                  }
+        },
+        {
+                  "featureType": "highway",
+                  "elementType": "geometry.stroke",
+                  "stylers": {
+                            "color": "#147a92"
+                  }
+        },
+        {
+                  "featureType": "arterial",
+                  "elementType": "geometry.fill",
+                  "stylers": {
+                            "color": "#000000"
+                  }
+        },
+        {
+                  "featureType": "arterial",
+                  "elementType": "geometry.stroke",
+                  "stylers": {
+                            "color": "#0b3d51"
+                  }
+        },
+        {
+                  "featureType": "local",
+                  "elementType": "geometry",
+                  "stylers": {
+                            "color": "#000000"
+                  }
+        },
+        {
+                  "featureType": "land",
+                  "elementType": "all",
+                  "stylers": {
+                            "color": "#2A2081"
+                  }
+        },
+        {
+                  "featureType": "railway",
+                  "elementType": "geometry.fill",
+                  "stylers": {
+                            "color": "#000000"
+                  }
+        },
+        {
+                  "featureType": "railway",
+                  "elementType": "geometry.stroke",
+                  "stylers": {
+                            "color": "#2A2081"
+                  }
+        },
+        {
+                  "featureType": "subway",
+                  "elementType": "geometry",
+                  "stylers": {
+                            "lightness": -70
+                  }
+        },
+        {
+                  "featureType": "building",
+                  "elementType": "geometry.fill",
+                  "stylers": {
+                            "color": "#000000"
+                  }
+        },
+        {
+                  "featureType": "all",
+                  "elementType": "labels.text.fill",
+                  "stylers": {
+                            "color": "#857f7f"
+                  }
+        },
+        {
+                  "featureType": "all",
+                  "elementType": "labels.text.stroke",
+                  "stylers": {
+                            "color": "#000000"
+                  }
+        },
+        {
+                  "featureType": "building",
+                  "elementType": "geometry",
+                  "stylers": {
+                            "color": "#022338"
+                  }
+        },
+        {
+                  "featureType": "green",
+                  "elementType": "geometry",
+                  "stylers": {
+                            "color": "#062032"
+                  }
+        },
+        {
+                  "featureType": "boundary",
+                  "elementType": "all",
+                  "stylers": {
+                            "color": "#6480CC"
+                  }
+        },
+        {
+                  "featureType": "manmade",
+                  "elementType": "geometry",
+                  "stylers": {
+                            "color": "#022338"
+                  }
+        },
+        {
+                  "featureType": "poi",
+                  "elementType": "all",
+                  "stylers": {
+                            "visibility": "off"
+                  }
+        },
+        {
+                  "featureType": "all",
+                  "elementType": "labels.icon",
+                  "stylers": {
+                            "visibility": "off"
+                  }
+        },
+        {
+                  "featureType": "all",
+                  "elementType": "labels.text.fill",
+                  "stylers": {
+                            "color": "#ffffffff",
+                            "visibility": "on"
+                  }
+        }
+]
+	});
+	
+	var point = new BMap.Point(113.972995,23.024814);
+	map.centerAndZoom(point,15);  // 初始化地图,设置中心点坐标和地图级别
 	/* //添加地图类型控件
 	map.addControl(new BMap.MapTypeControl({
 		mapTypes:[
@@ -43,28 +190,16 @@ var contextPath="${pageContext.request.contextPath }";
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 	
 	// 初始化地图， 设置中心点坐标和地图级别
-	var marker = new BMap.Marker(point);
-	map.addOverlay(marker);
+	//var marker = new BMap.Marker(point);
+	//map.addOverlay(marker);
 
 	function addMarker(arr){
 		for(var i = 0; i < arr.length; i ++){
 			
-			var infoBox = new BMapLib.InfoBox(map,html.join(""),{
-				boxStyle:{
-					background:"no-repeat center top"
-					,width: "270px"
-					,height: "300px"
-				},
-				closeIconMargin: "1px 1px 0 0",
-				enableAutoPan: true,
-				align: INFOBOX_AT_TOP
-			});
+			var pointEach = new BMap.Point(arr[i].longitude, arr[i].latitude);
+			var markerEach = new BMap.Marker(pointEach);
+			map.addOverlay(markerEach);
 			
-			var point = new BMap.Point(arr[i].lng, arr[i].lat);
-			var marker = new BMap.Marker(point);
-			map.addOverlay(marker);
-			
-			infoBox.open(marker);
 		}
 	}
 </script>

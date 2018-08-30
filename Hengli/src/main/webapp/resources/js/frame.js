@@ -15,13 +15,12 @@
     				companyName:$("#companyName").val()
     		}
         	//ajax
-        	ajaxFactory("post",contextPath+"/gx/getData",param).done(function(result){
+        	ajaxFactory("post",contextPath+"/gx/getGxData",param).done(function(result){
 		  	  if(result.status=="true"){
-		  		  //
-		  		  var arr = new Array();
-		  		  var obj = {lng:"117.162868", lat:"39.166204"};
-		  		  arr.push(obj);
-		  		  addMarker(arr);
+		  		  //地图标注
+		  		  var data = result.data;
+		  		  addMarker(data.companyList);
+		  		  addMarker(data.innovationCenterList);
 		  	  }
         	}) 
 		})
