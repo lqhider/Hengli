@@ -193,14 +193,25 @@ var contextPath="${pageContext.request.contextPath }";
 	//var marker = new BMap.Marker(point);
 	//map.addOverlay(marker);
 
-	function addMarker(arr){
-		for(var i = 0; i < arr.length; i ++){
+	function addMarker(longitude,latitude,sContent){
 			
-			var pointEach = new BMap.Point(arr[i].longitude, arr[i].latitude);
-			var markerEach = new BMap.Marker(pointEach);
-			map.addOverlay(markerEach);
-			
-		}
+		var pointEach = new BMap.Point(longitude, latitude);
+		var markerEach = new BMap.Marker(pointEach);
+		map.addOverlay(markerEach);
+		
+		var infoWindow = new BMap.InfoWindow(sContent);
+		markerEach.addEventListener("click", function(){          
+		   this.openInfoWindow(infoWindow);
+		});
+	}
+	
+	function openInfoWindow(longitude,latitude,sContent){
+		var pointEach = new BMap.Point(longitude, latitude);
+		var markerEach = new BMap.Marker(pointEach);
+		var infoWindow = new BMap.InfoWindow(sContent);
+		
+		var infoWindow = new BMap.InfoWindow(sContent);
+		markerEach.openInfoWindow(infoWindow);
 	}
 </script>
 </html>

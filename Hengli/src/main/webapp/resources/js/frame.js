@@ -17,10 +17,39 @@
         	//ajax
         	ajaxFactory("post",contextPath+"/gx/getGxData",param).done(function(result){
 		  	  if(result.status=="true"){
-		  		  //地图标注
 		  		  var data = result.data;
-		  		  addMarker(data.companyList);
-		  		  addMarker(data.innovationCenterList);
+		  		  var companyList = data.companyList;
+		  		  var innovationCenterList = data.innovationCenterList;
+		  		  
+		  		  //创新中心列表
+		  		  $(".cus").empty();
+		  		  var html="";
+		  		  for(var i = 0; i < innovationCenterList.length; i ++){
+		  			  
+		  			  html += '<div class="gd_box" id="innovationCenter'+i+'">'+innovationCenterList[i].name+'</div>';
+		  			  
+		  		  }
+		  		  $(".cus").empty().append(html);
+		  		  
+		  		  for(var i = 0; i < innovationCenterList.length; i ++){
+		  			  /*var pointEach = new BMap.Point(innovationCenterList[i].longitude, innovationCenterList[i].latitude);
+		  			  var markerEach = new BMap.Marker(pointEach);
+		  			  
+		  			  var infoWindow = new BMap.InfoWindow('');
+		  			  $("#innovationCenter"+i).click(function(){
+		  				  alert(markerEach.getPosition().lng);
+		  				  markerEach.openInfoWindow(infoWindow);
+		  			  })*/
+		  			  openInfoWindow(innovationCenterList[i].longitude, innovationCenterList[i].latitude,'');
+		  		  }
+		  		  
+		  		  //地图标注
+		  		  for(var i = 0; i < companyList.length; i ++){
+		  			  addMarker(companyList[i].longitude,companyList[i].latitude,'');
+		  		  }
+		  		  for(var i = 0; i < innovationCenterList.length; i ++){
+		  			  addMarker(innovationCenterList[i].longitude,innovationCenterList[i].latitude,'');
+		  		  }
 		  	  }
         	}) 
 		})
