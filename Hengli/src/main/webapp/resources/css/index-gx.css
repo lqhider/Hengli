@@ -1,8 +1,4 @@
-.tc-wrap {
-    position: relative;
-    width: 100%;
-    background-color: #f1f6f9;
-}
+
 .top{
     height: 55px;
     line-height: 55px;
@@ -71,42 +67,6 @@
 }
 .user:hover .user-sub{
     display: block;
-}
-.menu {
-    position: absolute;
-    width: 400px;
-    background-color: #fff;
-    left: 0;
-    top: 0;
-	z-index: 1;
-	box-shadow: 0 0 12px 0 #eee;
-	overflow: hidden;
-}
-.menu .first-classify {
-	position: relative;
-    left: 20px;
-    border-top: 1px solid #f1f6f9;
-    text-align: center;
-    padding: 0 9px;
-    width: 102px;
-    height: 100px;
-}
-
-.menu .second-classify {
-	position: relative;
-    left: 20px;
-    border-top: 20px solid #fff;
-    text-align: center;
-    padding: 0 9px;
-    width: 102px;
-    height: 100px;
-}
-
-.menu-list,
-.short-open {
-    position: relative;
-    width: 100%;
-    margin: 10px 0;
 }
 
 .draw-icon {

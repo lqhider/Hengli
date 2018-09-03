@@ -38,4 +38,9 @@ public class PageController {
 	public String gxmap() {
 		return "gx/gxmap";	
 	}
+	
+	@RequestMapping("/highcharts")
+	public String highcharts() {
+		return "gx/HighchartsTest";	
+	}
 }
