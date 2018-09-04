@@ -39,6 +39,16 @@ public class PageController {
 		return "gx/gxmap";	
 	}
 	
+	/**
+	 * 跳转供需平台首页
+	 * 
+	 * @return 跳转路径
+	 */
+	@RequestMapping("/gxpt")
+	public String gxpt() {
+		return "gxpt";
+	}
+	
 	@RequestMapping("/highcharts")
 	public String highcharts() {
 		return "gx/HighchartsTest";	
