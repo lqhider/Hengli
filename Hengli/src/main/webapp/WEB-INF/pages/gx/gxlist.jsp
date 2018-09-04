@@ -19,7 +19,7 @@
 		<div class="tc-wrap">
 			<!--左侧导航栏-->
 			<div class="menu">
-				<div class="first-classify">
+				<!-- <div class="first-classify">
 					<div class="logo"><div style="padding-left: 8px;">一级分类</div></div>
 					<div class="cc">
 						<div class="mj">冲压模具</div><div class="mj">简易模具</div><div class="mj">塑料成型模具</div><div class="mj">压铸模</div>
@@ -36,6 +36,11 @@
 						<div class="mj">有限元分析</div><div class="mj">铸锻加工</div><div class="mj">车加工</div>
 						<div class="mj">铣加工</div><div class="mj">钻加工</div><div class="mj">模加工</div>
 						<div class="mj">电火花加工</div>
+					</div>
+				</div> -->
+				<div class="center">
+					<div>创新中心</div>
+					<div class="cus">
 					</div>
 				</div>
 			</div>
