@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript" src="resources/js/libs/jquery.js"></script>
-		<script type="text/javascript" src="resources/js/libs/highcharts.js"></script>
+		<script type="text/javascript" src="resources/js/highcharts.js"></script>
 	</head>
 	<body>
 		<div id="container" style="height: 300px">
@@ -16,9 +16,12 @@
 				colors[i] = {
 					linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
 					stops: [
-						[0, color],
-						[0.3, 'white'],
-						[1, color]
+						[0, "#5D4BA5"],
+						[0.2, "#6F5CCE"],
+						[0.4, '#8460CD'],
+						[0.6, '#BD7BEA'],
+						[0.8, '#D186E8'],
+						[1, "#8963B4"]
 					]
 				};
 			});

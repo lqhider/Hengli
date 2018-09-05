@@ -10,6 +10,7 @@
 			*
 		FROM
 			first_classification 
+		ORDER BY sort
 	</select>
 	
 	<!-- 查询二级分类 -->
@@ -18,5 +19,6 @@
 			*
 		FROM
 			second_classification 
+		ORDER BY sort
 	</select>
 </mapper>  

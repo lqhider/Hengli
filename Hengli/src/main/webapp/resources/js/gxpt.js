@@ -80,8 +80,35 @@
 							'<p class="clearfix"><span>供应数量：'+companyList[i].product_number+'</span><span>需求数量：'+companyList[i].need_number+'</span></p>'+
 							'<p class="clearfix">定制服务数量：'+companyList[i].custom_service_number+'</p></a>';
 		  			  
+		  			/*var sContent = '<div style="width: 340px;position: absolute;top: 140px;right: 15px;padding: 15px 15px 5px 15px;z-index: 8;">'+
+										'<div style="position: absolute;width: 100%;height: 100%;left: 0;right: 0;top: 0;background: #6452e7;opacity: 0.7;z-index:8;"></div>'+
+										'<div style="position: relative;z-index: 9;color: #fff;font-size: 14px;">'+
+											'<h5>东莞市天倬模具有限公司</h5>'+
+											'<p>供应数量：</p>'+
+											'<p>需求数量：</p>'+
+											'<p>定制服务数量：</p>'+
+											'<div style="text-align: right;margin-top: 10px;">'+
+												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto;background: url(../images/gszy.png) no-repeat;"></a>'+
+												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto; background: url(../images/gxpt.png) no-repeat;margin-left: 10px;"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';*/
+		  			var sContent = '<div class="wr-w1">'+
+										'<div class="mask"></div>'+
+										'<div class="content">'+
+											'<h5>东莞市天倬模具有限公司</h5>'+
+											'<p>供应数量：</p>'+
+											'<p>需求数量：</p>'+
+											'<p>定制服务数量：</p>'+
+											'<div class="cbtn-w">'+
+												'<a href="#" class="com-btn gszy"></a>'+
+												'<a href="#" class="com-btn gxpt"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+		  			  
 		  			  //地图标注
-		  			  addMarker(companyList[i].longitude,companyList[i].latitude,'');
+		  			  addMarker(companyList[i].longitude,companyList[i].latitude,sContent);
 		  		  }
 		  		  $("#qylb").empty().append(html);
 		  		  
@@ -98,12 +125,19 @@
 		  		  
 		  		  $("#qylb a").each(function(index, element) {
   			  		$(this).click(function(){
+  			  			$("#qylb a").removeClass("active");
+  			  			$("#cxzx a").removeClass("active");
+  			  			$(this).addClass("active");
+  			  			
 	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude,'');
   			  		})
 	  			  })
 		  		  
   			  	  $("#cxzx a").each(function(index, element) {
   			  		$(this).click(function(){
+  			  			$("#qylb a").removeClass("active");
+			  			$("#cxzx a").removeClass("active");
+			  			$(this).addClass("active");
 	  					openInfoWindow(innovationCenterList[index].longitude, innovationCenterList[index].latitude,'');
   			  		})
 	  			  })
@@ -118,6 +152,51 @@
 		  	  }
         	}) 
     	}
+    	
+    	
+    	
+    	var colors = Highcharts.getOptions().colors;
+		$.each(colors, function(i, color) {
+			colors[i] = {
+				linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
+				stops: [
+					[0, "#5D4BA5"],
+					[0.2, "#6F5CCE"],
+					[0.4, '#8460CD'],
+					[0.6, '#BD7BEA'],
+					[0.8, '#D186E8'],
+					[1, "#8963B4"]
+				]
+			};
+		});
+		// Create the chart
+		var chart = new Highcharts.Chart({
+			chart: {
+				renderTo: 'chart',
+				type: 'column'
+			},
+			title: {
+				text: '各工业区企业数量分布'
+			},
+			xAxis: {
+				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			},
+			yAxis:{
+				title:{
+					text:''
+				},
+				labels:{
+					enabled:false
+			   }
+			},
+			series: [{
+				data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+				showInLegend: false
+			}],
+			credits:{
+			     enabled: false // 禁用版权信息
+			}
+		});
 	})
 })(jQuery)
 		//ajax请求

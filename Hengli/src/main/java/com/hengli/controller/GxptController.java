@@ -16,8 +16,8 @@ import com.hengli.util.Utils;
 
 
 @Controller
-@RequestMapping("/gx")
-public class GxController {
+@RequestMapping("/gxpt")
+public class GxptController {
 	
 	@Autowired
 	public CompanyMapper companyMapper;
@@ -31,9 +31,9 @@ public class GxController {
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/getGxData")
+	@RequestMapping("/getGxptData")
 	@ResponseBody
-	public Map<String, Object> getGxData(@RequestParam Map<String, Object> params){
+	public Map<String, Object> getGxptData(@RequestParam Map<String, Object> params){
 		
 		Map map = new HashMap();
 		

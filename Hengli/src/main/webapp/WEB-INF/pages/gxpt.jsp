@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
+		<script type="text/javascript" src="resources/js/highcharts.js"></script>
 		<script type="text/javascript" src="resources/js/gxpt.js"></script>
 		
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -186,7 +187,7 @@
 							<!-- 柱状图 -->
 							<div class="d-b-w">
 								<div class="mask"></div>
-								<div class="chart">
+								<div class="chart" id="chart">
 									<!-- 柱状图在这里 -->
 								</div>
 								<span class="arrow-up"></span>
@@ -382,7 +383,7 @@ var contextPath="${pageContext.request.contextPath }";
 	//map.addOverlay(marker);
 
 	function addMarker(longitude,latitude,sContent){
-			
+		
 		var pointEach = new BMap.Point(longitude, latitude);
 		var markerEach = new BMap.Marker(pointEach);
 		map.addOverlay(markerEach);
