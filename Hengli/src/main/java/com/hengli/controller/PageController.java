@@ -49,6 +49,16 @@ public class PageController {
 		return "gxpt";
 	}
 	
+	/**
+	 * 跳转产学研首页
+	 * 
+	 * @return 跳转路径
+	 */
+	@RequestMapping("/cxy")
+	public String cxy() {
+		return "cxy";
+	}
+	
 	@RequestMapping("/highcharts")
 	public String highcharts() {
 		return "gx/HighchartsTest";	
