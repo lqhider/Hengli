@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengli.db.mapper.CollegesMapper">
+	
+	<!-- 查询院校 -->
+	<select id="selectColleges" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			colleges 
+		<where>
+			<if test="collegesName != null and collegesName !='' ">
+				AND name LIKE CONCAT('%',#{collegesName},'%')
+			</if>
+			<if test="first_classification != null and first_classification !='' ">
+				AND first_classification = #{first_classification}
+			</if>
+			<if test="second_classification != null and second_classification !='' ">
+				AND second_classification = #{second_classification}
+			</if>
+		</where>
+	</select>
+</mapper>  

@@ -13,11 +13,11 @@ public class PageController {
 	 * 跳转首页
 	 * 
 	 * @return 跳转路径
-	 */
+	 *//*
 	@RequestMapping("/index")
 	public String index() {
 		return "frame";	
-	}
+	}*/
 	
 	/**
 	 * 跳转供需平台首页
@@ -44,6 +44,16 @@ public class PageController {
 	 * 
 	 * @return 跳转路径
 	 */
+	@RequestMapping("/")
+	public String index() {
+		return "gxpt";
+	}
+	
+	/**
+	 * 跳转供需平台首页
+	 * 
+	 * @return 跳转路径
+	 */
 	@RequestMapping("/gxpt")
 	public String gxpt() {
 		return "gxpt";
@@ -57,6 +67,16 @@ public class PageController {
 	@RequestMapping("/cxy")
 	public String cxy() {
 		return "cxy";
+	}
+	
+	/**
+	 * 跳转教育在线首页
+	 * 
+	 * @return 跳转路径
+	 */
+	@RequestMapping("/jyzx")
+	public String jyzx() {
+		return "jyzx";
 	}
 	
 	@RequestMapping("/highcharts")

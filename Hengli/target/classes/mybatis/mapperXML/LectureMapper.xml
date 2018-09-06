@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengli.db.mapper.LectureMapper">
+	
+	<!-- 查询讲座 -->
+	<select id="selectLecture" parameterType="map" resultType="map">
+		SELECT
+			colleges.id AS cid,
+			colleges.`name` AS cname,
+			lecture.*, colleges.*
+		FROM
+			lecture
+		INNER JOIN colleges ON lecture.colleges = colleges.id
+		WHERE
+			lecture.colleges = #{colleges}
+	</select>
+	
+</mapper>  

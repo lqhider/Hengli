@@ -11,6 +11,9 @@
 		FROM
 			company 
 		<where>
+			<if test="companyName != null and companyName !='' ">
+				AND name LIKE CONCAT('%',#{companyName},'%')
+			</if>
 			<if test="first_classification != null and first_classification !='' ">
 				AND first_classification = #{first_classification}
 			</if>
@@ -18,5 +21,18 @@
 				AND second_classification = #{second_classification}
 			</if>
 		</where>
+	</select>
+	
+	<!-- 查询企业分布 -->
+	<select id="selectCompanyDistribution" parameterType="map" resultType="map">
+		SELECT
+			industrial_area.id,
+			industrial_area.`name`,
+			count(company.id) AS count
+		FROM
+			industrial_area
+		LEFT JOIN company ON industrial_area.id = company.industrial_area
+		GROUP BY
+			industrial_area.id
 	</select>
 </mapper>  

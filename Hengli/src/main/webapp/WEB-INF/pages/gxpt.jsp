@@ -27,14 +27,14 @@
 			<div class="container">
 				<!-- header -->
 				<div class="header clearfix">
-					<a href="#" class="logo">
+					<a href="javascript:void(0)" class="logo">
 						<img src="resources/images/logo.png">
 					</a>
 					<div class="nav clearfix">
-						<a href="#" class="active">供需平台</a>
-						<a href="#">产学研</a>
-						<a href="#">教育在线</a>
-						<a href="#">设计联盟</a>
+						<a href="javascript:void(0)" class="active">供需平台</a>
+						<a href="${pageContext.request.contextPath}/cxy">产学研</a>
+						<a href="${pageContext.request.contextPath}/jyzx">教育在线</a>
+						<a href="${pageContext.request.contextPath}/sjlm">设计联盟</a>
 					</div>
 					<div class="search">
 						<input type="text" id="companyName"/>

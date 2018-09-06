@@ -37,7 +37,11 @@ public class CxyController {
 		
 		Map map = new HashMap();
 		
+		params.put("companyName", params.get("name"));
+		
 		List<Map<String, Object>> companyList = companyMapper.selectCompany(params);
+		
+		params.put("collegesName", params.get("name"));
 		
 		List<Map<String, Object>> collegesList = collegesMapper.selectColleges(params);
 		
