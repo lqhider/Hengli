@@ -384,12 +384,7 @@ var contextPath="${pageContext.request.contextPath }";
 	
 	var point = new BMap.Point(113.972995,23.024814);
 	map.centerAndZoom(point,15);  // 初始化地图,设置中心点坐标和地图级别
-	/* //添加地图类型控件
-	map.addControl(new BMap.MapTypeControl({
-		mapTypes:[
-	        BMAP_NORMAL_MAP,
-	        BMAP_HYBRID_MAP
-	    ]})); */	  
+	  
 	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 	
 	// 初始化地图， 设置中心点坐标和地图级别
@@ -399,7 +394,10 @@ var contextPath="${pageContext.request.contextPath }";
 	function addMarker(longitude,latitude,sContent){
 		
 		var pointEach = new BMap.Point(longitude, latitude);
-		var markerEach = new BMap.Marker(pointEach);
+		
+		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		
+		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		map.addOverlay(markerEach);
 		
 		var infoWindow = new BMap.InfoWindow(sContent);
@@ -415,12 +413,19 @@ var contextPath="${pageContext.request.contextPath }";
 	
 	function openInfoWindow(longitude,latitude,sContent){
 		var pointEach = new BMap.Point(longitude, latitude);
-		var markerEach = new BMap.Marker(pointEach);
+		
+		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		
+		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		var infoWindow = new BMap.InfoWindow(sContent);
 		
 		map.addOverlay(markerEach);
 		
 		markerEach.openInfoWindow(infoWindow);
+		
+		markerEach.addEventListener("infowindowclose", function(){
+			addMarker(longitude,latitude,sContent)
+		});
 	}
 </script>
 

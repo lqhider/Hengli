@@ -386,7 +386,10 @@ var contextPath="${pageContext.request.contextPath }";
 	function addMarker(longitude,latitude,sContent){
 		
 		var pointEach = new BMap.Point(longitude, latitude);
-		var markerEach = new BMap.Marker(pointEach);
+		
+		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		
+		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		map.addOverlay(markerEach);
 		
 		var infoWindow = new BMap.InfoWindow(sContent);
@@ -402,12 +405,19 @@ var contextPath="${pageContext.request.contextPath }";
 	
 	function openInfoWindow(longitude,latitude,sContent){
 		var pointEach = new BMap.Point(longitude, latitude);
-		var markerEach = new BMap.Marker(pointEach);
+		
+		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		
+		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		var infoWindow = new BMap.InfoWindow(sContent);
 		
 		map.addOverlay(markerEach);
 		
 		markerEach.openInfoWindow(infoWindow);
+		
+		markerEach.addEventListener("infowindowclose", function(){
+			addMarker(longitude,latitude,sContent)
+		});
 	}
 </script>
 
