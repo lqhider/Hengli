@@ -1,9 +1,9 @@
-body{font-family: "MICROSOFT YAHEI" , "Arial Narrow";}
+body{font-family: "MICROSOFT YAHEI" , "Arial Narrow";background:url(../images/bg.png) center center no-repeat;}
 a,a:visited{text-decoration: none;color: #fff;}
 a span{cursor: pointer;}
 img{max-width: 100%;}
 
-.main-body{width: 1140px;margin: 0 auto;background:url(../images/bg.png) center center no-repeat;}
+.main-body{width: 1140px;margin: 0 auto;}
 .container{padding: 50px 40px 80px 40px;}
 
 .logo{width: 290px;float: left;}
@@ -44,6 +44,7 @@ img{max-width: 100%;}
 /*right*/
 .w-right{width: 750px;float: right;}
 .map-wrap{width: 750px;height: 655px;background: #292081;position: relative;}
+.map{height: 100%;}
 .d-b-w{left: 0;right: 0;position: absolute;bottom: -33px;}
 
 .mask{position: absolute;width: 100%;height: 100%;left: 0;right: 0;top: 0;background: #6452e7;opacity: 0.7;z-index:8;}
@@ -55,9 +56,9 @@ img{max-width: 100%;}
 .qyfb{background: url(../images/qyfb.png) no-repeat;margin-top: 30px;}
 
 
-.wr-w1,.wr-w2{width: 340px;position: absolute;top: 140px;right: 15px;padding: 15px 15px 5px 15px;z-index: 8;}
+.wr-w1,.wr-w2{width: 340px;padding: 15px 15px 5px 15px;}
 .content{position: relative;z-index: 9;color: #fff;font-size: 14px;}
-.content h5{font-weight: bold;padding-left: 5px;}
+.content h5{font-weight: bold;padding-left: 5px;font-size: 15px;}
 .content p{background: #ae58dd;padding-left: 5px;margin-top:3px;padding-bottom: 2px;}
 .wlc-w3 a{margin-bottom: 0;}
 .wr-w2{top: 320px;}
@@ -73,6 +74,7 @@ img{max-width: 100%;}
 .cxtj{background: url(../images/cxtj.png) no-repeat;margin-top: 30px;}
 .sjszy{background: url(../images/sjszy.png) no-repeat;}
 .jzhdxq{background: url(../images/jzhdxq.png) no-repeat;width: 115px;}
+.xqdt{background: url(../images/xqdt.png) no-repeat;}
 
 .sjszy-w2{top:50px; }
 .sjszy-w{top: 250px;}

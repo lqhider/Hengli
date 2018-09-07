@@ -78,35 +78,21 @@
 		  			  html += '<a href="javascript:void(0)"><h3>'+companyList[i].name+'</h3>'+
 								'<p>难题数量：'+companyList[i].conundrum_number+'</p><p>合作数量：'+companyList[i].cooperate_number+'</p></a>';
 		  			  
-		  			/*var sContent = '<div style="width: 340px;position: absolute;top: 140px;right: 15px;padding: 15px 15px 5px 15px;z-index: 8;">'+
-										'<div style="position: absolute;width: 100%;height: 100%;left: 0;right: 0;top: 0;background: #6452e7;opacity: 0.7;z-index:8;"></div>'+
-										'<div style="position: relative;z-index: 9;color: #fff;font-size: 14px;">'+
-											'<h5>东莞市天倬模具有限公司</h5>'+
-											'<p>供应数量：</p>'+
-											'<p>需求数量：</p>'+
-											'<p>定制服务数量：</p>'+
-											'<div style="text-align: right;margin-top: 10px;">'+
-												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto;background: url(../images/gszy.png) no-repeat;"></a>'+
-												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto; background: url(../images/gxpt.png) no-repeat;margin-left: 10px;"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';*/
-		  			var sContent = '<div class="wr-w1">'+
+		  			var sContent = '<div class="wr-w2">'+
 										'<div class="mask"></div>'+
 										'<div class="content">'+
-											'<h5>东莞市天倬模具有限公司</h5>'+
-											'<p>供应数量：</p>'+
-											'<p>需求数量：</p>'+
-											'<p>定制服务数量：</p>'+
+											'<h5>'+companyList[i].name+'</h5>'+
+											'<p>难题数量：'+companyList[i].conundrum_number+'</p>'+
+											'<p>合作数量：'+companyList[i].cooperate_number+'</p>'+
 											'<div class="cbtn-w">'+
-												'<a href="#" class="com-btn gszy"></a>'+
-												'<a href="#" class="com-btn gxpt"></a>'+
+												'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'+
+												'<a target="_blank" href="'+companyList[i].conundrum_more+'" class="com-btn gdnt"></a>'+
 											'</div>'+
 										'</div>'+
 									'</div>';
 		  			  
 		  			  //地图标注
-		  			  addMarker(companyList[i].longitude,companyList[i].latitude,sContent);
+		  			  addMarker(companyList[i].longitude, companyList[i].latitude, sContent);
 		  		  }
 		  		  $("#qylb").empty().append(html);
 		  		  
@@ -119,8 +105,22 @@
 							'<span>成果数量：'+collegesList[i].achievement_num+'</span></p>'+
 							'<p class="clearfix"><span>合作数量：'+collegesList[i].cooperate_num+'</span></p></a>';
 		  			  
+		  			var sContent = '<div class="wr-w1">'+
+										'<div class="mask"></div>'+
+										'<div class="content">'+
+											'<h5>'+collegesList[i].name+'</h5>'+
+											'<p>专家数量：'+collegesList[i].expert_num+'</p>'+
+											'<p>成果数量：'+collegesList[i].achievement_num+'</p>'+
+											'<p>合作数量：'+collegesList[i].cooperate_num+'</p>'+
+											'<div class="cbtn-w">'+
+												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
+												'<a target="_blank" href="'+collegesList[i].more_achievement+'" class="com-btn gdcg"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+		  			  
 		  			  //地图标注
-		  			  addMarker(collegesList[i].longitude,collegesList[i].latitude,'');
+		  			  addMarker(collegesList[i].longitude, collegesList[i].latitude, sContent);
 		  		  }
 		  		  $("#yxlb").empty().append(html);
 		  		  
@@ -130,7 +130,20 @@
   			  			$("#yxlb a").removeClass("active");
   			  			$(this).addClass("active");
   			  			
-	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude,'');
+  			  		var sContent = '<div class="wr-w2">'+
+									'<div class="mask"></div>'+
+									'<div class="content">'+
+										'<h5>'+companyList[index].name+'</h5>'+
+										'<p>难题数量：'+companyList[index].conundrum_number+'</p>'+
+										'<p>合作数量：'+companyList[index].cooperate_number+'</p>'+
+										'<div class="cbtn-w">'+
+											'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'+
+											'<a target="_blank" href="'+companyList[index].conundrum_more+'" class="com-btn gdnt"></a>'+
+										'</div>'+
+									'</div>'+
+								'</div>';
+  			  			
+	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude, sContent);
   			  		})
 	  			  })
 		  		  
@@ -139,7 +152,22 @@
   			  			$("#qylb a").removeClass("active");
 			  			$("#yxlb a").removeClass("active");
 			  			$(this).addClass("active");
-	  					openInfoWindow(collegesList[index].longitude, collegesList[index].latitude,'');
+			  			
+			  			var sContent = '<div class="wr-w1">'+
+							'<div class="mask"></div>'+
+							'<div class="content">'+
+								'<h5>'+collegesList[index].name+'</h5>'+
+								'<p>专家数量：'+collegesList[index].expert_num+'</p>'+
+								'<p>成果数量：'+collegesList[index].achievement_num+'</p>'+
+								'<p>合作数量：'+collegesList[index].cooperate_num+'</p>'+
+								'<div class="cbtn-w">'+
+									'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
+									'<a target="_blank" href="'+collegesList[index].more_achievement+'" class="com-btn gdcg"></a>'+
+								'</div>'+
+							'</div>'+
+						'</div>';
+			  			
+	  					openInfoWindow(collegesList[index].longitude, collegesList[index].latitude, sContent);
   			  		})
 	  			  })
 		  		  

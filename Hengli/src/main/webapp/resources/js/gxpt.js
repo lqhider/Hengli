@@ -81,32 +81,19 @@
 							'<p class="clearfix"><span>供应数量：'+companyList[i].product_number+'</span><span>需求数量：'+companyList[i].need_number+'</span></p>'+
 							'<p class="clearfix">定制服务数量：'+companyList[i].custom_service_number+'</p></a>';
 		  			  
-		  			/*var sContent = '<div style="width: 340px;position: absolute;top: 140px;right: 15px;padding: 15px 15px 5px 15px;z-index: 8;">'+
-										'<div style="position: absolute;width: 100%;height: 100%;left: 0;right: 0;top: 0;background: #6452e7;opacity: 0.7;z-index:8;"></div>'+
-										'<div style="position: relative;z-index: 9;color: #fff;font-size: 14px;">'+
-											'<h5>东莞市天倬模具有限公司</h5>'+
-											'<p>供应数量：</p>'+
-											'<p>需求数量：</p>'+
-											'<p>定制服务数量：</p>'+
-											'<div style="text-align: right;margin-top: 10px;">'+
-												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto;background: url(../images/gszy.png) no-repeat;"></a>'+
-												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto; background: url(../images/gxpt.png) no-repeat;margin-left: 10px;"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';*/
-		  			var sContent = '<div class="wr-w1">'+
-										'<div class="mask"></div>'+
-										'<div class="content">'+
-											'<h5>东莞市天倬模具有限公司</h5>'+
-											'<p>供应数量：</p>'+
-											'<p>需求数量：</p>'+
-											'<p>定制服务数量：</p>'+
-											'<div class="cbtn-w">'+
-												'<a href="#" class="com-btn gszy"></a>'+
-												'<a href="#" class="com-btn gxpt"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+		  			var sContent = '<div class="wr-w1">'
+						+'<div class="mask"></div>'
+						+'<div class="content">'
+							+'<h5>'+companyList[i].name+'</h5>'
+							+'<p>供应数量：'+companyList[i].product_number+'</p>'
+							+'<p>需求数量：'+companyList[i].need_number+'</p>'
+							+'<p>定制服务数量：'+companyList[i].custom_service_number+'</p>'
+							+'<div class="cbtn-w">'
+								+'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'
+								+'<a target="_blank" href="'+companyList[i].gxptURL+'" class="com-btn gxpt"></a>'
+							+'</div>'
+						+'</div>'
+					+'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(companyList[i].longitude,companyList[i].latitude,sContent);
@@ -119,8 +106,20 @@
 		  			  
 		  			  html += '<a href="javascript:void(0)"><h3>'+innovationCenterList[i].name+'</h3></a>';
 		  			  
+		  			  var sContent = '<div class="wr-w2">'+
+										'<div class="mask"></div>'+
+										'<div class="content">'+
+											'<h5>'+innovationCenterList[i].name+'</h5>'+
+											'<p>中心介绍：'+innovationCenterList[i].introduce+'</p>'+
+											'<p>中心地址：'+innovationCenterList[i].address+'</p>'+
+											'<div class="cbtn-w">'+
+												'<a target="_blank" href="'+innovationCenterList[i].homepage+'" class="com-btn zxzy"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+		  			  
 		  			  //地图标注
-		  			  addMarker(innovationCenterList[i].longitude,innovationCenterList[i].latitude,'');
+		  			  addMarker(innovationCenterList[i].longitude,innovationCenterList[i].latitude,sContent);
 		  		  }
 		  		  $("#cxzx").empty().append(html);
 		  		  
@@ -130,7 +129,21 @@
   			  			$("#cxzx a").removeClass("active");
   			  			$(this).addClass("active");
   			  			
-	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude,'');
+	  			  		var sContent = '<div class="wr-w1">'
+										+'<div class="mask"></div>'
+										+'<div class="content">'
+											+'<h5>'+companyList[index].name+'</h5>'
+											+'<p>供应数量：'+companyList[index].product_number+'</p>'
+											+'<p>需求数量：'+companyList[index].need_number+'</p>'
+											+'<p>定制服务数量：'+companyList[index].custom_service_number+'</p>'
+											+'<div class="cbtn-w">'
+												+'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'
+												+'<a target="_blank" href="'+companyList[index].gxptURL+'" class="com-btn gxpt"></a>'
+											+'</div>'
+										+'</div>'
+									+'</div>';
+  			  			
+	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude, sContent);
   			  		})
 	  			  })
 		  		  
@@ -139,7 +152,20 @@
   			  			$("#qylb a").removeClass("active");
 			  			$("#cxzx a").removeClass("active");
 			  			$(this).addClass("active");
-	  					openInfoWindow(innovationCenterList[index].longitude, innovationCenterList[index].latitude,'');
+			  			
+			  			var sContent = '<div class="wr-w2">'+
+										'<div class="mask"></div>'+
+										'<div class="content">'+
+											'<h5>'+innovationCenterList[index].name+'</h5>'+
+											'<p>中心介绍：'+innovationCenterList[index].introduce+'</p>'+
+											'<p>中心地址：'+innovationCenterList[index].address+'</p>'+
+											'<div class="cbtn-w">'+
+												'<a target="_blank" href="'+innovationCenterList[index].homepage+'" class="com-btn zxzy"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+			  			
+	  					openInfoWindow(innovationCenterList[index].longitude, innovationCenterList[index].latitude, sContent);
   			  		})
 	  			  })
 		  		  
@@ -171,13 +197,17 @@
 	  			var chart = new Highcharts.Chart({
 	  				chart: {
 	  					renderTo: 'chart',
-	  					type: 'column'
+	  					type: 'column',
+	  					backgroundColor: 'rgba(0,0,0,0)'
 	  				},
 	  				title: {
 	  					text: '各工业区企业数量分布'
 	  				},
 	  				xAxis: {
-	  					categories: nameArr
+	  					categories: nameArr,
+	  					tickLength:5,
+		                min:0, //别忘了这里
+        				max:10
 	  				},
 	  				yAxis:{
 	  					title:{
@@ -191,6 +221,10 @@
 	  					pointFormatter: function() {
 	  					    return '<b>'+ this.y +'</b>'
 	  					}
+	  				},
+	  				//设置滚动条   
+	  				scrollbar: {
+	  					enabled: true
 	  				},
 	  				series: [{
 	  					data: dataArr,

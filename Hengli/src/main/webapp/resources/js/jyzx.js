@@ -78,29 +78,16 @@
 								'<p class="clearfix"><span>师资数量：'+collegesList[i].teachers_num+'    </span><span>课程数量：'+collegesList[i].course_num+'</span></p>'+
 								'<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'   </span><span>报名培训数量：'+collegesList[i].enroll_num+'</span></p></a>';
 		  			  
-		  			/*var sContent = '<div style="width: 340px;position: absolute;top: 140px;right: 15px;padding: 15px 15px 5px 15px;z-index: 8;">'+
-										'<div style="position: absolute;width: 100%;height: 100%;left: 0;right: 0;top: 0;background: #6452e7;opacity: 0.7;z-index:8;"></div>'+
-										'<div style="position: relative;z-index: 9;color: #fff;font-size: 14px;">'+
-											'<h5>东莞市天倬模具有限公司</h5>'+
-											'<p>供应数量：</p>'+
-											'<p>需求数量：</p>'+
-											'<p>定制服务数量：</p>'+
-											'<div style="text-align: right;margin-top: 10px;">'+
-												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto;background: url(../images/gszy.png) no-repeat;"></a>'+
-												'<a href="#" style="width: 87px;height: 24px;display:block;margin: 0px auto; background: url(../images/gxpt.png) no-repeat;margin-left: 10px;"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';*/
-		  			var sContent = '<div class="wr-w1">'+
+		  			var sContent = '<div class="wr-w1 sjszy-w2">'+
 										'<div class="mask"></div>'+
 										'<div class="content">'+
-											'<h5>东莞市天倬模具有限公司</h5>'+
-											'<p>供应数量：</p>'+
-											'<p>需求数量：</p>'+
-											'<p>定制服务数量：</p>'+
+											'<h5>'+collegesList[i].name+'</h5>'+
+											'<p>师资数量：'+collegesList[i].teachers_num+'</p>'+
+											'<p>课程数量：'+collegesList[i].course_num+'</p>'+
+											'<p>资料数量：'+collegesList[i].datum_num+'</p>'+
+											'<p>报名培训数量：'+collegesList[i].enroll_num+'</p>'+
 											'<div class="cbtn-w">'+
-												'<a href="#" class="com-btn gszy"></a>'+
-												'<a href="#" class="com-btn gxpt"></a>'+
+												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
 											'</div>'+
 										'</div>'+
 									'</div>';
@@ -115,7 +102,21 @@
   			  			$("#yxlb a").removeClass("active");
   			  			$(this).addClass("active");
   			  			
-	  					openInfoWindow(collegesList[index].longitude, collegesList[index].latitude,'');
+	  			  		var sContent = '<div class="wr-w1 sjszy-w2">'+
+											'<div class="mask"></div>'+
+											'<div class="content">'+
+												'<h5>'+collegesList[index].name+'</h5>'+
+												'<p>师资数量：'+collegesList[index].teachers_num+'</p>'+
+												'<p>课程数量：'+collegesList[index].course_num+'</p>'+
+												'<p>资料数量：'+collegesList[index].datum_num+'</p>'+
+												'<p>报名培训数量：'+collegesList[index].enroll_num+'</p>'+
+												'<div class="cbtn-w">'+
+													'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
+												'</div>'+
+											'</div>'+
+										'</div>';
+  			  			
+	  					openInfoWindow(collegesList[index].longitude, collegesList[index].latitude, sContent);
 	  					
 	  					getLectureTeacher();
   			  		})
@@ -152,7 +153,21 @@
 			  			$("#jslb a").removeClass("active");
 			  			$(this).addClass("active");
 			  			
-			  			openInfoWindow(lectureList[index].longitude, lectureList[index].latitude,'');
+			  			var sContent = '<div class="wr-w1 yx-w1">'+
+										'<div class="mask"></div>'+
+										'<div class="content">'+
+											'<h5>'+lectureList[index].cname+'</h5>'+
+											'<p>主题：'+lectureList[index].theme+'</p>'+
+											'<p>授课教师：'+lectureList[index].tname+'</p>'+
+											'<p>课程类型：'+lectureList[index].course_type+'</p>'+
+											'<p>课程费用：'+lectureList[index].course_fee+'</p>'+
+											'<div class="cbtn-w">'+
+												'<a target="_blank" href="'+lectureList[index].details_page+'" class="com-btn jzhdxq"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+			  			
+			  			openInfoWindow(lectureList[index].longitude, lectureList[index].latitude, sContent);
 			  		})
 				  })
 		  		  
@@ -173,7 +188,21 @@
 			  			$("#jslb a").removeClass("active");
 			  			$(this).addClass("active");
 			  			
-			  			openInfoWindow(teacherList[index].longitude, teacherList[index].latitude,'');
+			  			var sContent = '<div class="wr-w2 yx-w">'+
+										'<div class="mask"></div>'+
+										'<div class="content">'+
+											'<h5>姓名：'+teacherList[index].tname+'</h5>'+
+											'<p>所属院校：'+teacherList[index].cname+'</p>'+
+											'<p>工作年限：'+teacherList[index].work_year+'</p>'+
+											'<p>课程数量：'+teacherList[index].course_num+'</p>'+
+											'<p>讲师简介：'+teacherList[index].summary+'</p>'+
+											'<div class="cbtn-w">'+
+												'<a target="_blank" href="'+teacherList[index].homepage+'" class="com-btn yxzy"></a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+			  			
+			  			openInfoWindow(teacherList[index].longitude, teacherList[index].latitude, sContent);
 			  		})
 				  })
 		  	  }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengli.db.mapper.DesignerMapper">
+	
+	<!-- 查询设计师 -->
+	<select id="selectDesigner" parameterType="map" resultType="map">
+		SELECT
+			design_company.`name` AS dcname,
+			designer.`name` AS dname,
+			designer.*,design_company.*
+		FROM
+			designer
+		LEFT JOIN design_company ON designer.design_company = design_company.id
+		WHERE
+			designer.design_company = #{design_company}
+	</select>
+	
+</mapper>  

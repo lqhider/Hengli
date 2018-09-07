@@ -9,10 +9,12 @@
 		SELECT
 			colleges.id AS cid,
 			colleges.`name` AS cname,
+			teacher.`name` AS tname,
 			lecture.*, colleges.*
 		FROM
 			lecture
 		INNER JOIN colleges ON lecture.colleges = colleges.id
+		LEFT JOIN teacher ON lecture.teacher = teacher.id
 		WHERE
 			lecture.colleges = #{colleges}
 	</select>

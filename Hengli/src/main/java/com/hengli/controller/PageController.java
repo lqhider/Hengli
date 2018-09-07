@@ -79,6 +79,16 @@ public class PageController {
 		return "jyzx";
 	}
 	
+	/**
+	 * 跳转设计联盟首页
+	 * 
+	 * @return 跳转路径
+	 */
+	@RequestMapping("/sjlm")
+	public String sjlm() {
+		return "sjlm";
+	}
+	
 	@RequestMapping("/highcharts")
 	public String highcharts() {
 		return "gx/HighchartsTest";	

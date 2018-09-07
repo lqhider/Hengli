@@ -21,6 +21,8 @@
 		.anchorBL {display: none;}
 		</style>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6xnpV6UuLrzn9p6eow4HW3l2Ra1sER6E"></script>
+		
+		<script type="text/javascript" src="resources/js/infoBox.js"></script>
 	</head>
 	<body>
 		<div class="main-body">
@@ -403,6 +405,8 @@ var contextPath="${pageContext.request.contextPath }";
 		map.clearOverlays();
 	}
 	
+	window.lastInfoBox = null;//定义上一个窗体为lastInfoBox;
+	
 	function openInfoWindow(longitude,latitude,sContent){
 		var pointEach = new BMap.Point(longitude, latitude);
 		
@@ -413,11 +417,27 @@ var contextPath="${pageContext.request.contextPath }";
 		
 		map.addOverlay(markerEach);
 		
-		markerEach.openInfoWindow(infoWindow);
+		/* markerEach.openInfoWindow(infoWindow);
 		
 		markerEach.addEventListener("infowindowclose", function(){
 			addMarker(longitude,latitude,sContent)
+		}); */
+		
+		var infoBox = new BMapLib.InfoBox(map,sContent,{
+			closeIconUrl:'resources/images/close.png',
+			closeIconMargin: "8px 8px 0 0",
+			enableAutoPan: true,
+			align: INFOBOX_AT_TOP
 		});
+		
+		if(lastInfoBox){
+        //判断上一个窗体是否存在，若存在则执行close
+            lastInfoBox.close();
+        }
+        lastInfoBox = infoBox;
+		
+		infoBox.open(markerEach);
+		
 	}
 </script>
 

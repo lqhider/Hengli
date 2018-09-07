@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengli.db.mapper.DesignCompanyMapper">
+	
+	<!-- 查询设计公司 -->
+	<select id="selectDesignCompany" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			design_company 
+		<where>
+			<if test="designCompanyName != null and designCompanyName !='' ">
+				AND name LIKE CONCAT('%',#{designCompanyName},'%')
+			</if>
+			<if test="first_classification != null and first_classification !='' ">
+				AND first_classification = #{first_classification}
+			</if>
+			<if test="second_classification != null and second_classification !='' ">
+				AND second_classification = #{second_classification}
+			</if>
+		</where>
+	</select>
+	
+</mapper>  
