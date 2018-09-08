@@ -37,6 +37,7 @@ img{max-width: 100%;}
 .wlc-w2 h3{font-weight: normal;font-size: 16px;}
 .wlc-w2 p{margin-top: 3px;}
 .wlc-w2 p span{width: 50%;float: left;display: block;}
+.wlc-w2 p span.blo{width: 90%;float: left;display: block;}
 .wl-wrap2 .s-wrap{height: 140px;}
 .wl-wrap3 .s-wrap{height: 80px;}
 
@@ -45,16 +46,18 @@ img{max-width: 100%;}
 .w-right{width: 750px;float: right;}
 .map-wrap{width: 750px;height: 655px;background: #292081;position: relative;}
 .map{height: 100%;}
-.d-b-w{left: 0;right: 0;position: absolute;bottom: -33px;}
+.d-b-w{left: 0;right: 0;position: absolute;bottom: -23px;}
 
 .mask{position: absolute;width: 100%;height: 100%;left: 0;right: 0;top: 0;background: #6452e7;opacity: 0.7;z-index:8;}
 
-.d-b-w .mask{height: 140px;padding: 10px;background: #fff;opacity: 0.7;border-radius: 4px;z-index: 7;}
-.chart{height: 140px;padding: 10px;border-radius: 4px;position: relative;z-index: 8;}
+.d-b-w .mask{height: 166px;padding: 10px;background: #fff;opacity: 0.7;border-radius: 4px;z-index: 7;}
+.chart{height: 120px;padding: 10px;border-radius: 4px;position: relative;z-index: 8;}
 .arrow-up{width:16px;height: 14px;display: block;margin: 10px auto;background: url(../images/arrow.png) no-repeat;}
 .com-btn {width: 87px;height: 24px;display:block;margin: 0px auto;}
 .qyfb{background: url(../images/qyfb.png) no-repeat;margin-top: 30px;}
 
+.distribution_title{background: url(../images/qyslfb.png) no-repeat;height: 31px;padding: 10px;margin-left:70px;margin-top:6px;border-radius: 4px;position: relative;z-index: 8;}
+.gqcxsl_title{background: url(../images/gqcxsl.png) no-repeat;height: 31px;padding: 10px;margin-left:70px;margin-top:6px;border-radius: 4px;position: relative;z-index: 8;}
 
 .wr-w1,.wr-w2{width: 340px;padding: 15px 15px 5px 15px;}
 .content{position: relative;z-index: 9;color: #fff;font-size: 14px;}
@@ -64,6 +67,9 @@ img{max-width: 100%;}
 .wr-w2{top: 320px;}
 .cbtn-w{text-align: right;margin-top: 10px;}
 .cbtn-w a{display: inline-block;}
+
+/* .closeBtn{width: 36px;height:36px;float:right;margin-right: 8px;margin-top: 8px;} */
+.closeBtn{position: absolute;width: 20px;height:20px;top: 8px;right:8px;z-index:10;}
 
 .gszy{background: url(../images/gszy.png) no-repeat;}
 .gxpt{background: url(../images/gxpt.png) no-repeat;margin-left: 10px;}

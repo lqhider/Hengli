@@ -49,6 +49,7 @@
     	})
     	
     	getCxyData();
+    	getInnovateNum();
     	
     	$(".search-btn").click(function(){
     		getCxyData();
@@ -79,7 +80,7 @@
 								'<p>难题数量：'+companyList[i].conundrum_number+'</p><p>合作数量：'+companyList[i].cooperate_number+'</p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w2">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+companyList[i].name+'</h5>'+
 											'<p>难题数量：'+companyList[i].conundrum_number+'</p>'+
@@ -106,7 +107,7 @@
 							'<p class="clearfix"><span>合作数量：'+collegesList[i].cooperate_num+'</span></p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+collegesList[i].name+'</h5>'+
 											'<p>专家数量：'+collegesList[i].expert_num+'</p>'+
@@ -131,7 +132,7 @@
   			  			$(this).addClass("active");
   			  			
   			  		var sContent = '<div class="wr-w2">'+
-									'<div class="mask"></div>'+
+									'<div class="mask"></div><div class="closeBtn"></div>'+
 									'<div class="content">'+
 										'<h5>'+companyList[index].name+'</h5>'+
 										'<p>难题数量：'+companyList[index].conundrum_number+'</p>'+
@@ -154,7 +155,7 @@
 			  			$(this).addClass("active");
 			  			
 			  			var sContent = '<div class="wr-w1">'+
-							'<div class="mask"></div>'+
+							'<div class="mask"></div><div class="closeBtn"></div>'+
 							'<div class="content">'+
 								'<h5>'+collegesList[index].name+'</h5>'+
 								'<p>专家数量：'+collegesList[index].expert_num+'</p>'+
@@ -175,9 +176,176 @@
         	}) 
     	}
     	
+    	function getInnovateNum(){
+    		ajaxFactory("post",contextPath+"/cxy/getInnovateNum",'').done(function(result){
+  		  	  if(result.status=="true"){
+  		  		  var data = result.data;
+		  		  var innovateNum = data.innovateNum;
+		  		  
+			  		var dataArr = [];
+			      	for(var i = 0; i < innovateNum.length; i ++){
+			      		var obj = {};
+			      		obj.industrial_area = innovateNum[i].name;
+			      		obj.conundrum_number = innovateNum[i].conundrum_number;
+			      		obj.cooperate_number = innovateNum[i].cooperate_number;
+			      		obj.color1 = "#7C6ACC";
+			      		obj.color2 = "#FFCD42";
+			  			dataArr.push(obj);
+			  		}
+			      	
+			      	var chart = AmCharts.makeChart("chart", {
+			      	    "theme": "light",
+			      	    "type": "serial",
+			      	    /*"dataProvider": [{
+			      	        "country": "USA",
+			      	        "year2004": 3.5,
+			      	        "year2005": 4.2,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "UK",
+			      	        "year2004": 1.7,
+			      	        "year2005": 3.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "Canada",
+			      	        "year2004": 2.8,
+			      	        "year2005": 2.9,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "Japan",
+			      	        "year2004": 2.6,
+			      	        "year2005": 2.3,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "France",
+			      	        "year2004": 1.4,
+			      	        "year2005": 2.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "Brazil",
+			      	        "year2004": 2.6,
+			      	        "year2005": 4.9,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "Russia",
+			      	        "year2004": 6.4,
+			      	        "year2005": 7.2,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "India",
+			      	        "year2004": 8,
+			      	        "year2005": 7.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }, {
+			      	        "country": "China",
+			      	        "year2004": 9.9,
+			      	        "year2005": 10.1,
+			      			"color1": "#7C6ACC",
+			      			"color2": "#FFCD42"
+			      	    }]*/
+			      	    "dataProvider":dataArr,
+			      	    "valueAxes": [{
+			      	        "stackType": "3d",
+			      	        "position": "left",
+			      	        "title": "",
+			      	        "labelsEnabled":false
+			      	    }],
+			      	    "startDuration": 1,
+			      	    "graphs": [{
+			      	        "balloonText": "[[category]] 难题数量 : <b>[[value]]</b>",
+			      	        "fillAlphas": 0.9,
+			      	        "lineAlpha": 0.2,
+			      			"colorField": "color1",
+			      	        "title": "难题数量",
+			      	        "type": "column",
+			      	        "valueField": "conundrum_number",
+			      			"labelText": "[[value]]",
+			      	    }, {
+			      	        "balloonText": "[[category]] 合作数量 : <b>[[value]]</b>",
+			      	        "fillAlphas": 0.9,
+			      	        "lineAlpha": 0.2,
+			      	        "colorField": "color2",
+			      	        "title": "合作数量",
+			      	        "type": "column",
+			      	        "valueField": "cooperate_number",
+			      			"labelText": "[[value]]",
+			      			
+			      	    }],
+			      	    "plotAreaFillAlphas": 0.1,
+			      	    "depth3D": 60,
+			      	    "angle": 30,
+			      	    "categoryField": "industrial_area",
+			      	    "categoryAxis": {
+			      	        "gridPosition": "start"
+			      	    },
+			      	    "export": {
+			      	    	"enabled": false
+			      	     }
+			      	});
+			      	jQuery('.chart-input').off().on('input change',function() {
+			      		var property	= jQuery(this).data('property');
+			      		var target		= chart;
+			      		chart.startDuration = 0;
+	
+			      		if ( property == 'topRadius') {
+			      			target = chart.graphs[0];
+			      	      	if ( this.value == 0 ) {
+			      	          this.value = undefined;
+			      	      	}
+			      		}
+	
+			      		target[property] = this.value;
+			      		chart.validateNow();
+			      	});
+  		  	  }
+        	}) 
+    	}
     	
-    	
-    	var colors = Highcharts.getOptions().colors;
+    	/*var colors = Highcharts.getOptions().colors;
 		$.each(colors, function(i, color) {
 			colors[i] = {
 				linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
@@ -218,7 +386,8 @@
 			credits:{
 			     enabled: false // 禁用版权信息
 			}
-		});
+		});*/
+    	
 	})
 })(jQuery)
 		//ajax请求

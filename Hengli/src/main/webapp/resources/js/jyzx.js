@@ -76,10 +76,10 @@
 		  			  
 		  			  html += '<a href="javascript:void(0)" yx="'+collegesList[i].id+'"><h3>'+collegesList[i].name+'</h3>'+
 								'<p class="clearfix"><span>师资数量：'+collegesList[i].teachers_num+'    </span><span>课程数量：'+collegesList[i].course_num+'</span></p>'+
-								'<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'   </span><span>报名培训数量：'+collegesList[i].enroll_num+'</span></p></a>';
+								'<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'   </span></p><p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1 sjszy-w2">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+collegesList[i].name+'</h5>'+
 											'<p>师资数量：'+collegesList[i].teachers_num+'</p>'+
@@ -103,7 +103,7 @@
   			  			$(this).addClass("active");
   			  			
 	  			  		var sContent = '<div class="wr-w1 sjszy-w2">'+
-											'<div class="mask"></div>'+
+											'<div class="mask"></div><div class="closeBtn"></div>'+
 											'<div class="content">'+
 												'<h5>'+collegesList[index].name+'</h5>'+
 												'<p>师资数量：'+collegesList[index].teachers_num+'</p>'+
@@ -154,7 +154,7 @@
 			  			$(this).addClass("active");
 			  			
 			  			var sContent = '<div class="wr-w1 yx-w1">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+lectureList[index].cname+'</h5>'+
 											'<p>主题：'+lectureList[index].theme+'</p>'+
@@ -189,7 +189,7 @@
 			  			$(this).addClass("active");
 			  			
 			  			var sContent = '<div class="wr-w2 yx-w">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>姓名：'+teacherList[index].tname+'</h5>'+
 											'<p>所属院校：'+teacherList[index].cname+'</p>'+

@@ -84,7 +84,7 @@
 								'<p>发布需求数量：'+companyList[i].requirement_num+'</p></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w1 sjszy-w2">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+companyList[i].name+'</h5>'+
 											'<p>发布需求数量：'+companyList[i].requirement_num+'</p>'+
@@ -106,7 +106,7 @@
   			  			$(this).addClass("active");
   			  			
   			  		var sContent = '<div class="wr-w1 sjszy-w2">'+
-									'<div class="mask"></div>'+
+									'<div class="mask"></div><div class="closeBtn"></div>'+
 									'<div class="content">'+
 										'<h5>'+companyList[index].name+'</h5>'+
 										'<p>发布需求数量：'+companyList[index].requirement_num+'</p>'+
@@ -129,7 +129,7 @@
 								'<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w2 sjsgs-w">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+designCompanyList[i].name+'</h5>'+
 											'<p>领域：'+designCompanyList[i].domain+'</p>'+
@@ -152,7 +152,7 @@
   			  			$(this).addClass("active");
   			  			
   			  			var sContent = '<div class="wr-w2 sjsgs-w">'+
-									'<div class="mask"></div>'+
+									'<div class="mask"></div><div class="closeBtn"></div>'+
 									'<div class="content">'+
 										'<h5>'+designCompanyList[index].name+'</h5>'+
 										'<p>领域：'+designCompanyList[index].domain+'</p>'+
@@ -200,7 +200,7 @@
 			  			$(this).addClass("active");
 			  			
 			  			var sContent = '<div class="wr-w1 sjszy-w">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>姓名：'+designerList[index].dname+'</h5>'+
 											'<p>所属设计公司：'+designerList[index].dcname+'</p>'+

@@ -11,6 +11,14 @@
 		<script type="text/javascript" src="resources/js/highcharts.js"></script>
 		<script type="text/javascript" src="resources/js/gxpt.js"></script>
 		
+		
+		<!-- Resources -->
+		<script type="text/javascript" src="resources/js/amcharts.js"></script>
+		<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+		<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+		<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	    <style type="text/css">  
@@ -22,7 +30,7 @@
 		</style>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6xnpV6UuLrzn9p6eow4HW3l2Ra1sER6E"></script>
 		
-		<script type="text/javascript" src="resources/js/infoBox.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/library/InfoBox/1.2/src/InfoBox_min.js"></script>
 	</head>
 	<body>
 		<div class="main-body">
@@ -190,6 +198,7 @@
 							<!-- 柱状图 -->
 							<div class="d-b-w">
 								<div class="mask"></div>
+								<div class="distribution_title"></div>
 								<div class="chart" id="chart">
 									<!-- 柱状图在这里 -->
 								</div>
@@ -384,7 +393,9 @@ var contextPath="${pageContext.request.contextPath }";
 	// 初始化地图， 设置中心点坐标和地图级别
 	//var marker = new BMap.Marker(point);
 	//map.addOverlay(marker);
-
+	
+	window.lastInfoBox = null;//定义上一个窗体为lastInfoBox;
+	
 	function addMarker(longitude,latitude,sContent){
 		
 		var pointEach = new BMap.Point(longitude, latitude);
@@ -394,9 +405,34 @@ var contextPath="${pageContext.request.contextPath }";
 		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		map.addOverlay(markerEach);
 		
-		var infoWindow = new BMap.InfoWindow(sContent);
+		/* var infoWindow = new BMap.InfoWindow(sContent);
 		markerEach.addEventListener("click", function(){          
 		   this.openInfoWindow(infoWindow);
+		}); */
+		
+		
+		markerEach.addEventListener("click", function(){          
+			var infoBox = new BMapLib.InfoBox(map,sContent,{
+				closeIconUrl:'resources/images/close.png',
+				closeIconMargin: "8px 8px 0 0",
+				enableAutoPan: true,
+				align: INFOBOX_AT_TOP
+			});
+			
+			if(lastInfoBox){
+	        //判断上一个窗体是否存在，若存在则执行close
+	            lastInfoBox.close();
+	        }
+	        lastInfoBox = infoBox;
+			
+	      	//把关闭按钮放在窗体打开的监听事件里面，否则选择器无法用事件代理的方法获取的关闭按钮；
+	        infoBox.addEventListener("open", function(e) { 
+	              $('.closeBtn').on('click',function () {
+	                  infoBox.close();
+	              });
+	        });
+	        
+			infoBox.open(markerEach);
 		});
 	}
 	
@@ -404,8 +440,6 @@ var contextPath="${pageContext.request.contextPath }";
 		
 		map.clearOverlays();
 	}
-	
-	window.lastInfoBox = null;//定义上一个窗体为lastInfoBox;
 	
 	function openInfoWindow(longitude,latitude,sContent){
 		var pointEach = new BMap.Point(longitude, latitude);
@@ -423,6 +457,8 @@ var contextPath="${pageContext.request.contextPath }";
 			addMarker(longitude,latitude,sContent)
 		}); */
 		
+		//openInfoBox(markerEach,sContent);
+		
 		var infoBox = new BMapLib.InfoBox(map,sContent,{
 			closeIconUrl:'resources/images/close.png',
 			closeIconMargin: "8px 8px 0 0",
@@ -436,8 +472,15 @@ var contextPath="${pageContext.request.contextPath }";
         }
         lastInfoBox = infoBox;
 		
+      	//把关闭按钮放在窗体打开的监听事件里面，否则选择器无法用事件代理的方法获取的关闭按钮；
+        infoBox.addEventListener("open", function(e) { 
+              $('.closeBtn').on('click',function () {
+                  infoBox.close();
+            	  addMarker(longitude,latitude,sContent);
+              });
+        });
+        
 		infoBox.open(markerEach);
-		
 	}
 </script>
 

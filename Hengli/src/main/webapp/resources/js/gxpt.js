@@ -49,6 +49,7 @@
     	})
     	
     	getGxptData();
+    	getCompanyDistribution();
     	
     	$(".search-btn").click(function(){
     		getGxptData();
@@ -70,7 +71,6 @@
 		  		  var data = result.data;
 		  		  var companyList = data.companyList;
 		  		  var innovationCenterList = data.innovationCenterList;
-		  		  var companyDistribution = data.companyDistribution;
 		  		  
 		  		  //企业列表
 		  		  var html="";
@@ -82,7 +82,7 @@
 							'<p class="clearfix">定制服务数量：'+companyList[i].custom_service_number+'</p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1">'
-						+'<div class="mask"></div>'
+						+'<div class="mask"></div><div class="closeBtn"></div>'
 						+'<div class="content">'
 							+'<h5>'+companyList[i].name+'</h5>'
 							+'<p>供应数量：'+companyList[i].product_number+'</p>'
@@ -107,7 +107,7 @@
 		  			  html += '<a href="javascript:void(0)"><h3>'+innovationCenterList[i].name+'</h3></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w2">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+innovationCenterList[i].name+'</h5>'+
 											'<p>中心介绍：'+innovationCenterList[i].introduce+'</p>'+
@@ -130,7 +130,7 @@
   			  			$(this).addClass("active");
   			  			
 	  			  		var sContent = '<div class="wr-w1">'
-										+'<div class="mask"></div>'
+										+'<div class="mask"></div><div class="closeBtn"></div>'
 										+'<div class="content">'
 											+'<h5>'+companyList[index].name+'</h5>'
 											+'<p>供应数量：'+companyList[index].product_number+'</p>'
@@ -154,7 +154,7 @@
 			  			$(this).addClass("active");
 			  			
 			  			var sContent = '<div class="wr-w2">'+
-										'<div class="mask"></div>'+
+										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
 											'<h5>'+innovationCenterList[index].name+'</h5>'+
 											'<p>中心介绍：'+innovationCenterList[index].introduce+'</p>'+
@@ -170,75 +170,207 @@
 	  			  })
 		  		  
 		  		  
-	  			
-	  			//企业分布
-	  			var nameArr = [];
-		  		var dataArr = [];
-	  			for(var i = 0; i < companyDistribution.length; i ++){
-	  				nameArr.push(companyDistribution[i].name);
-	  				dataArr.push(companyDistribution[i].count);
-	  			}
-	  			
-	  	    	var colors = Highcharts.getOptions().colors;
-	  			$.each(colors, function(i, color) {
-	  				colors[i] = {
-	  					linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
-	  					stops: [
-	  						[0, "#5D4BA5"],
-	  						[0.2, "#6F5CCE"],
-	  						[0.4, '#8460CD'],
-	  						[0.6, '#BD7BEA'],
-	  						[0.8, '#D186E8'],
-	  						[1, "#8963B4"]
-	  					]
-	  				};
-	  			});
-	  			// Create the chart
-	  			var chart = new Highcharts.Chart({
-	  				chart: {
-	  					renderTo: 'chart',
-	  					type: 'column',
-	  					backgroundColor: 'rgba(0,0,0,0)'
-	  				},
-	  				title: {
-	  					text: '各工业区企业数量分布'
-	  				},
-	  				xAxis: {
-	  					categories: nameArr,
-	  					tickLength:5,
-		                min:0, //别忘了这里
-        				max:10
-	  				},
-	  				yAxis:{
-	  					title:{
-	  						text:''
-	  					},
-	  					labels:{
-	  						enabled:false
-	  				   }
-	  				},
-	  				tooltip: {
-	  					pointFormatter: function() {
-	  					    return '<b>'+ this.y +'</b>'
-	  					}
-	  				},
-	  				//设置滚动条   
-	  				scrollbar: {
-	  					enabled: true
-	  				},
-	  				series: [{
-	  					data: dataArr,
-	  					showInLegend: false
-	  				}],
-	  				credits:{
-	  				     enabled: false // 禁用版权信息
-	  				}
-	  			});
 		  	  }
         	}) 
     	}
     	
-    	
+    	function getCompanyDistribution(){
+    		
+    		ajaxFactory("post",contextPath+"/gxpt/getCompanyDistribution",'').done(function(result){
+  		  	  if(result.status=="true"){
+  		  		var data = result.data;
+  		  		var companyDistribution = data.companyDistribution;
+  		  		
+  		  		//企业分布
+  	  			var nameArr = [];
+  		  		var dataArr = [];
+  	  			for(var i = 0; i < companyDistribution.length; i ++){
+  	  				nameArr.push(companyDistribution[i].name);
+  	  				dataArr.push(companyDistribution[i].count);
+  	  			}
+  	  			
+  	  	    	/*var colors = Highcharts.getOptions().colors;
+  	  			$.each(colors, function(i, color) {
+  	  				colors[i] = {
+  	  					linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
+  	  					stops: [
+  	  						[0, "#5D4BA5"],
+  	  						[0.2, "#6F5CCE"],
+  	  						[0.4, '#8460CD'],
+  	  						[0.6, '#BD7BEA'],
+  	  						[0.8, '#D186E8'],
+  	  						[1, "#8963B4"]
+  	  					]
+  	  				};
+  	  			});
+  	  			// Create the chart
+  	  			var chart = new Highcharts.Chart({
+  	  				chart: {
+  	  					renderTo: 'chart',
+  	  					type: 'column',
+  	  					backgroundColor: 'rgba(0,0,0,0)'
+  	  				},
+  	  				title: {
+  	  					text: '各工业区企业数量分布'
+  	  				},
+  	  				xAxis: {
+  	  					categories: nameArr,
+  	  					tickLength:5,
+  		                min:0, //别忘了这里
+  	    				max:10
+  	  				},
+  	  				yAxis:{
+  	  					title:{
+  	  						text:''
+  	  					},
+  	  					labels:{
+  	  						enabled:false
+  	  				   }
+  	  				},
+  	  				tooltip: {
+  	  					pointFormatter: function() {
+  	  					    return '<b>'+ this.y +'</b>'
+  	  					}
+  	  				},
+  	  				//设置滚动条   
+  	  				scrollbar: {
+  	  					enabled: true
+  	  				},
+  	  				series: [{
+  	  					data: dataArr,
+  	  					showInLegend: false
+  	  				}],
+  	  				credits:{
+  	  				     enabled: false // 禁用版权信息
+  	  				}
+  	  			});*/
+  	  			
+  	  			var dataArr = [];
+  	  			for(var i = 0; i < companyDistribution.length; i ++){
+  	  				var obj = {};
+  	  				obj.industrial_area = companyDistribution[i].name;
+  	  				obj.count = companyDistribution[i].count;
+  	  				obj.color = "#7C6ACC";
+  	  				dataArr.push(obj);
+  	  			}
+  	  			
+  	  			var chart = AmCharts.makeChart("chart", {
+  	  			    "theme": "light",
+  	  			    "type": "serial",
+  	  			    "startDuration": 1,
+  	  			    /*"dataProvider": [{
+  	  			        "country": "USA",
+  	  			        "visits": 4025,
+  	  			        "color": "#7C6ACC",
+  	  			    }, {
+  	  			        "country": "China",
+  	  			        "visits": 1882,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Japan",
+  	  			        "visits": 1809,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Germany",
+  	  			        "visits": 1322,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "UK",
+  	  			        "visits": 1122,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "France",
+  	  			        "visits": 1114,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "India",
+  	  			        "visits": 984,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Spain",
+  	  			        "visits": 711,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Netherlands",
+  	  			        "visits": 665,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Russia",
+  	  			        "visits": 580,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "South Korea",
+  	  			        "visits": 443,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Canada",
+  	  			        "visits": 441,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Brazil",
+  	  			        "visits": 395,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Italy",
+  	  			        "visits": 386,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "Taiwan",
+  	  			        "visits": 338,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "123",
+  	  			        "visits": 338,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "444",
+  	  			        "visits": 338,
+  	  			        "color": "#7C6ACC"
+  	  			    }, {
+  	  			        "country": "5555",
+  	  			        "visits": 338,
+  	  			        "color": "#7C6ACC"
+  	  			    }],*/
+  	  			    "dataProvider":dataArr,
+  	  			    "valueAxes": [{
+  	  			        "position": "left",
+  	  			        "axisAlpha":0,
+  	  			        "gridAlpha":0,
+  	  			        "labelsEnabled":false
+  	  			    }],
+  	  			    "graphs": [{
+  	  			        "balloonText": "[[category]]: <b>[[value]]</b>",
+  	  			        "colorField": "color",
+  	  			        "fillAlphas": 0.85,
+  	  			        "lineAlpha": 0.1,
+  	  			        "type": "column",
+  	  			        "topRadius":1,
+  	  			        "valueField": "count",
+  	  					"labelText": "[[value]]",
+  	  			    }],
+  	  			    "depth3D": 40,
+  	  				"angle": 30,
+  	  			    "chartCursor": {
+  	  			        "categoryBalloonEnabled": true,
+  	  			        "cursorAlpha": 0,
+  	  			        "zoomable": true
+  	  			    },
+  	  			    "categoryField": "industrial_area",
+  	  			    "categoryAxis": {
+  	  			        "gridPosition": "start",
+  	  			        "axisAlpha":0,
+  	  			        "gridAlpha":0
+
+  	  			    },
+  	  			    "export": {
+  	  			    	"enabled": false
+  	  			     }
+
+  	  			}, 0);
+  		  	  }
+  		  	})
+    		
+    	}
 	})
 })(jQuery)
 		//ajax请求
