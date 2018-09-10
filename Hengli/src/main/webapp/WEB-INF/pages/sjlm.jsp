@@ -78,7 +78,7 @@
 						<a class="com-t1" href="javascript:void(0)">二级分类</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
-								<div class="wlc-wrap wlc-w1 clearfix" id="ejfl">
+								<div class="wlc-wrap wlc-w12 clearfix" id="ejfl">
 									<!-- <a href="#">冲压模具</a>
 									<a href="#">简易模具</a>
 									<a href="#">塑料成型模具</a>
@@ -160,7 +160,7 @@
 				</div>
 				<!-- right -->
 				<div class="w-right">
-					<div class="map-wrap">
+					<div class="map-wrap3">
 						<div class="map" id="container">
 							<!-- <img src="images/map.png"> -->
 						</div>
@@ -211,7 +211,7 @@
 var contextPath="${pageContext.request.contextPath }";
 
 	//百度地图API功能
-	var map = new BMap.Map("container");    // 创建Map实例
+	var map = new BMap.Map("container",{enableMapClick:false});    // 创建Map实例
 	
 	map.setMapStyle({
 		styleJson:[

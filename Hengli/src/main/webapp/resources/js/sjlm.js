@@ -30,7 +30,7 @@
 	  	  if(result.status=="true"){
 	  		var data = result.data;
 	  		
-	  		var html = "";
+	  		var html = '<a href="javascript:void(0)" fl="">全部</a>';
 	  		for(var i = 0; i < data.length; i ++){
 	  			  html += '<a href="javascript:void(0)" fl="'+data[i].id+'">'+data[i].name+'</a>';
 	  		}

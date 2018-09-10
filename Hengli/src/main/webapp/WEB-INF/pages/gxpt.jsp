@@ -232,7 +232,7 @@ var contextPath="${pageContext.request.contextPath }";
 var contextPath="${pageContext.request.contextPath }";
 
 	//百度地图API功能
-	var map = new BMap.Map("container");    // 创建Map实例
+	var map = new BMap.Map("container",{enableMapClick:false});    // 创建Map实例
 	
 	map.setMapStyle({
 		styleJson:[
