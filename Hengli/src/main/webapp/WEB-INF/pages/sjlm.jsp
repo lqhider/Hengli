@@ -7,7 +7,9 @@
 	<title>横沥模具产业</title>
 	<link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/jquery.mCustomScrollbar.css">
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.mCustomScrollbar.js"></script>
 	<script type="text/javascript" src="resources/js/sjlm.js"></script>
 	
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -206,6 +208,19 @@
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript">
+	$(function(){
+		$(".s-wrap").mCustomScrollbar({
+			theme:"light-thin",
+			callbacks:{
+			      onCreate: function(){
+			      	$(".s-wrap").css("overflow-y","auto");
+			      }
+			}
+		});
+	})
+</script>
 
 <script type="text/javascript">
 var contextPath="${pageContext.request.contextPath }";

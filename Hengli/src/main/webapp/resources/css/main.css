@@ -1,4 +1,13 @@
-body{font-family: "MICROSOFT YAHEI" , "Arial Narrow";background:url(../images/bg.png) center center no-repeat;}
+body{
+	font-family: "MICROSOFT YAHEI" , "Arial Narrow";
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#190A67), to(#9F2288));   
+	background: -webkit-linear-gradient(left, #190A67, #9F2288);   
+	background: -moz-linear-gradient(left, #190A67, #9F2288);   
+	background: -o-linear-gradient(left, #190A67, #9F2288);   
+	background: -ms-linear-gradient(left, #190A67, #9F2288);   
+	background: linear-gradient(left, #190A67, #9F2288);   
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr = #190A67, endColorstr = #9F2288);
+}
 a,a:visited{text-decoration: none;color: #fff;}
 a span{cursor: pointer;}
 img{max-width: 100%;}
@@ -26,7 +35,7 @@ img{max-width: 100%;}
 .wl-wrap2{height: 187px;background:url(../images/bg8.png) no-repeat;}
 .wl-wrap3{height: 126px;background:url(../images/bg81.png) no-repeat;}
 /*滚动条容器*/
-.s-wrap{overflow-y:auto;height: 100px;width: 320px;margin-top: 34px;}
+.s-wrap{overflow-y:hidden;height: 100px;width: 270px;margin-top: 34px;}
 .wl-cnt{width: 260px;margin-left: 12px;padding-bottom: 10px;}
 .com-t1{left:12px;background:#462ad6;width: 100px;height: 30px;line-height: 30px;font-size: 16px;font-weight: bold;text-align: center;color: #fff;border-radius: 4px;display: block;position: absolute;top: 0;}
 .com-t2{width: 130px;}

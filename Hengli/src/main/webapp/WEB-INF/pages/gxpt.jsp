@@ -7,8 +7,10 @@
 		<title>横沥模具产业</title>
 		<link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+		<link rel="stylesheet" type="text/css" href="resources/css/jquery.mCustomScrollbar.css">
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
 		<script type="text/javascript" src="resources/js/highcharts.js"></script>
+		<script type="text/javascript" src="resources/js/jquery.mCustomScrollbar.js"></script>
 		<script type="text/javascript" src="resources/js/gxpt.js"></script>
 		
 		
@@ -196,7 +198,7 @@
 								</div>
 							</div> -->
 							<!-- 柱状图 -->
-							<div class="d-b-w">
+							<div class="d-b-w" style="display: none">
 								<div class="mask"></div>
 								<div class="distribution_title"></div>
 								<div class="chart" id="chart">
@@ -217,6 +219,14 @@ var contextPath="${pageContext.request.contextPath }";
 </script>
 <script type="text/javascript">
 	$(function(){
+		$(".s-wrap").mCustomScrollbar({
+			theme:"light-thin",
+			callbacks:{
+			      onCreate: function(){
+			      	$(".s-wrap").css("overflow-y","auto");
+			      }
+			}
+		});
 		$(".qyfb").click(function(){
 			var dbw = $(".d-b-w")
 			if(dbw.is(":hidden")){
@@ -234,7 +244,7 @@ var contextPath="${pageContext.request.contextPath }";
 	//百度地图API功能
 	var map = new BMap.Map("container",{enableMapClick:false});    // 创建Map实例
 	
-	map.setMapStyle({
+	/* map.setMapStyle({
 		styleJson:[
 	          {
                   "featureType": "water",
@@ -378,7 +388,7 @@ var contextPath="${pageContext.request.contextPath }";
                   }
         }
 ]
-	});
+	}); */
 	
 	var point = new BMap.Point(113.972995,23.024814);
 	map.centerAndZoom(point,15);  // 初始化地图,设置中心点坐标和地图级别
