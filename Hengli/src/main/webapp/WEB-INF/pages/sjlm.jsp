@@ -228,7 +228,7 @@ var contextPath="${pageContext.request.contextPath }";
 	//百度地图API功能
 	var map = new BMap.Map("container",{enableMapClick:false});    // 创建Map实例
 	
-	map.setMapStyle({
+	/* map.setMapStyle({
 		styleJson:[
 	          {
                   "featureType": "water",
@@ -372,7 +372,7 @@ var contextPath="${pageContext.request.contextPath }";
                   }
         }
 ]
-	});
+	}); */
 	
 	var point = new BMap.Point(113.972995,23.024814);
 	map.centerAndZoom(point,15);  // 初始化地图,设置中心点坐标和地图级别
@@ -389,12 +389,13 @@ var contextPath="${pageContext.request.contextPath }";
 	//map.addOverlay(marker);
 	
 	window.lastInfoBox = null;//定义上一个窗体为lastInfoBox;
+	window.lastMarker = null;
 	
 	function addMarker(longitude,latitude,sContent){
 		
 		var pointEach = new BMap.Point(longitude, latitude);
 		
-		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		var myIcon = new BMap.Icon("resources/images/purpleArrow.png", new BMap.Size(47,46));
 		
 		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		map.addOverlay(markerEach);
@@ -406,7 +407,7 @@ var contextPath="${pageContext.request.contextPath }";
 		
 		
 		markerEach.addEventListener("click", function(){          
-			var infoBox = new BMapLib.InfoBox(map,sContent,{
+			/* var infoBox = new BMapLib.InfoBox(map,sContent,{
 				closeIconUrl:'resources/images/close.png',
 				closeIconMargin: "8px 8px 0 0",
 				enableAutoPan: true,
@@ -426,7 +427,8 @@ var contextPath="${pageContext.request.contextPath }";
 	              });
 	        });
 	        
-			infoBox.open(markerEach);
+			infoBox.open(markerEach); */
+			openInfoWindow(longitude,latitude,sContent);
 		});
 	}
 	
@@ -436,9 +438,18 @@ var contextPath="${pageContext.request.contextPath }";
 	}
 	
 	function openInfoWindow(longitude,latitude,sContent){
+		
+		var overlays = map.getOverlays();
+		for(var i=0;i<overlays.length;i++){
+			var pos = overlays[i].getPosition();
+			if(pos.lng==longitude && pos.lat==latitude){
+				map.removeOverlay(overlays[i]);
+			}
+		}
+		
 		var pointEach = new BMap.Point(longitude, latitude);
 		
-		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		var myIcon = new BMap.Icon("resources/images/redArrow.png", new BMap.Size(47,46));
 		
 		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		var infoWindow = new BMap.InfoWindow(sContent);
@@ -464,7 +475,14 @@ var contextPath="${pageContext.request.contextPath }";
         //判断上一个窗体是否存在，若存在则执行close
             lastInfoBox.close();
         }
+		if(lastMarker && (longitude!=lastMarker.longitude) && (latitude!=lastMarker.latitude)){
+			addMarker(lastMarker.longitude,lastMarker.latitude,lastMarker.sContent);
+        }
         lastInfoBox = infoBox;
+        lastMarker = {};
+        lastMarker.longitude = longitude;
+        lastMarker.latitude = latitude;
+        lastMarker.sContent = sContent;
 		
       	//把关闭按钮放在窗体打开的监听事件里面，否则选择器无法用事件代理的方法获取的关闭按钮；
         infoBox.addEventListener("open", function(e) { 
@@ -473,6 +491,10 @@ var contextPath="${pageContext.request.contextPath }";
             	  addMarker(longitude,latitude,sContent);
               });
         });
+      	
+        infoBox.addEventListener("close", function(e) {
+        	map.removeOverlay(markerEach);
+      	});
         
 		infoBox.open(markerEach);
 	}
