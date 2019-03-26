@@ -23,6 +23,19 @@
 		</where>
 	</select>
 	
+	<!-- 查询没有经纬度的企业 -->
+	<select id="selectCompanyNoLongitudeLatitude" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			company
+		WHERE
+			longitude IS NULL
+		OR longitude = ''
+		OR latitude IS NULL
+		OR latitude = ''
+	</select>
+	
 	<!-- 查询企业分布 -->
 	<select id="selectCompanyDistribution" parameterType="map" resultType="map">
 		SELECT
