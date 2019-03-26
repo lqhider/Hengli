@@ -1,5 +1,6 @@
 package com.hengli.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,11 @@ public class ToolsController {
 	@ResponseBody
 	public Map<String, Object> getLongitudeLatitude(){
 		
+		List<Map<String, Object>> companys = companyMapper.selectCompanyNoLongitudeLatitude();
 		
+		for (Map<String, Object> company : companys) {
+			
+		}
 		
 		return Utils.returnResult(null);
 	}
