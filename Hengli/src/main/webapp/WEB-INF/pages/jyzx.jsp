@@ -7,7 +7,9 @@
 	<title>横沥模具产业</title>
 	<link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/jquery.mCustomScrollbar.css">
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.mCustomScrollbar.js"></script>
 	<script type="text/javascript" src="resources/js/jyzx.js"></script>
 	
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -20,6 +22,8 @@
 		.anchorBL {display: none;}
 		</style>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6xnpV6UuLrzn9p6eow4HW3l2Ra1sER6E"></script>
+		
+		<script type="text/javascript" src="http://api.map.baidu.com/library/InfoBox/1.2/src/InfoBox_min.js"></script>
 </head>
 <body>
 	<div class="main-body">
@@ -72,7 +76,7 @@
 						</div>
 					</div>
 					<!-- 二级分类 -->
-					<div class="wl-wrap wl-wrap3">
+					<div class="wl-wrap">
 						<a class="com-t1" href="javascript:void(0)">二级分类</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
@@ -132,7 +136,7 @@
 						</div>
 					</div>
 					<!-- 设计师列表 -->
-					<div class="wl-wrap">
+					<div class="wl-wrap wl-wrap3">
 						<a class="com-t1 com-t2" href="javascript:void(0)">讲座/活动列表</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
@@ -152,7 +156,7 @@
 						</div>
 					</div>
 					<!-- 设计师公司列表 -->
-					<div class="wl-wrap">
+					<div class="wl-wrap wl-wrap3">
 						<a class="com-t1 com-t2" href="javascript:void(0)">讲师列表</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
@@ -176,7 +180,7 @@
 				</div>
 				<!-- right -->
 				<div class="w-right">
-					<div class="map-wrap">
+					<div class="map-wrap2">
 						<div class="map" id="container">
 							<!-- <img src="images/map.png"> -->
 						</div>
@@ -231,12 +235,25 @@
 
 
 <script type="text/javascript">
+	$(function(){
+		$(".s-wrap").mCustomScrollbar({
+			theme:"light-thin",
+			callbacks:{
+			      onCreate: function(){
+			      	$(".s-wrap").css("overflow-y","auto");
+			      }
+			}
+		});
+	})
+</script>
+
+<script type="text/javascript">
 var contextPath="${pageContext.request.contextPath }";
 
 	//百度地图API功能
-	var map = new BMap.Map("container");    // 创建Map实例
+	var map = new BMap.Map("container",{enableMapClick:false});    // 创建Map实例
 	
-	map.setMapStyle({
+	/* map.setMapStyle({
 		styleJson:[
 	          {
                   "featureType": "water",
@@ -380,7 +397,7 @@ var contextPath="${pageContext.request.contextPath }";
                   }
         }
 ]
-	});
+	}); */
 	
 	var point = new BMap.Point(113.972995,23.024814);
 	map.centerAndZoom(point,15);  // 初始化地图,设置中心点坐标和地图级别
@@ -390,19 +407,48 @@ var contextPath="${pageContext.request.contextPath }";
 	// 初始化地图， 设置中心点坐标和地图级别
 	//var marker = new BMap.Marker(point);
 	//map.addOverlay(marker);
-
+	
+	window.lastInfoBox = null;//定义上一个窗体为lastInfoBox;
+	window.lastMarker = null;
+	
 	function addMarker(longitude,latitude,sContent){
 		
 		var pointEach = new BMap.Point(longitude, latitude);
 		
-		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		var myIcon = new BMap.Icon("resources/images/purpleArrow.png", new BMap.Size(47,46));
 		
 		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		map.addOverlay(markerEach);
 		
-		var infoWindow = new BMap.InfoWindow(sContent);
+		/* var infoWindow = new BMap.InfoWindow(sContent);
 		markerEach.addEventListener("click", function(){          
 		   this.openInfoWindow(infoWindow);
+		}); */
+		
+		
+		markerEach.addEventListener("click", function(){          
+			/* var infoBox = new BMapLib.InfoBox(map,sContent,{
+				closeIconUrl:'resources/images/close.png',
+				closeIconMargin: "8px 8px 0 0",
+				enableAutoPan: true,
+				align: INFOBOX_AT_TOP
+			});
+			
+			if(lastInfoBox){
+	        //判断上一个窗体是否存在，若存在则执行close
+	            lastInfoBox.close();
+	        }
+	        lastInfoBox = infoBox;
+			
+	      	//把关闭按钮放在窗体打开的监听事件里面，否则选择器无法用事件代理的方法获取的关闭按钮；
+	        infoBox.addEventListener("open", function(e) { 
+	              $('.closeBtn').on('click',function () {
+	                  infoBox.close();
+	              });
+	        });
+	        
+			infoBox.open(markerEach); */
+			openInfoWindow(longitude,latitude,sContent);
 		});
 	}
 	
@@ -412,20 +458,65 @@ var contextPath="${pageContext.request.contextPath }";
 	}
 	
 	function openInfoWindow(longitude,latitude,sContent){
+		
+		var overlays = map.getOverlays();
+		for(var i=0;i<overlays.length;i++){
+			var pos = overlays[i].getPosition();
+			if(pos.lng==longitude && pos.lat==latitude){
+				map.removeOverlay(overlays[i]);
+			}
+		}
+		
 		var pointEach = new BMap.Point(longitude, latitude);
 		
-		var myIcon = new BMap.Icon("resources/images/Tagging1.png", new BMap.Size(47,46));
+		var myIcon = new BMap.Icon("resources/images/redArrow.png", new BMap.Size(47,46));
 		
 		var markerEach = new BMap.Marker(pointEach,{icon:myIcon});
 		var infoWindow = new BMap.InfoWindow(sContent);
 		
 		map.addOverlay(markerEach);
 		
-		markerEach.openInfoWindow(infoWindow);
+		/* markerEach.openInfoWindow(infoWindow);
 		
 		markerEach.addEventListener("infowindowclose", function(){
 			addMarker(longitude,latitude,sContent)
+		}); */
+		
+		//openInfoBox(markerEach,sContent);
+		
+		var infoBox = new BMapLib.InfoBox(map,sContent,{
+			closeIconUrl:'resources/images/close.png',
+			closeIconMargin: "8px 8px 0 0",
+			enableAutoPan: true,
+			align: INFOBOX_AT_TOP
 		});
+		
+		if(lastInfoBox){
+        //判断上一个窗体是否存在，若存在则执行close
+            lastInfoBox.close();
+        }
+		if(lastMarker && (longitude!=lastMarker.longitude) && (latitude!=lastMarker.latitude)){
+			addMarker(lastMarker.longitude,lastMarker.latitude,lastMarker.sContent);
+        }
+        lastInfoBox = infoBox;
+        lastMarker = {};
+        lastMarker.longitude = longitude;
+        lastMarker.latitude = latitude;
+        lastMarker.sContent = sContent;
+		
+      	//把关闭按钮放在窗体打开的监听事件里面，否则选择器无法用事件代理的方法获取的关闭按钮；
+        infoBox.addEventListener("open", function(e) { 
+              $('.closeBtn').on('click',function () {
+                  infoBox.close();
+            	  addMarker(longitude,latitude,sContent);
+              });
+        });
+      	
+        infoBox.addEventListener("close", function(e) {
+        	map.removeOverlay(markerEach);
+      	});
+        
+		infoBox.open(markerEach);
 	}
 </script>
 
