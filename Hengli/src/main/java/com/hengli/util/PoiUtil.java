@@ -38,37 +38,18 @@ public class PoiUtil{// implements IPoiUtil
 	 */
 	private static final String STR_BLANK = "";
 	
-	private static final int INDEX_WORKSHEET = 0;
-	private static final int COL_USERNAME    = 1;
-	private static final int COL_REALNAME    = 2;
-	private static final int COL_MAIL        = 3;
-	private static final int COL_PHONE       = 4;
-	private static final int COL_ERR         = 5;
+	private static final String COMPANY_WORKSHEET = "企业表";
+	private static final String INNOVATION_CENTER_WORKSHEET = "创新中心表";
+	private static final String COLLEGES_WORKSHEET = "院校表";
+	private static final String TEACHER_WORKSHEET = "讲师表";
+	private static final String LECTURE_WORKSHEET = "讲座表";
+	private static final String DESIGN_COMPANY_WORKSHEET = "设计师公司";
+	private static final String DESIGN_WORKSHEET = "设计师";
+	
 	/**
 	 * 处理起始行行号
 	 */
 	private static final int START_LINE = 1;
-	
-	/**
-	 * 用户名最小长度
-	 */
-	private static final int MIN_USERNAME_LENGTH = 6;
-	/**
-	 * 用户名最大长度
-	 */
-	private static final int MAX_USERNAME_LENGTH = 18;
-	/**
-	 * 真实姓名最大长度
-	 */
-	private static final int MAX_REALNAME_LENGTH = 5;
-	/**
-	 * 邮箱最大长度
-	 */
-	private static final int MAX_MAIL_LENGTH = 50;
-	/**
-	 * 移动电话最大长度
-	 */
-	private static final int MAX_PHONE_LENGTH = 20;
 	
 	/**
 	 * 处理批量上传的文档数据<br><br><strong>此方法为线程同步方法</strong>
@@ -76,11 +57,7 @@ public class PoiUtil{// implements IPoiUtil
 	 * @param xlsPath 处理对象文档名称
 	 * @throws Exception 
 	 */
-	public synchronized POIResult process(final String xlsPath, final String reportPath, HashMap<String, Object> params) throws Exception {
-		
-		if(!Utils.hasText(Utils.valueOf(params.get("vdc_id")))){
-			throw new Exception("VDCid不能为空");
-		}
+	public synchronized POIResult process(final String xlsPath, final String reportPath) throws Exception {
 		
 		POIResult result = new POIResult();
 		// 总数据条数
@@ -99,7 +76,7 @@ public class PoiUtil{// implements IPoiUtil
 //			HSSFWorkbook wb = new HSSFWorkbook(fs);
 			Workbook wb = WorkbookFactory.create(new FileInputStream(xlsPath));
 			// 得到Excel指定工作表
-			Sheet sheet = wb.getSheetAt(INDEX_WORKSHEET); 
+			Sheet sheet = wb.getSheet(COMPANY_WORKSHEET);
 			int lastRowNum = sheet.getLastRowNum();
 			
 			totalCount = lastRowNum;
@@ -107,44 +84,14 @@ public class PoiUtil{// implements IPoiUtil
 			for (int index = START_LINE; index <= lastRowNum; index++) {
 
 				Row row = sheet.getRow(index);// 得到Excel工作表指定行
-				row.removeCell(row.createCell(COL_ERR));
 
 				String username, realname, mail = "", phone = "";
 				
 				DecimalFormat dformat = new DecimalFormat("0");
-				if((row.getCell(COL_USERNAME) == null || row.getCell(COL_USERNAME).getStringCellValue().trim().equals(STR_BLANK)) 
-						&& (row.getCell(COL_REALNAME) == null || row.getCell(COL_REALNAME).getStringCellValue().trim().equals(STR_BLANK)) 
-						&& (row.getCell(COL_MAIL) == null || row.getCell(COL_MAIL).getStringCellValue().trim().equals(STR_BLANK))
-						&& (row.getCell(COL_PHONE) == null || dformat.format(row.getCell(COL_PHONE).getNumericCellValue()).trim().equals(STR_BLANK))) {
-					totalCount --;
-					// 数据全部为空时跳过本条数据
-					continue;
-				}
 				
-				// 用户名提取
-				Cell cell = row.getCell(COL_USERNAME);
-				if (cell == null || cell.getStringCellValue().trim().equals(STR_BLANK)) {
-					setErr(row.createCell(COL_USERNAME));
-					row.createCell(COL_ERR).setCellValue("用户名不能为空");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 为空时跳过本条数据
-					continue;
-				}else if(cell.getStringCellValue().trim().length()>MAX_USERNAME_LENGTH || cell.getStringCellValue().trim().length()<MIN_USERNAME_LENGTH){
-					setErr(row.getCell(COL_USERNAME));
-					row.createCell(COL_ERR).setCellValue("用户名长度为"+MIN_USERNAME_LENGTH+"-"+MAX_USERNAME_LENGTH+"字");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 超长时跳过本条数据
-					continue;
-				}else if(cell.getStringCellValue().trim().replaceAll("^[A-Za-z][A-Za-z0-9]*", "").length() > 0){
-					setErr(row.getCell(COL_USERNAME));
-					row.createCell(COL_ERR).setCellValue("用户名必须包含英文字母,数字,下划线中的任意两种");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 格式错误跳过本条数据
-					continue;
-				}
+				// 企业名提取
+				Cell cell = row.getCell(2);
+				
 				username = cell.getStringCellValue().trim();
 				
 				// 姓名提取

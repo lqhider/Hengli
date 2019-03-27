@@ -67,14 +67,14 @@ public class ToolsController {
 	}
 	
 	/**
-	 * 批量创建用户
+	 * 导入数据
 	 * @param params
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping("/batchCreateUser")
+	@RequestMapping("/importData")
 	@ResponseBody
-	public Map<String, Object> batchCreateUser(HttpServletRequest request) throws Exception{
+	public Map<String, Object> importData(HttpServletRequest request) throws Exception{
 		
 		long startTime = System.currentTimeMillis();
 		
@@ -88,14 +88,6 @@ public class ToolsController {
 		if (multipartResolver.isMultipart(request)) {
 			// 将request变成多部分request
 			MultipartHttpServletRequest multiRequest = multipartResolver.resolveMultipart(request);
-			
-			if (!Utils.hasText(multiRequest.getParameter("vdcId"))) {
-				return Utils.returnResult(null, false, "VDCid不能为空");
-			}
-			
-			// 获取请求中的参数
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			params.put("vdc_id", multiRequest.getParameter("vdcId"));
 			
 			// 获取multiRequest 中所有的文件名
 			Iterator<String> iter = multiRequest.getFileNames();
@@ -118,7 +110,7 @@ public class ToolsController {
 					// 上传
 					file.transferTo(new File(listPath));
 					
-					POIResult poiResult = poiUtil.process(listPath, reportPath, params);
+					POIResult poiResult = poiUtil.process(listPath, reportPath);
 					result.put("total", poiResult.getTotal()+"");
 					result.put("error", poiResult.getError()+"");
 					if(!poiResult.isStatus()){
