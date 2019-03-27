@@ -210,7 +210,8 @@ var contextPath="${pageContext.request.contextPath }";
 		var markerEach = new BMap.Marker(pointEach);
 		var infoWindow = new BMap.InfoWindow(sContent);
 		
-		var infoWindow = new BMap.InfoWindow(sContent);
+		map.addOverlay(markerEach);
+		
 		markerEach.openInfoWindow(infoWindow);
 	}
 </script>
