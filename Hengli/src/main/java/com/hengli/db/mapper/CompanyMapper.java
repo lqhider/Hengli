@@ -10,5 +10,9 @@ public interface CompanyMapper {
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> params);
 	
+	public List<Map<String,Object>> selectCompanyNoLongitudeLatitude();
+	
 	public List<Map<String,Object>> selectCompanyDistribution(Map<String, Object> params);
+	
+	public int updateCompany(Map<String,Object> params);
 }

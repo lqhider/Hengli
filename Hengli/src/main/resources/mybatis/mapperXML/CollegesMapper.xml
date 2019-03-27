@@ -22,4 +22,17 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 查询没有经纬度的院校 -->
+	<select id="selectCollegesNoLongitudeLatitude" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			colleges
+		WHERE
+			longitude IS NULL
+		OR longitude = ''
+		OR latitude IS NULL
+		OR latitude = ''
+	</select>
 </mapper>  
