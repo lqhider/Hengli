@@ -168,6 +168,9 @@
 	  					getDesigner();
   			  		})
 	  			  })
+	  			  
+	  			  
+	  			$("#sjsgslb a:eq(0)").click();
 		  	  }
         	}) 
     	}

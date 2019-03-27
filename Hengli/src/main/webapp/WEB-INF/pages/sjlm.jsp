@@ -76,11 +76,11 @@
 						</div>
 					</div>
 					<!-- 二级分类 -->
-					<div class="wl-wrap wl-wrap3">
+					<div class="wl-wrap">
 						<a class="com-t1" href="javascript:void(0)">二级分类</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
-								<div class="wlc-wrap wlc-w12 clearfix" id="ejfl">
+								<div class="wlc-wrap wlc-w1 clearfix" id="ejfl">
 									<!-- <a href="#">冲压模具</a>
 									<a href="#">简易模具</a>
 									<a href="#">塑料成型模具</a>
@@ -122,7 +122,7 @@
 						</div>
 					</div>
 					<!-- 设计师列表 -->
-					<div class="wl-wrap">
+					<div class="wl-wrap wl-wrap3">
 						<a class="com-t1 com-t2" href="javascript:void(0)">设计师列表</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
@@ -143,7 +143,7 @@
 					</div>
 					<!-- 设计师公司列表 -->
 					<div class="wl-wrap wl-wrap3">
-						<a class="com-t1 com-t2" href="javascript:void(0)">设计师公司列表</a>
+						<a class="com-t1 com-t2" href="javascript:void(0)">设计公司列表</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
 								<div class="wlc-wrap wlc-w2 clearfix" id="sjsgslb">

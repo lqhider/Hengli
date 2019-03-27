@@ -122,7 +122,9 @@
   			  		})
 	  			  })
 		  	  }
-        	}) 
+		  	  
+		  	  $("#yxlb a:eq(0)").click();
+        	})
     	}
     	
     	function getLectureTeacher(){
