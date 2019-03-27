@@ -48,4 +48,60 @@
 		GROUP BY
 			industrial_area.id
 	</select>
+	
+	<!-- 修改企业信息 -->
+	<update id="updateCompany" parameterType="map">
+		UPDATE company
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="need_number != null">
+				need_number = #{need_number},
+			</if>
+			<if test="product_number != null">
+				product_number = #{product_number},
+			</if>
+			<if test="custom_service_number != null">
+				custom_service_number = #{custom_service_number},
+			</if>
+			<if test="conundrum_number != null">
+				conundrum_number = #{conundrum_number},
+			</if>
+			<if test="cooperate_number != null">
+				cooperate_number = #{cooperate_number},
+			</if>
+			<if test="requirement_num != null">
+				requirement_num = #{requirement_num},
+			</if>
+			<if test="first_classification != null">
+				first_classification = #{first_classification},
+			</if>
+			<if test="second_classification != null">
+				second_classification = #{second_classification},
+			</if>
+			<if test="industrial_area != null">
+				industrial_area = #{industrial_area},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude},
+			</if>
+			<if test="homepage != null">
+				homepage = #{homepage},
+			</if>
+			<if test="gxptURL != null">
+				gxptURL = #{gxptURL},
+			</if>
+			<if test="conundrum_more != null">
+				conundrum_more = #{conundrum_more},
+			</if>
+			<if test="demand_hall != null">
+				demand_hall = #{demand_hall},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 </mapper>  
