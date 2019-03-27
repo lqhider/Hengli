@@ -26,22 +26,17 @@
 		  		  var html="";
 		  		  for(var i = 0; i < innovationCenterList.length; i ++){
 		  			  
-		  			  html += '<div class="gd_box" id="innovationCenter'+i+'">'+innovationCenterList[i].name+'</div>';
+		  			  html += '<div class="gd_box">'+innovationCenterList[i].name+'</div>';
 		  			  
 		  		  }
 		  		  $(".cus").empty().append(html);
 		  		  
-		  		  for(var i = 0; i < innovationCenterList.length; i ++){
-		  			  /*var pointEach = new BMap.Point(innovationCenterList[i].longitude, innovationCenterList[i].latitude);
-		  			  var markerEach = new BMap.Marker(pointEach);
-		  			  
-		  			  var infoWindow = new BMap.InfoWindow('');
-		  			  $("#innovationCenter"+i).click(function(){
-		  				  alert(markerEach.getPosition().lng);
-		  				  markerEach.openInfoWindow(infoWindow);
-		  			  })*/
-		  			  openInfoWindow(innovationCenterList[i].longitude, innovationCenterList[i].latitude,'');
-		  		  }
+  			  	  $(".gd_box").each(function(index, element) {
+  			  		$(this).click(function(){
+  			  			alert(innovationCenterList[index].longitude);
+	  					  openInfoWindow(innovationCenterList[index].longitude, innovationCenterList[index].latitude,'');
+  			  		})
+	  			  })
 		  		  
 		  		  //地图标注
 		  		  for(var i = 0; i < companyList.length; i ++){
