@@ -89,6 +89,16 @@ public class PageController {
 		return "sjlm";
 	}
 	
+	/**
+	 * 跳转辅助工具页面
+	 * 
+	 * @return 跳转路径
+	 */
+	@RequestMapping("/toolsPage")
+	public String toolsPage() {
+		return "tools";
+	}
+	
 	@RequestMapping("/highcharts")
 	public String highcharts() {
 		return "gx/HighchartsTest";	
