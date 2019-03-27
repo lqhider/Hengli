@@ -49,6 +49,20 @@
 			industrial_area.id
 	</select>
 	
+	<!-- 查询企业创新数量 -->
+	<select id="selectInnovateNum" parameterType="map" resultType="map">
+		SELECT
+			industrial_area.id,
+			industrial_area.`name`,
+			COALESCE(sum(company.conundrum_number),0) AS conundrum_number,
+			COALESCE(sum(company.cooperate_number),0) AS cooperate_number
+		FROM
+			industrial_area
+		LEFT JOIN company ON industrial_area.id = company.industrial_area
+		GROUP BY
+			industrial_area.id
+	</select>
+	
 	<!-- 修改企业信息 -->
 	<update id="updateCompany" parameterType="map">
 		UPDATE company
