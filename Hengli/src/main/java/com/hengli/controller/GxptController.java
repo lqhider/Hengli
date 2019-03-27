@@ -41,10 +41,26 @@ public class GxptController {
 		
 		List<Map<String, Object>> innovationCenterList = innovationCenterMapper.selectInnovationCenterMapper(params);
 		
-		List<Map<String, Object>> companyDistribution = companyMapper.selectCompanyDistribution(params);
-		
 		map.put("companyList", companyList);
 		map.put("innovationCenterList", innovationCenterList);
+		
+		return Utils.returnResult(map);
+	}
+	
+	/**
+	 * 获取企业分布
+	 * @param params
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/getCompanyDistribution")
+	@ResponseBody
+	public Map<String, Object> getCompanyDistribution(@RequestParam Map<String, Object> params){
+		
+		Map map = new HashMap();
+		
+		List<Map<String, Object>> companyDistribution = companyMapper.selectCompanyDistribution(params);
+		
 		map.put("companyDistribution", companyDistribution);
 		
 		return Utils.returnResult(map);

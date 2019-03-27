@@ -38,15 +38,32 @@ public class CxyController {
 		Map map = new HashMap();
 		
 		params.put("companyName", params.get("name"));
-		
 		List<Map<String, Object>> companyList = companyMapper.selectCompany(params);
 		
 		params.put("collegesName", params.get("name"));
-		
 		List<Map<String, Object>> collegesList = collegesMapper.selectColleges(params);
 		
 		map.put("companyList", companyList);
 		map.put("collegesList", collegesList);
+		
+		return Utils.returnResult(map);
+	}
+	
+	/**
+	 * 获取创新数量
+	 * @param params
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/getInnovateNum")
+	@ResponseBody
+	public Map<String, Object> getInnovateNum(@RequestParam Map<String, Object> params){
+		
+		Map map = new HashMap();
+		
+		List<Map<String, Object>> innovateNum = companyMapper.selectInnovateNum(params);
+		
+		map.put("innovateNum", innovateNum);
 		
 		return Utils.returnResult(map);
 	}
