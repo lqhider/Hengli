@@ -10,4 +10,7 @@ public interface DesignCompanyMapper {
 	
 	public List<Map<String,Object>> selectDesignCompany(Map<String, Object> params);
 	
+	public List<Map<String,Object>> selectDesignCompanyNoLongitudeLatitude();
+	
+	public int updateDesignCompany(Map<String,Object> params);
 }

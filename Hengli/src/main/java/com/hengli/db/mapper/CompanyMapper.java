@@ -16,5 +16,7 @@ public interface CompanyMapper {
 	
 	public List<Map<String,Object>> selectInnovateNum(Map<String, Object> params);
 	
+	public void insertCompany(Map<String,Object> params);
+	
 	public int updateCompany(Map<String,Object> params);
 }
