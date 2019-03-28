@@ -1,6 +1,5 @@
 package com.hengli.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,7 +18,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.hengli.db.mapper.CollegesMapper;
 import com.hengli.db.mapper.CompanyMapper;
+import com.hengli.db.mapper.DesignCompanyMapper;
+import com.hengli.db.mapper.InnovationCenterMapper;
 import com.hengli.util.CoordinateUtils;
+import com.hengli.util.PoiUtil;
 import com.hengli.util.PoiUtil.POIResult;
 import com.hengli.util.Utils;
 
@@ -34,15 +36,24 @@ public class ToolsController {
 	@Autowired
 	public CollegesMapper collegesMapper;
 	
+	@Autowired
+	public DesignCompanyMapper designCompanyMapper;
+	
+	@Autowired
+	public InnovationCenterMapper innovationCenterMapper;
+	
+	@Autowired
+	private PoiUtil poiUtil;
+	
 	/**
-	 * 获取企业,院校,设计公司经纬度
+	 * 获取企业经纬度
 	 * @param params
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping("/getLongitudeLatitude")
+	@RequestMapping("/getCompanyLongitudeLatitude")
 	@ResponseBody
-	public Map<String, Object> getLongitudeLatitude() throws IOException{
+	public Map<String, Object> getCompanyLongitudeLatitude() throws IOException{
 		
 		List<Map<String, Object>> companys = companyMapper.selectCompanyNoLongitudeLatitude();
 		
@@ -57,10 +68,86 @@ public class ToolsController {
 			companyMapper.updateCompany(params);
 		}
 		
+		return Utils.returnResult(null);
+	}
+	
+	/**
+	 * 获取院校经纬度
+	 * @param params
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping("/getCollegesLongitudeLatitude")
+	@ResponseBody
+	public Map<String, Object> getCollegesLongitudeLatitude() throws IOException{
+		
 		List<Map<String, Object>> colleges = collegesMapper.selectCollegesNoLongitudeLatitude();
 		
 		for (Map<String, Object> college : colleges) {
+			String[] coordinate = CoordinateUtils.getCoordinate((String) college.get("name"));
 			
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("id", college.get("id"));
+			params.put("longitude", coordinate[0]);
+			params.put("latitude", coordinate[1]);
+			
+			collegesMapper.updateColleges(params);
+		}
+		
+		return Utils.returnResult(null);
+	}
+	
+	/**
+	 * 获取设计公司经纬度
+	 * @param params
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping("/getDesignCompanyLongitudeLatitude")
+	@ResponseBody
+	public Map<String, Object> getDesignCompanyLongitudeLatitude() throws IOException{
+		
+		List<Map<String, Object>> designCompanys = designCompanyMapper.selectDesignCompanyNoLongitudeLatitude();
+		
+		for (Map<String, Object> designCompany : designCompanys) {
+			String[] coordinate = CoordinateUtils.getCoordinate((String) designCompany.get("name"));
+			
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("id", designCompany.get("id"));
+			params.put("longitude", coordinate[0]);
+			params.put("latitude", coordinate[1]);
+			
+			designCompanyMapper.updateDesignCompany(params);
+		}
+		
+		return Utils.returnResult(null);
+	}
+	
+	/**
+	 * 获取创新中心经纬度
+	 * @param params
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping("/getInnovationCenterLongitudeLatitude")
+	@ResponseBody
+	public Map<String, Object> getInnovationCenterLongitudeLatitude() throws IOException{
+		
+		List<Map<String, Object>> innovationCenters = innovationCenterMapper.selectInnovationCenterNoLongitudeLatitude();
+		
+		for (Map<String, Object> innovationCenter : innovationCenters) {
+			String address = (String) innovationCenter.get("address");
+			if(address == null || "".equals(address)) {
+				address = (String) innovationCenter.get("name");
+			}
+			String[] coordinate = CoordinateUtils.getCoordinate(address);
+			
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("id", innovationCenter.get("id"));
+			params.put("longitude", coordinate[0]);
+			params.put("latitude", coordinate[1]);
+			
+			innovationCenterMapper.updateInnovationCenter(params);
 		}
 		
 		return Utils.returnResult(null);
@@ -75,8 +162,6 @@ public class ToolsController {
 	@RequestMapping("/importData")
 	@ResponseBody
 	public Map<String, Object> importData(HttpServletRequest request) throws Exception{
-		
-		long startTime = System.currentTimeMillis();
 		
 		HashMap<String, String> result = new HashMap<String, String>();
 		
@@ -97,25 +182,22 @@ public class ToolsController {
 				MultipartFile file = multiRequest.getFile(iter.next()
 						.toString());
 				if (file != null) {
-					String contextPath = request.getSession().getServletContext().getRealPath("/");
-					String realFilePath = contextPath + File.separator + "files" + File.separator;
-					String reportFilePath = contextPath + File.separator + "resources" + File.separator;
-					if(!(new File(realFilePath).exists())){
-						new File(realFilePath).mkdirs();
-					}
-					String fileName = startTime + ".xlsx";
-					String listPath = realFilePath  + fileName;
-					String reportPath = reportFilePath  + fileName;
+//					String contextPath = request.getSession().getServletContext().getRealPath("/");
+//					String realFilePath = contextPath + File.separator + "files" + File.separator;
+					
+//					if(!(new File(realFilePath).exists())){
+//						new File(realFilePath).mkdirs();
+//					}
+//					String fileName = startTime + ".xlsx";
+//					String listPath = realFilePath  + fileName;
 					
 					// 上传
-					file.transferTo(new File(listPath));
+//					file.transferTo(new File(listPath));
 					
-					POIResult poiResult = poiUtil.process(listPath, reportPath);
-					result.put("total", poiResult.getTotal()+"");
+					POIResult poiResult = poiUtil.process(file.getInputStream());
 					result.put("error", poiResult.getError()+"");
 					if(!poiResult.isStatus()){
-						result.put("reportPath", "resources" + File.separator + fileName);
-						return Utils.returnResult(result, false, "批量导入失败");
+						return Utils.returnResult(result, false, "导入数据失败");
 					}
 				}
 			}

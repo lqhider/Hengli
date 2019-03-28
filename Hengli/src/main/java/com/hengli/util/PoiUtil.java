@@ -1,11 +1,12 @@
 package com.hengli.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -15,16 +16,16 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import com.mysql.jdbc.MysqlDataTruncation;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import com.hengli.db.mapper.CollegesMapper;
+import com.hengli.db.mapper.CompanyMapper;
+import com.hengli.db.mapper.DesignCompanyMapper;
+import com.hengli.db.mapper.InnovationCenterMapper;
 
 //@Service
 @Component
@@ -32,6 +33,18 @@ public class PoiUtil{// implements IPoiUtil
 	
 	@Autowired
 	DataSourceTransactionManager transactionManager;
+	
+	@Autowired
+	public CompanyMapper companyMapper;
+	
+	@Autowired
+	public CollegesMapper collegesMapper;
+	
+	@Autowired
+	public DesignCompanyMapper designCompanyMapper;
+	
+	@Autowired
+	public InnovationCenterMapper innovationCenterMapper;
 	
 	/**
 	 * 空字符串
@@ -57,145 +70,57 @@ public class PoiUtil{// implements IPoiUtil
 	 * @param xlsPath 处理对象文档名称
 	 * @throws Exception 
 	 */
-	public synchronized POIResult process(final String xlsPath, final String reportPath) throws Exception {
+	public synchronized POIResult process(final InputStream inp) throws Exception {
 		
 		POIResult result = new POIResult();
-		// 总数据条数
-		int totalCount = 0;
+		
 		// 总错误条数
 		int totalError = 0;
+		
 		// 启动事务，事务等级为【排他】
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		Workbook wb = null;
 		
 		try {
 			// 得到Excel工作簿对象
 //			POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(xlsPath)); 
 			// 得到Excel工作表对象
 //			HSSFWorkbook wb = new HSSFWorkbook(fs);
-			Workbook wb = WorkbookFactory.create(new FileInputStream(xlsPath));
-			// 得到Excel指定工作表
-			Sheet sheet = wb.getSheet(COMPANY_WORKSHEET);
-			int lastRowNum = sheet.getLastRowNum();
+			wb = WorkbookFactory.create(inp);
+			// 导入企业数据
+			totalError = importCompanyData(totalError, wb.getSheet(COMPANY_WORKSHEET));
 			
-			totalCount = lastRowNum;
-
-			for (int index = START_LINE; index <= lastRowNum; index++) {
-
-				Row row = sheet.getRow(index);// 得到Excel工作表指定行
-
-				String username, realname, mail = "", phone = "";
-				
-				DecimalFormat dformat = new DecimalFormat("0");
-				
-				// 企业名提取
-				Cell cell = row.getCell(2);
-				
-				username = cell.getStringCellValue().trim();
-				
-				// 姓名提取
-				cell = row.getCell(COL_REALNAME);
-				if (cell == null || cell.getStringCellValue().trim().equals(STR_BLANK)) {
-					// 为空时忽略当前字段
-				}else if(cell.getStringCellValue().trim().length()>MAX_REALNAME_LENGTH){
-					setErr(row.getCell(COL_REALNAME));
-					row.createCell(COL_ERR).setCellValue("姓名最长"+MAX_REALNAME_LENGTH+"字");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 为空时跳过本条数据
-					continue;
-				}
-				realname = cell.getStringCellValue().trim();
-				
-				// 邮箱提取
-				cell = row.getCell(COL_MAIL);
-				if (cell == null || cell.getStringCellValue().trim().equals(STR_BLANK)) {
-					// 为空时忽略当前字段
-				}else if(cell.getStringCellValue().trim().length()>MAX_MAIL_LENGTH){
-					setErr(row.getCell(COL_MAIL));
-					row.createCell(COL_ERR).setCellValue("邮箱最多"+MAX_MAIL_LENGTH+"个字符");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 超长时跳过本条数据
-					continue;
-				}else if(cell.getStringCellValue().trim().replaceAll("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$", "").length()>0) {
-					setErr(row.getCell(COL_MAIL));
-					row.createCell(COL_ERR).setCellValue("邮箱错误");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 格式错误跳过本条数据
-					continue;
-				}else{
-					mail = cell.getStringCellValue().trim();
-				}
-				
-				// 手机号提取
-				cell = row.getCell(COL_PHONE);
-				DecimalFormat df = new DecimalFormat("0");
-				if (cell == null || df.format(cell.getNumericCellValue()).trim().equals(STR_BLANK)) {
-					// 为空时忽略当前字段
-				}else if(df.format(cell.getNumericCellValue()).trim().length()>MAX_PHONE_LENGTH){
-					setErr(row.getCell(COL_PHONE));
-					row.createCell(COL_ERR).setCellValue("手机号最多"+MAX_PHONE_LENGTH+"位数字");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 超长时跳过本条数据
-					continue;
-				}else if(df.format(cell.getNumericCellValue()).trim().replaceAll("^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$", "").length()>0) {
-					setErr(row.getCell(COL_PHONE));
-					row.createCell(COL_ERR).setCellValue("手机号格式错误");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 超长时跳过本条数据
-					continue;
-				}else{
-					phone = df.format(cell.getNumericCellValue()).trim();
-				}
-				
-				// 封装处理对象
-				HashMap<String, Object> userInfo = new HashMap<String, Object>();
-				userInfo.put("username", username);
-				userInfo.put("realname", realname);
-				userInfo.put("mail", mail);
-				userInfo.put("phone", phone);
-				
-				// 判断用户名是否存在
-				if(userService.checkUserName(userInfo)) {
-					setErr(row.createCell(COL_USERNAME));
-					row.createCell(COL_ERR).setCellValue("用户名已经存在");
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-					// 跳过本条数据
-					continue;
-				}
-				
-				try{
-					doInstert(userInfo);
-					// 添加用户和VDC的关系
-					params.put("user_id", Utils.valueOf(userInfo.get("id")));
-					relationService.insertRelation(params);
-				}catch(DuplicateKeyException e){
-					totalError ++;
-					setErr(row.getCell(COL_USERNAME));
-					row.createCell(COL_ERR).setCellValue("用户名已经存在");
-					setErr(row.getCell(COL_ERR));
-//					e.getMessage()
-				}catch(DataIntegrityViolationException e){
-					if(e.getCause() instanceof MysqlDataTruncation){
-						row.createCell(COL_ERR).setCellValue("非法数据：长度过长");
-					}else if(e.getCause() instanceof MySQLIntegrityConstraintViolationException){
-						setErr(row.getCell(COL_USERNAME));
-						row.createCell(COL_ERR).setCellValue("非法数据：数据不能为空或为系统关键词");
-					}
-					setErr(row.getCell(COL_ERR));
-					totalError ++;
-				}catch(Exception e){
-					row.createCell(COL_ERR).setCellValue("未知异常");
-					setErr(row.getCell(COL_ERR));
-					e.printStackTrace();
-					totalError ++;
-				}
+			if(totalError != 0) {
+				result.setStatus(false);
+				transactionManager.rollback(status);
+				System.out.println("=====事务控制回滚通知=====");
+				result.setError(totalError);
+				return result;
+			}
+			
+			// 导入创新中心数据
+			totalError = importInnovationCenterData(totalError, wb.getSheet(INNOVATION_CENTER_WORKSHEET));
+			
+			if(totalError != 0) {
+				result.setStatus(false);
+				transactionManager.rollback(status);
+				System.out.println("=====事务控制回滚通知=====");
+				result.setError(totalError);
+				return result;
+			}
+			
+			// 导入院校数据
+			totalError = importCollegesData(totalError, wb.getSheet(COLLEGES_WORKSHEET));
+			
+			if(totalError != 0) {
+				result.setStatus(false);
+				transactionManager.rollback(status);
+				System.out.println("=====事务控制回滚通知=====");
+				result.setError(totalError);
+				return result;
 			}
 			
 			if(totalError == 0){
@@ -207,21 +132,8 @@ public class PoiUtil{// implements IPoiUtil
 				transactionManager.rollback(status);
 				System.out.println("=====事务控制回滚通知=====");
 			}
-			result.setTotal(totalCount);
 			result.setError(totalError);
 			
-			if(!result.isStatus()){
-				// 输出结果
-				FileOutputStream fileOut = new FileOutputStream(reportPath);
-				wb.write(fileOut);
-				wb.close();
-				fileOut.flush();
-				fileOut.close();
-//				fs.close();
-			}else{
-				wb.close();
-//				fs.close();
-			}
 		} catch (Exception e) {
 			transactionManager.rollback(status);
 			System.out.println("=====事务控制回滚通知=====");
@@ -229,28 +141,125 @@ public class PoiUtil{// implements IPoiUtil
 			result.setTotal(0);
 			result.setError(0);
 			e.printStackTrace();
+		}finally {
+			wb.close();
 		}
 		return result;
 	}
 
-	/**
-	 * 执行用户信息及附加信息的插入
-	 * @param userInfo 新用户信息
-	 */
-//	@OperationTransaction
-	public void doInstert(HashMap<String, Object> userInfo) {
-		userInfo.put("password", "123456");
-		String defaultPassword = "123456";
-		if(passworHelper!=null){
-			passworHelper.encryptPassword(userInfo);
-		}else{
-			userInfo.put("password", defaultPassword);
+	private int importCompanyData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index < lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+
+			// 封装处理对象
+			HashMap<String, Object> company = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			company.put("id", getCellValue(row.getCell(0)));
+			company.put("name", getCellValue(row.getCell(1)));
+			company.put("need_number", getCellValue(row.getCell(2)));
+			company.put("product_number", getCellValue(row.getCell(3)));
+			company.put("custom_service_number", getCellValue(row.getCell(4)));
+			company.put("conundrum_number", getCellValue(row.getCell(5)));
+			company.put("cooperate_number", getCellValue(row.getCell(6)));
+			company.put("requirement_num", getCellValue(row.getCell(7)));
+			company.put("first_classification", getCellValue(row.getCell(8)));
+			company.put("second_classification", getCellValue(row.getCell(9)));
+			company.put("industrial_area", getCellValue(row.getCell(10)));
+			company.put("longitude", getCellValue(row.getCell(11)));
+			company.put("latitude", getCellValue(row.getCell(12)));
+			company.put("homepage", getCellValue(row.getCell(13)));
+			company.put("gxptURL", getCellValue(row.getCell(14)));
+			company.put("conundrum_more", getCellValue(row.getCell(15)));
+			company.put("demand_hall", getCellValue(row.getCell(16)));
+			
+			try{
+				companyMapper.insertCompany(company);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
 		}
-		
-		userService.insertUser(userInfo);
-		userService.insertUserInfo(userInfo);
+		return totalError;
 	}
 	
+	private int importInnovationCenterData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index < lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+
+			// 封装处理对象
+			HashMap<String, Object> innovationCenter = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			innovationCenter.put("id", getCellValue(row.getCell(0)));
+			innovationCenter.put("name", getCellValue(row.getCell(1)));
+			innovationCenter.put("introduce", getCellValue(row.getCell(2)));
+			innovationCenter.put("address", getCellValue(row.getCell(3)));
+			innovationCenter.put("longitude", getCellValue(row.getCell(4)));
+			innovationCenter.put("latitude", getCellValue(row.getCell(5)));
+			innovationCenter.put("homepage", getCellValue(row.getCell(6)));
+			
+			try{
+				innovationCenterMapper.insertInnovationCenter(innovationCenter);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
+		}
+		return totalError;
+	}
+	
+	private int importCollegesData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index < lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+
+			// 封装处理对象
+			HashMap<String, Object> colleges = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			colleges.put("id", getCellValue(row.getCell(0)));
+			colleges.put("name", getCellValue(row.getCell(1)));
+			colleges.put("expert_num", getCellValue(row.getCell(2)));
+			colleges.put("achievement_num", getCellValue(row.getCell(3)));
+			colleges.put("cooperate_num", getCellValue(row.getCell(4)));
+			colleges.put("teachers_num", getCellValue(row.getCell(5)));
+			colleges.put("course_num", getCellValue(row.getCell(6)));
+			colleges.put("datum_num", getCellValue(row.getCell(7)));
+			colleges.put("enroll_num", getCellValue(row.getCell(8)));
+			colleges.put("first_classification", getCellValue(row.getCell(9)));
+			colleges.put("second_classification", getCellValue(row.getCell(10)));
+			colleges.put("longitude", getCellValue(row.getCell(11)));
+			colleges.put("latitude", getCellValue(row.getCell(12)));
+			colleges.put("homepage", getCellValue(row.getCell(13)));
+			colleges.put("more_achievement", getCellValue(row.getCell(14)));
+			
+			try{
+				collegesMapper.insertColleges(colleges);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
+		}
+		return totalError;
+	}
 	
 	public void setErr(Cell cell){
 		CellStyle style = cell.getSheet().getWorkbook().createCellStyle();
@@ -258,6 +267,56 @@ public class PoiUtil{// implements IPoiUtil
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		cell.setCellStyle(style);
 	}
+	
+	public String getCellValue(Cell cell) {
+        String cellValue = "";
+        if (cell == null) {
+            return cellValue;
+        }
+        // 判断数据的类型
+        switch (cell.getCellType()) {
+        case Cell.CELL_TYPE_NUMERIC: // 数字
+            //short s = cell.getCellStyle().getDataFormat();
+            if (HSSFDateUtil.isCellDateFormatted(cell)) {// 处理日期格式、时间格式
+                SimpleDateFormat sdf = null;
+                // 验证short值
+                if (cell.getCellStyle().getDataFormat() == 14) {
+                    sdf = new SimpleDateFormat("yyyy/MM/dd");
+                } else if (cell.getCellStyle().getDataFormat() == 21) {
+                    sdf = new SimpleDateFormat("HH:mm:ss");
+                } else if (cell.getCellStyle().getDataFormat() == 22) {
+                    sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                } else {
+                    throw new RuntimeException("日期格式错误!!!");
+                }
+                Date date = cell.getDateCellValue();
+                cellValue = sdf.format(date);
+            } else if (cell.getCellStyle().getDataFormat() == 0) {//处理数值格式
+                cell.setCellType(Cell.CELL_TYPE_STRING);
+                cellValue = String.valueOf(cell.getRichStringCellValue().getString());
+            }
+            break;
+        case Cell.CELL_TYPE_STRING: // 字符串
+            cellValue = String.valueOf(cell.getStringCellValue());
+            break;
+        case Cell.CELL_TYPE_BOOLEAN: // Boolean
+            cellValue = String.valueOf(cell.getBooleanCellValue());
+            break;
+        case Cell.CELL_TYPE_FORMULA: // 公式
+            cellValue = String.valueOf(cell.getCellFormula());
+            break;
+        case Cell.CELL_TYPE_BLANK: // 空值
+            cellValue = null;
+            break;
+        case Cell.CELL_TYPE_ERROR: // 故障
+            cellValue = "非法字符";
+            break;
+        default:
+            cellValue = "未知类型";
+            break;
+        }
+        return cellValue;
+    }
 	
 	public class POIResult implements Serializable{
 
