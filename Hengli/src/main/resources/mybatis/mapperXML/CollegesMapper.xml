@@ -35,4 +35,93 @@
 		OR latitude IS NULL
 		OR latitude = ''
 	</select>
+	
+	<!-- 创建院校 -->
+	<insert id="insertColleges" parameterType="map">
+		INSERT INTO colleges
+		(
+			id,
+			name,
+			expert_num,
+			achievement_num,
+			cooperate_num,
+			teachers_num,
+			course_num,
+			datum_num,
+			enroll_num,
+			first_classification,
+			second_classification,
+			longitude,
+			latitude,
+			homepage,
+			more_achievement
+		)
+		VALUES (
+			#{id},
+			#{name},
+			#{expert_num},
+			#{achievement_num},
+			#{cooperate_num},
+			#{teachers_num},
+			#{course_num},
+			#{datum_num},
+			#{enroll_num},
+			#{first_classification},
+			#{second_classification},
+			#{longitude},
+			#{latitude},
+			#{homepage},
+			#{more_achievement}
+		)
+	</insert>
+	
+	<!-- 修改院校信息 -->
+	<update id="updateColleges" parameterType="map">
+		UPDATE colleges
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="expert_num != null">
+				expert_num = #{expert_num},
+			</if>
+			<if test="achievement_num != null">
+				achievement_num = #{achievement_num},
+			</if>
+			<if test="cooperate_num != null">
+				cooperate_num = #{cooperate_num},
+			</if>
+			<if test="teachers_num != null">
+				teachers_num = #{teachers_num},
+			</if>
+			<if test="course_num != null">
+				course_num = #{course_num},
+			</if>
+			<if test="datum_num != null">
+				datum_num = #{datum_num},
+			</if>
+			<if test="enroll_num != null">
+				enroll_num = #{enroll_num},
+			</if>
+			<if test="first_classification != null">
+				first_classification = #{first_classification},
+			</if>
+			<if test="second_classification != null">
+				second_classification = #{second_classification},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude},
+			</if>
+			<if test="homepage != null">
+				homepage = #{homepage},
+			</if>
+			<if test="more_achievement != null">
+				more_achievement = #{more_achievement},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 </mapper>  

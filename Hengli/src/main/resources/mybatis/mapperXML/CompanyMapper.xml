@@ -63,6 +63,47 @@
 			industrial_area.id
 	</select>
 	
+	<!-- 创建企业 -->
+	<insert id="insertCompany" parameterType="map">
+		INSERT INTO company
+		(
+			id,
+			name,
+			need_number,
+			product_number,
+			custom_service_number,
+			conundrum_number,
+			cooperate_number,
+			requirement_num,
+			first_classification,
+			second_classification,
+			industrial_area,
+			longitude,
+			latitude,
+			homepage,
+			gxptURL,
+			conundrum_more
+		)
+		VALUES (
+			#{id},
+			#{name},
+			#{need_number},
+			#{product_number},
+			#{custom_service_number},
+			#{conundrum_number},
+			#{cooperate_number},
+			#{requirement_num},
+			#{first_classification},
+			#{second_classification},
+			#{industrial_area},
+			#{longitude},
+			#{latitude},
+			#{homepage},
+			#{gxptURL},
+			#{conundrum_more}
+		)
+	</insert>
+	
 	<!-- 修改企业信息 -->
 	<update id="updateCompany" parameterType="map">
 		UPDATE company

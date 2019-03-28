@@ -11,4 +11,66 @@
 		FROM
 			innovation_center
 	</select>
+	
+	<!-- 查询没有经纬度的创新中心 -->
+	<select id="selectInnovationCenterNoLongitudeLatitude" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			innovation_center
+		WHERE
+			longitude IS NULL
+		OR longitude = ''
+		OR latitude IS NULL
+		OR latitude = ''
+	</select>
+	
+	<!-- 创建创新中心 -->
+	<insert id="insertInnovationCenter" parameterType="map">
+		INSERT INTO innovation_center
+		(
+			id,
+			name,
+			introduce,
+			address,
+			longitude,
+			latitude,
+			homepage
+		)
+		VALUES (
+			#{id},
+			#{name},
+			#{introduce},
+			#{address},
+			#{longitude},
+			#{latitude},
+			#{homepage}
+		)
+	</insert>
+	
+	<!-- 修改创新中心信息 -->
+	<update id="updateInnovationCenter" parameterType="map">
+		UPDATE innovation_center
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="introduce != null">
+				introduce = #{introduce},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude},
+			</if>
+			<if test="homepage != null">
+				homepage = #{homepage},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 </mapper>  

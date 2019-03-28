@@ -23,4 +23,54 @@
 		</where>
 	</select>
 	
+	<!-- 查询没有经纬度的设计公司 -->
+	<select id="selectDesignCompanyNoLongitudeLatitude" parameterType="map" resultType="map">
+		SELECT
+			*
+		FROM
+			design_company
+		WHERE
+			longitude IS NULL
+		OR longitude = ''
+		OR latitude IS NULL
+		OR latitude = ''
+	</select>
+	
+	<!-- 修改设计公司信息 -->
+	<update id="updateDesignCompany" parameterType="map">
+		UPDATE design_company
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="designer_num != null">
+				designer_num = #{designer_num},
+			</if>
+			<if test="receipt_num != null">
+				receipt_num = #{receipt_num},
+			</if>
+			<if test="domain != null">
+				domain = #{domain},
+			</if>
+			<if test="qualifications != null">
+				qualifications = #{qualifications},
+			</if>
+			<if test="first_classification != null">
+				first_classification = #{first_classification},
+			</if>
+			<if test="second_classification != null">
+				second_classification = #{second_classification},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude},
+			</if>
+			<if test="homepage != null">
+				homepage = #{homepage},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
 </mapper>  
