@@ -25,7 +25,10 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import com.hengli.db.mapper.CollegesMapper;
 import com.hengli.db.mapper.CompanyMapper;
 import com.hengli.db.mapper.DesignCompanyMapper;
+import com.hengli.db.mapper.DesignerMapper;
 import com.hengli.db.mapper.InnovationCenterMapper;
+import com.hengli.db.mapper.LectureMapper;
+import com.hengli.db.mapper.TeacherMapper;
 
 //@Service
 @Component
@@ -45,6 +48,15 @@ public class PoiUtil{// implements IPoiUtil
 	
 	@Autowired
 	public InnovationCenterMapper innovationCenterMapper;
+	
+	@Autowired
+	public TeacherMapper teacherMapper;
+	
+	@Autowired
+	public LectureMapper lectureMapper;
+	
+	@Autowired
+	public DesignerMapper designerMapper;
 	
 	/**
 	 * 空字符串
@@ -123,6 +135,42 @@ public class PoiUtil{// implements IPoiUtil
 				return result;
 			}
 			
+			// 导入讲师数据
+			totalError = importTeacherData(totalError, wb.getSheet(TEACHER_WORKSHEET));
+			
+			if(totalError != 0) {
+				result.setStatus(false);
+				transactionManager.rollback(status);
+				System.out.println("=====事务控制回滚通知=====");
+				result.setError(totalError);
+				return result;
+			}
+			
+			// 导入讲座数据
+			totalError = importLectureData(totalError, wb.getSheet(LECTURE_WORKSHEET));
+			
+			if(totalError != 0) {
+				result.setStatus(false);
+				transactionManager.rollback(status);
+				System.out.println("=====事务控制回滚通知=====");
+				result.setError(totalError);
+				return result;
+			}
+			
+			// 导入设计公司数据
+			totalError = importDesignCompanyData(totalError, wb.getSheet(DESIGN_COMPANY_WORKSHEET));
+			
+			if(totalError != 0) {
+				result.setStatus(false);
+				transactionManager.rollback(status);
+				System.out.println("=====事务控制回滚通知=====");
+				result.setError(totalError);
+				return result;
+			}
+			
+			// 导入设计师数据
+			totalError = importDesignerData(totalError, wb.getSheet(DESIGN_WORKSHEET));
+			
 			if(totalError == 0){
 				result.setStatus(true);
 				transactionManager.commit(status);
@@ -150,9 +198,13 @@ public class PoiUtil{// implements IPoiUtil
 	private int importCompanyData(int totalError, Sheet sheet) {
 		int lastRowNum = sheet.getLastRowNum();
 
-		for (int index = START_LINE; index < lastRowNum; index++) {
+		for (int index = START_LINE; index <= lastRowNum; index++) {
 
 			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+			
+			if(row == null) {
+				continue;
+			}
 
 			// 封装处理对象
 			HashMap<String, Object> company = new HashMap<String, Object>();
@@ -192,10 +244,14 @@ public class PoiUtil{// implements IPoiUtil
 	private int importInnovationCenterData(int totalError, Sheet sheet) {
 		int lastRowNum = sheet.getLastRowNum();
 
-		for (int index = START_LINE; index < lastRowNum; index++) {
+		for (int index = START_LINE; index <= lastRowNum; index++) {
 
 			Row row = sheet.getRow(index);// 得到Excel工作表指定行
-
+			
+			if(row == null) {
+				continue;
+			}
+			
 			// 封装处理对象
 			HashMap<String, Object> innovationCenter = new HashMap<String, Object>();
 			
@@ -224,9 +280,13 @@ public class PoiUtil{// implements IPoiUtil
 	private int importCollegesData(int totalError, Sheet sheet) {
 		int lastRowNum = sheet.getLastRowNum();
 
-		for (int index = START_LINE; index < lastRowNum; index++) {
+		for (int index = START_LINE; index <= lastRowNum; index++) {
 
 			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+			
+			if(row == null) {
+				continue;
+			}
 
 			// 封装处理对象
 			HashMap<String, Object> colleges = new HashMap<String, Object>();
@@ -253,6 +313,155 @@ public class PoiUtil{// implements IPoiUtil
 			
 			try{
 				collegesMapper.insertColleges(colleges);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
+		}
+		return totalError;
+	}
+	
+	private int importTeacherData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index <= lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+			
+			if(row == null) {
+				continue;
+			}
+
+			// 封装处理对象
+			HashMap<String, Object> teacher = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			teacher.put("id", getCellValue(row.getCell(0)));
+			teacher.put("name", getCellValue(row.getCell(1)));
+			teacher.put("colleges", getCellValue(row.getCell(2)));
+			teacher.put("work_year", getCellValue(row.getCell(3)));
+			teacher.put("course_num", getCellValue(row.getCell(4)));
+			teacher.put("summary", getCellValue(row.getCell(5)));
+			
+			try{
+				teacherMapper.insertTeacher(teacher);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
+		}
+		return totalError;
+	}
+	
+	private int importLectureData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index <= lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+			
+			if(row == null) {
+				continue;
+			}
+
+			// 封装处理对象
+			HashMap<String, Object> lecture = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			lecture.put("id", getCellValue(row.getCell(0)));
+			lecture.put("theme", getCellValue(row.getCell(1)));
+			lecture.put("time", getCellValue(row.getCell(2)));
+			lecture.put("address", getCellValue(row.getCell(3)));
+			lecture.put("colleges", getCellValue(row.getCell(4)));
+			lecture.put("teacher", getCellValue(row.getCell(5)));
+			lecture.put("course_type", getCellValue(row.getCell(6)));
+			lecture.put("course_fee", getCellValue(row.getCell(7)));
+			lecture.put("details_page", getCellValue(row.getCell(8)));
+			
+			try{
+				lectureMapper.insertLecture(lecture);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
+		}
+		return totalError;
+	}
+	
+	private int importDesignCompanyData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index <= lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+			
+			if(row == null) {
+				continue;
+			}
+
+			// 封装处理对象
+			HashMap<String, Object> designCompany = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			designCompany.put("id", getCellValue(row.getCell(0)));
+			designCompany.put("name", getCellValue(row.getCell(1)));
+			designCompany.put("designer_num", getCellValue(row.getCell(2)));
+			designCompany.put("receipt_num", getCellValue(row.getCell(3)));
+			designCompany.put("domain", getCellValue(row.getCell(4)));
+			designCompany.put("qualifications", getCellValue(row.getCell(5)));
+			designCompany.put("first_classification", getCellValue(row.getCell(6)));
+			designCompany.put("second_classification", getCellValue(row.getCell(7)));
+			designCompany.put("longitude", getCellValue(row.getCell(8)));
+			designCompany.put("latitude", getCellValue(row.getCell(9)));
+			designCompany.put("homepage", getCellValue(row.getCell(10)));
+			
+			try{
+				designCompanyMapper.insertDesignCompany(designCompany);
+			}catch(Exception e){
+				e.printStackTrace();
+				totalError ++;
+			}
+		}
+		return totalError;
+	}
+	
+	private int importDesignerData(int totalError, Sheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+
+		for (int index = START_LINE; index <= lastRowNum; index++) {
+
+			Row row = sheet.getRow(index);// 得到Excel工作表指定行
+			
+			if(row == null) {
+				continue;
+			}
+
+			// 封装处理对象
+			HashMap<String, Object> designer = new HashMap<String, Object>();
+			
+			if(row.getCell(0) == null || getCellValue(row.getCell(0)) == null) {
+				continue;
+			}
+			
+			designer.put("id", getCellValue(row.getCell(0)));
+			designer.put("name", getCellValue(row.getCell(1)));
+			designer.put("design_company", getCellValue(row.getCell(2)));
+			designer.put("publication_num", getCellValue(row.getCell(3)));
+			designer.put("seniority", getCellValue(row.getCell(4)));
+			designer.put("work_experience", getCellValue(row.getCell(5)));
+			designer.put("homepage", getCellValue(row.getCell(6)));
+			
+			try{
+				designerMapper.insertDesigner(designer);
 			}catch(Exception e){
 				e.printStackTrace();
 				totalError ++;
