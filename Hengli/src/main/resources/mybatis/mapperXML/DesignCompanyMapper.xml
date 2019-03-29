@@ -36,6 +36,37 @@
 		OR latitude = ''
 	</select>
 	
+	<!-- 创建设计公司 -->
+	<insert id="insertDesignCompany" parameterType="map">
+		INSERT INTO design_company
+		(
+			id,
+			name,
+			designer_num,
+			receipt_num,
+			domain,
+			qualifications,
+			first_classification,
+			second_classification,
+			longitude,
+			latitude,
+			homepage
+		)
+		VALUES (
+			#{id},
+			#{name},
+			#{designer_num},
+			#{receipt_num},
+			#{domain},
+			#{qualifications},
+			#{first_classification},
+			#{second_classification},
+			#{longitude},
+			#{latitude},
+			#{homepage}
+		)
+	</insert>
+	
 	<!-- 修改设计公司信息 -->
 	<update id="updateDesignCompany" parameterType="map">
 		UPDATE design_company

@@ -19,4 +19,31 @@
 			lecture.colleges = #{colleges}
 	</select>
 	
+	<!-- 创建讲座 -->
+	<insert id="insertLecture" parameterType="map">
+		INSERT INTO lecture
+		(
+			id,
+			theme,
+			time,
+			address,
+			colleges,
+			teacher,
+			course_type,
+			course_fee,
+			details_page
+		)
+		VALUES (
+			#{id},
+			#{theme},
+			#{time},
+			#{address},
+			#{colleges},
+			#{teacher},
+			#{course_type},
+			#{course_fee},
+			#{details_page}
+		)
+	</insert>
+	
 </mapper>  

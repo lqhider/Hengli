@@ -17,4 +17,27 @@
 			designer.design_company = #{design_company}
 	</select>
 	
+	<!-- 创建设计师 -->
+	<insert id="insertDesigner" parameterType="map">
+		INSERT INTO designer
+		(
+			id,
+			name,
+			design_company,
+			publication_num,
+			seniority,
+			work_experience,
+			homepage
+		)
+		VALUES (
+			#{id},
+			#{name},
+			#{design_company},
+			#{publication_num},
+			#{seniority},
+			#{work_experience},
+			#{homepage}
+		)
+	</insert>
+	
 </mapper>  

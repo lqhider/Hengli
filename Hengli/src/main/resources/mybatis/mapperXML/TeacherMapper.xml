@@ -18,4 +18,25 @@
 			teacher.colleges = #{colleges}
 	</select>
 	
+	<!-- 创建讲师 -->
+	<insert id="insertTeacher" parameterType="map">
+		INSERT INTO teacher
+		(
+			id,
+			name,
+			colleges,
+			work_year,
+			course_num,
+			summary
+		)
+		VALUES (
+			#{id},
+			#{name},
+			#{colleges},
+			#{work_year},
+			#{course_num},
+			#{summary}
+		)
+	</insert>
+	
 </mapper>  
