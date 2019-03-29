@@ -48,12 +48,12 @@
 			<div class="wrapper clearfix">
 				<!-- left -->
 				<div class="w-left">
-					<div class="wl-wrap">
+					<!-- <div class="wl-wrap">
 						<a class="com-t1" href="javascript:void(0)">一级分类</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
 								<div class="wlc-wrap wlc-w1 clearfix" id="yjfl">
-									<!-- <a href="#">冲压模具</a>
+									<a href="#">冲压模具</a>
 									<a href="#">简易模具</a>
 									<a href="#">塑料成型模具</a>
 									<a href="#" class="active">冲压模具</a>
@@ -70,18 +70,18 @@
 									<a href="#">冲压模具</a>
 									<a href="#">冲压模具</a>
 									<a href="#">简易模具</a>
-									<a href="#">塑料成型模具</a> -->
+									<a href="#">塑料成型模具</a>
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- 二级分类 -->
-					<div class="wl-wrap">
+					<!-- <div class="wl-wrap">
 						<a class="com-t1" href="javascript:void(0)">二级分类</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
 								<div class="wlc-wrap wlc-w1 clearfix" id="ejfl">
-									<!-- <a href="#">冲压模具</a>
+									<a href="#">冲压模具</a>
 									<a href="#">简易模具</a>
 									<a href="#">塑料成型模具</a>
 									<a href="#" class="active">冲压模具</a>
@@ -98,11 +98,11 @@
 									<a href="#">冲压模具</a>
 									<a href="#">冲压模具</a>
 									<a href="#">简易模具</a>
-									<a href="#">塑料成型模具</a> -->
+									<a href="#">塑料成型模具</a>
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- 企业列表 -->
 					<div class="wl-wrap wl-wrap3">
 						<a class="com-t1" href="javascript:void(0)">院校列表</a>
