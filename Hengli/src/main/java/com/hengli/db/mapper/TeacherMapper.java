@@ -10,4 +10,6 @@ public interface TeacherMapper {
 	
 	public List<Map<String,Object>> selectTeacher(Map<String, Object> params);
 	
+	public void insertTeacher(Map<String,Object> params);
+	
 }

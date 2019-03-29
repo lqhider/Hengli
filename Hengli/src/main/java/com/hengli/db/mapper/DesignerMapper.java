@@ -10,4 +10,6 @@ public interface DesignerMapper {
 	
 	public List<Map<String,Object>> selectDesigner(Map<String, Object> params);
 	
+	public void insertDesigner(Map<String,Object> params);
+	
 }
