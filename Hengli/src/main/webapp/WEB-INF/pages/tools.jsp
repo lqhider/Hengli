@@ -7,8 +7,10 @@
 	<title>横沥模具产业</title>
 	<link rel="stylesheet" type="text/css" href="resources/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/jquery.mloading.css">
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
 	<script type="text/javascript" src="resources/js/plugins/jquery.form.js"></script>
+	<script type="text/javascript" src="resources/js/plugins/jquery.mloading.js"></script>
 	
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,6 +54,7 @@
 	      filter: alpha(opacity=0);
 	      cursor: pointer;
 	    }
+	    
 		</style>
 </head>
 <body>
@@ -111,30 +114,42 @@ var contextPath="${pageContext.request.contextPath }";
 <script type="text/javascript">
 	$(function(){
 		$("#companyCoordinate").click(function(){
-			ajaxFactory("post",contextPath+"/tools/getCompanyLongitudeLatitude",null).done(function(result){
+			ajaxFactory('正在获取经纬度,请稍后',"post",contextPath+"/tools/getCompanyLongitudeLatitude",null).done(function(result){
+				  $("body").mLoading("hide");
 			  	  if(result.status=="true"){
-			  		  alert('获取企业经纬度执行成功!');
+			  	  	alert('获取企业经纬度执行成功!');
+			  	  }else{
+			  		alert('获取企业经纬度执行失败!');
 			  	  }
 			})
 		});
 		$("#collegesCoordinate").click(function(){
-			ajaxFactory("post",contextPath+"/tools/getCollegesLongitudeLatitude",null).done(function(result){
+			ajaxFactory('正在获取经纬度,请稍后',"post",contextPath+"/tools/getCollegesLongitudeLatitude",null).done(function(result){
+					$("body").mLoading("hide");
 			  	  if(result.status=="true"){
 			  		  alert('获取院校经纬度执行成功!');
+			  	  }else{
+			  		alert('获取院校经纬度执行失败!');
 			  	  }
 			})
 		});
 		$("#designCompanyCoordinate").click(function(){
-			ajaxFactory("post",contextPath+"/tools/getDesignCompanyLongitudeLatitude",null).done(function(result){
+			ajaxFactory('正在获取经纬度,请稍后',"post",contextPath+"/tools/getDesignCompanyLongitudeLatitude",null).done(function(result){
+				$("body").mLoading("hide");
 			  	  if(result.status=="true"){
 			  		  alert('获取设计公司经纬度执行成功!');
+			  	  }else{
+			  		alert('获取设计公司经纬度执行失败!');
 			  	  }
 			})
 		});
 		$("#innovationCenterCoordinate").click(function(){
-			ajaxFactory("post",contextPath+"/tools/getInnovationCenterLongitudeLatitude",null).done(function(result){
+			ajaxFactory('正在获取经纬度,请稍后',"post",contextPath+"/tools/getInnovationCenterLongitudeLatitude",null).done(function(result){
+				$("body").mLoading("hide");
 			  	  if(result.status=="true"){
 			  		  alert('获取创新中心经纬度执行成功!');
+			  	  }else{
+			  		alert('获取创新中心经纬度执行失败!');
 			  	  }
 			})
 		})
@@ -160,6 +175,7 @@ var contextPath="${pageContext.request.contextPath }";
 		
 		// 文件上传
 		$.fileUpload = function() {
+			
 			var options = {
 				type : "POST", // 默认是form的method（get or post），如果申明，则会覆盖
 				url : contextPath + "/tools/importData", // 默认是form的action，
@@ -168,31 +184,46 @@ var contextPath="${pageContext.request.contextPath }";
 					fileName:"upfileInp",
 				},
 				clearForm : true, // 成功提交后，清除所有表单元素的值
+				beforeSend:function() {  
+					$("body").mLoading({
+					    text:"正在导入数据,请稍后"
+					});
+                },
 				success : function(result) {
+					$("body").mLoading("hide");
 					if(result.status=="true"){
-						
+						alert("导入成功!");
 					}else{
-						
+						alert("导入失败!");
 					}
 				},
+				error:function() {
+                    $("body").mLoading("hide");
+                    alert("导入失败!");
+                }
 			}
 			$("#relationForm").ajaxSubmit(options);
 		}
 	})
 	
 	//ajax请求
-	function ajaxFactory(method,url,param) { //method:请求类型，url：请求地址,param:请求参数
+	function ajaxFactory(txt,method,url,param) { //method:请求类型，url：请求地址,param:请求参数
 	    var defer = $.Deferred();
 	    $.ajax({
 	        type: method,
 	        url:  url,
 	        data: param,
-	        timeout: 30000,
 	        dataType: "json",
+	        beforeSend:function() {  
+				$("body").mLoading({
+				    text:txt
+				});
+            },
 	        success: function(result) {
 	            defer.resolve(result);
 	        },
 	        error: function(XMLHttpRequest, textStatus, errorThrown) {
+	        	$("body").mLoading("hide");
 	        	console.log("Ajax请求出错！")
 	        }
 	    });
