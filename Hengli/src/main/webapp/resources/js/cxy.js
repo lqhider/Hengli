@@ -82,10 +82,17 @@
 		  			var sContent = '<div class="wr-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+companyList[i].name+'</h5>'+
-											'<p>难题数量：'+companyList[i].conundrum_number+'</p>'+
-											'<p>合作数量：'+companyList[i].cooperate_number+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+companyList[i].name+'</h5>';
+		  			if(companyList[i].conundrum_number != null && companyList[i].conundrum_number!=''){
+		  				sContent += '<p>难题数量：'+companyList[i].conundrum_number+'</p>';
+		  			}
+		  			if(companyList[i].cooperate_number != null && companyList[i].cooperate_number!=''){
+		  				sContent += '<p>合作数量：'+companyList[i].cooperate_number+'</p>';
+		  			}
+//											'<p>难题数量：'+companyList[i].conundrum_number+'</p>'+
+//											'<p>合作数量：'+companyList[i].cooperate_number+'</p>'+
+//											'<div class="cbtn-w">'+
+		  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'+
 												'<a target="_blank" href="'+companyList[i].conundrum_more+'" class="com-btn gdnt"></a>'+
 											'</div>'+
@@ -109,11 +116,21 @@
 		  			var sContent = '<div class="wr-w1">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+collegesList[i].name+'</h5>'+
-											'<p>专家数量：'+collegesList[i].expert_num+'</p>'+
-											'<p>成果数量：'+collegesList[i].achievement_num+'</p>'+
-											'<p>合作数量：'+collegesList[i].cooperate_num+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+collegesList[i].name+'</h5>';
+		  			if(collegesList[i].expert_num != null && collegesList[i].expert_num!=''){
+		  				sContent += '<p>专家数量：'+collegesList[i].expert_num+'</p>';
+		  			}
+		  			if(collegesList[i].achievement_num != null && collegesList[i].achievement_num!=''){
+		  				sContent += '<p>成果数量：'+collegesList[i].achievement_num+'</p>';
+		  			}
+		  			if(collegesList[i].cooperate_num != null && collegesList[i].cooperate_num!=''){
+		  				sContent += '<p>合作数量：'+collegesList[i].cooperate_num+'</p>';
+		  			}
+//											'<p>专家数量：'+collegesList[i].expert_num+'</p>'+
+//											'<p>成果数量：'+collegesList[i].achievement_num+'</p>'+
+//											'<p>合作数量：'+collegesList[i].cooperate_num+'</p>'+
+//											'<div class="cbtn-w">'+
+		  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
 												'<a target="_blank" href="'+collegesList[i].more_achievement+'" class="com-btn gdcg"></a>'+
 											'</div>'+
@@ -134,10 +151,17 @@
   			  		var sContent = '<div class="wr-w2">'+
 									'<div class="mask"></div><div class="closeBtn"></div>'+
 									'<div class="content">'+
-										'<h5>'+companyList[index].name+'</h5>'+
-										'<p>难题数量：'+companyList[index].conundrum_number+'</p>'+
-										'<p>合作数量：'+companyList[index].cooperate_number+'</p>'+
-										'<div class="cbtn-w">'+
+										'<h5>'+companyList[index].name+'</h5>';
+	  			  	if(companyList[index].conundrum_number != null && companyList[index].conundrum_number!=''){
+		  				sContent += '<p>难题数量：'+companyList[index].conundrum_number+'</p>';
+		  			}
+		  			if(companyList[index].cooperate_number != null && companyList[index].cooperate_number!=''){
+		  				sContent += '<p>合作数量：'+companyList[index].cooperate_number+'</p>';
+		  			}
+//										'<p>难题数量：'+companyList[index].conundrum_number+'</p>'+
+//										'<p>合作数量：'+companyList[index].cooperate_number+'</p>'+
+//										'<div class="cbtn-w">'+
+		  			sContent += '<div class="cbtn-w">'+
 											'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'+
 											'<a target="_blank" href="'+companyList[index].conundrum_more+'" class="com-btn gdnt"></a>'+
 										'</div>'+
@@ -157,11 +181,21 @@
 			  			var sContent = '<div class="wr-w1">'+
 							'<div class="mask"></div><div class="closeBtn"></div>'+
 							'<div class="content">'+
-								'<h5>'+collegesList[index].name+'</h5>'+
-								'<p>专家数量：'+collegesList[index].expert_num+'</p>'+
-								'<p>成果数量：'+collegesList[index].achievement_num+'</p>'+
-								'<p>合作数量：'+collegesList[index].cooperate_num+'</p>'+
-								'<div class="cbtn-w">'+
+								'<h5>'+collegesList[index].name+'</h5>';
+			  			if(collegesList[index].expert_num != null && collegesList[index].expert_num!=''){
+			  				sContent += '<p>专家数量：'+collegesList[index].expert_num+'</p>';
+			  			}
+			  			if(collegesList[index].achievement_num != null && collegesList[index].achievement_num!=''){
+			  				sContent += '<p>成果数量：'+collegesList[index].achievement_num+'</p>';
+			  			}
+			  			if(collegesList[index].cooperate_num != null && collegesList[index].cooperate_num!=''){
+			  				sContent += '<p>合作数量：'+collegesList[index].cooperate_num+'</p>';
+			  			}
+//								'<p>专家数量：'+collegesList[index].expert_num+'</p>'+
+//								'<p>成果数量：'+collegesList[index].achievement_num+'</p>'+
+//								'<p>合作数量：'+collegesList[index].cooperate_num+'</p>'+
+//								'<div class="cbtn-w">'+
+			  			sContent += '<div class="cbtn-w">'+
 									'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
 									'<a target="_blank" href="'+collegesList[index].more_achievement+'" class="com-btn gdcg"></a>'+
 								'</div>'+

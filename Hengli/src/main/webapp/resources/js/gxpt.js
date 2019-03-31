@@ -7,7 +7,7 @@
 		  		
 		  		var html = '<a href="javascript:void(0)" fl="">全部</a>';
 		  		for(var i = 0; i < data.length; i ++){
-		  			  html += '<a href="javascript:void(0)" fl="'+data[i].id+'">'+data[i].name+'</a>';
+		  			  html += '<a href="javascript:void(0)" fl="'+data[i].name+'">'+data[i].name+'</a>';
 		  		}
 		  		$("#yjfl").empty().append(html);
 		  	  }
@@ -31,7 +31,7 @@
 	  		
 	  		var html = '<a href="javascript:void(0)" fl="">全部</a>';
 	  		for(var i = 0; i < data.length; i ++){
-	  			  html += '<a href="javascript:void(0)" fl="'+data[i].id+'">'+data[i].name+'</a>';
+	  			  html += '<a href="javascript:void(0)" fl="'+data[i].name+'">'+data[i].name+'</a>';
 	  		}
 	  		$("#ejfl").empty().append(html);
 	  		
@@ -84,11 +84,21 @@
 		  			var sContent = '<div class="wr-w1">'
 						+'<div class="mask"></div><div class="closeBtn"></div>'
 						+'<div class="content">'
-							+'<h5>'+companyList[i].name+'</h5>'
-							+'<p>供应数量：'+companyList[i].product_number+'</p>'
-							+'<p>需求数量：'+companyList[i].need_number+'</p>'
-							+'<p>定制服务数量：'+companyList[i].custom_service_number+'</p>'
-							+'<div class="cbtn-w">'
+							+'<h5>'+companyList[i].name+'</h5>';
+		  			if(companyList[i].product_number != null && companyList[i].product_number!=''){
+		  				sContent += '<p>供应数量：'+companyList[i].product_number+'</p>';
+		  			}
+		  			if(companyList[i].need_number != null && companyList[i].need_number!=''){
+		  				sContent += '<p>需求数量：'+companyList[i].need_number+'</p>';
+		  			}
+		  			if(companyList[i].custom_service_number != null && companyList[i].custom_service_number!=''){
+		  				sContent += '<p>定制服务数量：'+companyList[i].custom_service_number+'</p>';
+		  			}
+//							+'<p>供应数量：'+companyList[i].product_number+'</p>'
+//							+'<p>需求数量：'+companyList[i].need_number+'</p>'
+//							+'<p>定制服务数量：'+companyList[i].custom_service_number+'</p>'
+//							+'<div class="cbtn-w">'
+		  			sContent = sContent + '<div class="cbtn-w">'
 								+'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'
 								+'<a target="_blank" href="'+companyList[i].gxptURL+'" class="com-btn gxpt"></a>'
 							+'</div>'
@@ -109,10 +119,17 @@
 		  			  var sContent = '<div class="wr-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+innovationCenterList[i].name+'</h5>'+
-											'<p>中心介绍：'+innovationCenterList[i].introduce+'</p>'+
-											'<p>中心地址：'+innovationCenterList[i].address+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+innovationCenterList[i].name+'</h5>';
+		  			if(innovationCenterList[i].introduce != null && innovationCenterList[i].introduce!=''){
+		  				sContent += '<p>中心介绍：'+innovationCenterList[i].introduce+'</p>';
+		  			}
+		  			if(innovationCenterList[i].address != null && innovationCenterList[i].address!=''){
+		  				sContent += '<p>中心地址：'+innovationCenterList[i].address+'</p>';
+		  			}
+//											'<p>中心介绍：'+innovationCenterList[i].introduce+'</p>'+
+//											'<p>中心地址：'+innovationCenterList[i].address+'</p>'+
+//											'<div class="cbtn-w">'+
+		  			sContent = sContent + '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+innovationCenterList[i].homepage+'" class="com-btn zxzy"></a>'+
 											'</div>'+
 										'</div>'+
@@ -132,11 +149,21 @@
 	  			  		var sContent = '<div class="wr-w1">'
 										+'<div class="mask"></div><div class="closeBtn"></div>'
 										+'<div class="content">'
-											+'<h5>'+companyList[index].name+'</h5>'
-											+'<p>供应数量：'+companyList[index].product_number+'</p>'
-											+'<p>需求数量：'+companyList[index].need_number+'</p>'
-											+'<p>定制服务数量：'+companyList[index].custom_service_number+'</p>'
-											+'<div class="cbtn-w">'
+											+'<h5>'+companyList[index].name+'</h5>';
+		  			  	if(companyList[index].product_number != null && companyList[index].product_number!=''){
+			  				sContent += '<p>供应数量：'+companyList[index].product_number+'</p>';
+			  			}
+			  			if(companyList[index].need_number != null && companyList[index].need_number!=''){
+			  				sContent += '<p>需求数量：'+companyList[index].need_number+'</p>';
+			  			}
+			  			if(companyList[index].custom_service_number != null && companyList[index].custom_service_number!=''){
+			  				sContent += '<p>定制服务数量：'+companyList[index].custom_service_number+'</p>';
+			  			}
+//											+'<p>供应数量：'+companyList[index].product_number+'</p>'
+//											+'<p>需求数量：'+companyList[index].need_number+'</p>'
+//											+'<p>定制服务数量：'+companyList[index].custom_service_number+'</p>'
+//											+'<div class="cbtn-w">'
+			  			sContent = sContent + '<div class="cbtn-w">'
 												+'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'
 												+'<a target="_blank" href="'+companyList[index].gxptURL+'" class="com-btn gxpt"></a>'
 											+'</div>'
@@ -156,10 +183,17 @@
 			  			var sContent = '<div class="wr-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+innovationCenterList[index].name+'</h5>'+
-											'<p>中心介绍：'+innovationCenterList[index].introduce+'</p>'+
-											'<p>中心地址：'+innovationCenterList[index].address+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+innovationCenterList[index].name+'</h5>';
+			  			if(innovationCenterList[index].introduce != null && innovationCenterList[index].introduce!=''){
+			  				sContent += '<p>中心介绍：'+innovationCenterList[index].introduce+'</p>';
+			  			}
+			  			if(innovationCenterList[index].address != null && innovationCenterList[index].address!=''){
+			  				sContent += '<p>中心地址：'+innovationCenterList[index].address+'</p>';
+			  			}
+//											'<p>中心介绍：'+innovationCenterList[index].introduce+'</p>'+
+//											'<p>中心地址：'+innovationCenterList[index].address+'</p>'+
+//											'<div class="cbtn-w">'+
+			  			sContent = sContent + '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+innovationCenterList[index].homepage+'" class="com-btn zxzy"></a>'+
 											'</div>'+
 										'</div>'+

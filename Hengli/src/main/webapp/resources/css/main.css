@@ -36,7 +36,7 @@ img{max-width: 100%;}
 .wl-wrap3{height: 126px;background:url(../images/bg81.png) no-repeat;}
 /*滚动条容器*/
 .s-wrap{overflow-y:hidden;height: 100px;width: 270px;margin-top: 34px;}
-.wl-cnt{width: 260px;margin-left: 12px;padding-bottom: 10px;}
+.wl-cnt{width: 250px;margin-left: 12px;padding-bottom: 10px;}
 .com-t1{left:12px;background:#462ad6;width: 100px;height: 30px;line-height: 30px;font-size: 16px;font-weight: bold;text-align: center;color: #fff;border-radius: 4px;display: block;position: absolute;top: 0;}
 .com-t2{width: 130px;}
 .wlc-w1 a{display: block;float: left;font-size: 16px;color: #fff;padding: 0 6px;border-radius:2px;margin-bottom: 5px;}
