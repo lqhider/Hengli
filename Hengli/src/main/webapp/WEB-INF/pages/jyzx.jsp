@@ -238,6 +238,7 @@
 	$(function(){
 		$(".s-wrap").mCustomScrollbar({
 			theme:"light-thin",
+			setWidth:'97%',
 			callbacks:{
 			      onCreate: function(){
 			      	$(".s-wrap").css("overflow-y","auto");
