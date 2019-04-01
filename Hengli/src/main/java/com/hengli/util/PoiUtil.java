@@ -486,23 +486,39 @@ public class PoiUtil{// implements IPoiUtil
         switch (cell.getCellType()) {
         case Cell.CELL_TYPE_NUMERIC: // 数字
             //short s = cell.getCellStyle().getDataFormat();
-            if (HSSFDateUtil.isCellDateFormatted(cell)) {// 处理日期格式、时间格式
-                SimpleDateFormat sdf = null;
-                // 验证short值
-                if (cell.getCellStyle().getDataFormat() == 14) {
-                    sdf = new SimpleDateFormat("yyyy/MM/dd");
-                } else if (cell.getCellStyle().getDataFormat() == 21) {
-                    sdf = new SimpleDateFormat("HH:mm:ss");
-                } else if (cell.getCellStyle().getDataFormat() == 22) {
-                    sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                } else {
-                    throw new RuntimeException("日期格式错误!!!");
-                }
+//            if (HSSFDateUtil.isCellDateFormatted(cell)) {// 处理日期格式、时间格式
+//                SimpleDateFormat sdf = null;
+//                // 验证short值
+//                if (cell.getCellStyle().getDataFormat() == 14) {
+//                    sdf = new SimpleDateFormat("yyyy/MM/dd");
+//                } else if (cell.getCellStyle().getDataFormat() == 21) {
+//                    sdf = new SimpleDateFormat("HH:mm:ss");
+//                } else if (cell.getCellStyle().getDataFormat() == 22) {
+//                    sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                } else {
+//                    throw new RuntimeException("日期格式错误!!!");
+//                }
+//                Date date = cell.getDateCellValue();
+//                cellValue = sdf.format(date);
+//            } else if (cell.getCellStyle().getDataFormat() == 0) {//处理数值格式
+//                cell.setCellType(Cell.CELL_TYPE_STRING);
+//                cellValue = String.valueOf(cell.getRichStringCellValue().getString());
+//            }
+        	short format = cell.getCellStyle().getDataFormat();
+            SimpleDateFormat sdf = null;
+            if (format == 14 || format == 31 || format == 57 || format == 58  
+                    || (176<=format && format<=178) || (182<=format && format<=196) 
+                    || (210<=format && format<=213) || (208==format ) ) { // 日期
+                sdf = new SimpleDateFormat("yyyy年M月d日");
                 Date date = cell.getDateCellValue();
                 cellValue = sdf.format(date);
-            } else if (cell.getCellStyle().getDataFormat() == 0) {//处理数值格式
-                cell.setCellType(Cell.CELL_TYPE_STRING);
-                cellValue = String.valueOf(cell.getRichStringCellValue().getString());
+            } else if (format == 20 || format == 32 || format==183 || (200<=format && format<=209) ) { // 时间
+                sdf = new SimpleDateFormat("HH:mm");
+                Date date = cell.getDateCellValue();
+                cellValue = sdf.format(date);
+            } else { // 不是日期格式
+            	cell.setCellType(Cell.CELL_TYPE_STRING);
+            	cellValue = String.valueOf(cell.getRichStringCellValue().getString());
             }
             break;
         case Cell.CELL_TYPE_STRING: // 字符串
