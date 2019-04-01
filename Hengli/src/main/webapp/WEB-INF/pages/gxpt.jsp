@@ -143,7 +143,7 @@
 							</div>
 						</div>
 						<!-- 院校列表 -->
-						<div class="wl-wrap wl-wrap3">
+						<div class="wl-wrap wl-wrap4">
 							<a class="com-t1" href="javascript:void(0)">创新中心</a>
 							<div class="s-wrap">
 								<div class="wl-cnt">

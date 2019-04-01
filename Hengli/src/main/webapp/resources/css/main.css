@@ -33,7 +33,8 @@ img{max-width: 100%;}
 .w-left{width: 287px;float: left;}
 .wl-wrap,.wl-wrap2{width: 287px;height: 146px;overflow: hidden;background:url(../images/bg3.png) no-repeat;position: relative;margin-bottom: 11px;}
 .wl-wrap2{height: 187px;background:url(../images/bg8.png) no-repeat;}
-.wl-wrap3{height: 126px;background:url(../images/bg81.png) no-repeat;}
+.wl-wrap3{height: 207px;background:url(../images/bg81.png) no-repeat;background-size:287px 207px;}
+.wl-wrap4{height: 126px;background:url(../images/bg81.png) no-repeat;}
 /*滚动条容器*/
 .s-wrap{overflow-y:hidden;height: 100px;width: 270px;margin-top: 34px;}
 .wl-cnt{width: 250px;margin-left: 12px;padding-bottom: 10px;}
@@ -48,7 +49,8 @@ img{max-width: 100%;}
 .wlc-w2 p span{width: 50%;float: left;display: block;}
 .wlc-w2 p span.blo{width: 90%;float: left;display: block;}
 .wl-wrap2 .s-wrap{height: 140px;}
-.wl-wrap3 .s-wrap{height: 80px;}
+.wl-wrap3 .s-wrap{height: 161px;}
+.wl-wrap4 .s-wrap{height: 80px;}
 
 .wlc-w12 a{display: block;float: left;font-size: 16px;color: #fff;padding: 0 4px;border-radius:2px;margin-bottom: 5px;}
 .wlc-w12 a.active{background: #4c33d9;}
@@ -115,10 +117,12 @@ img{max-width: 100%;}
   .w-left,.wl-wrap,.wl-wrap2{width: 350px;}
   .wl-wrap,.wl-wrap2{background:url(../images/1920/bg3.png) no-repeat;height: 174px;}
   .wl-wrap2{background:url(../images/1920/bg8.png) no-repeat;height: 160px;}
-  .wl-wrap3{background:url(../images/1920/bg81.png) no-repeat;height: 189px;}
+  .wl-wrap3{background:url(../images/1920/bg81.png) no-repeat;height: 270px;background-size:348px 270px;}
+  .wl-wrap4{background:url(../images/1920/bg81.png) no-repeat;height: 189px;}
   .s-wrap{width: 333px;height: 120px;}
   .wl-wrap2 .s-wrap{height: 100px;}
-  .wl-wrap3 .s-wrap{height: 120px;}
+  .wl-wrap3 .s-wrap{height: 181px;}
+  .wl-wrap4 .s-wrap{height: 120px;}
   .wl-cnt{width: 300px;}
   .w-right,.map-wrap{width: 1230px;height: 710px;}
   .map-wrap2,.map-wrap3{width: 1230px;height: 950px;}

@@ -112,7 +112,7 @@
 						</div>
 					</div> -->
 					<!-- 企业列表 -->
-					<div class="wl-wrap wl-wrap2">
+					<div class="wl-wrap wl-wrap3">
 						<a class="com-t1" href="javascript:void(0)">企业列表</a>
 						<div class="s-wrap">
 							<div class="wl-cnt">
