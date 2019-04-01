@@ -74,19 +74,51 @@
 		  		  var html="";
 		  		  for(var i = 0; i < collegesList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)" yx="'+collegesList[i].id+'"><h3>'+collegesList[i].name+'</h3>'+
-								'<p class="clearfix"><span>师资数量：'+collegesList[i].teachers_num+'    </span><span>课程数量：'+collegesList[i].course_num+'</span></p>'+
-								'<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'   </span></p><p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p></a>';
+		  			  html += '<a href="javascript:void(0)" yx="'+collegesList[i].id+'"><h3>'+collegesList[i].name+'</h3>';
+			  			if((collegesList[i].teachers_num != null && collegesList[i].teachers_num!='') || (collegesList[i].course_num != null && collegesList[i].course_num!='')){
+			  				html += '<p class="clearfix">';
+			  				
+			  				if(collegesList[i].teachers_num != null && collegesList[i].teachers_num!=''){
+			  					html += '<span>师资数量：'+collegesList[i].teachers_num+'</span>';
+				  			}
+				  			if(collegesList[i].course_num != null && collegesList[i].course_num!=''){
+				  				html += '<span>课程数量：'+collegesList[i].course_num+'</span>';
+				  			}
+				  			
+				  			html += '</p>';
+			  			}
+			  			if(collegesList[i].datum_num != null && collegesList[i].datum_num!=''){
+			  				html += '<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'</span></p>';
+			  			}
+			  			if(collegesList[i].enroll_num != null && collegesList[i].enroll_num!=''){
+			  				html += '<p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p>';
+			  			}
+			  			html += '</a>';
+//								'<p class="clearfix"><span>师资数量：'+collegesList[i].teachers_num+'    </span><span>课程数量：'+collegesList[i].course_num+'</span></p>'+
+//								'<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'   </span></p><p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1 sjszy-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+collegesList[i].name+'</h5>'+
-											'<p>师资数量：'+collegesList[i].teachers_num+'</p>'+
-											'<p>课程数量：'+collegesList[i].course_num+'</p>'+
-											'<p>资料数量：'+collegesList[i].datum_num+'</p>'+
-											'<p>报名培训数量：'+collegesList[i].enroll_num+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+collegesList[i].name+'</h5>';
+					if(collegesList[i].teachers_num != null && collegesList[i].teachers_num!=''){
+		  				sContent += '<p>师资数量：'+collegesList[i].teachers_num+'</p>';
+		  			}
+					if(collegesList[i].course_num != null && collegesList[i].course_num!=''){
+		  				sContent += '<p>课程数量：'+collegesList[i].course_num+'</p>';
+		  			}
+					if(collegesList[i].datum_num != null && collegesList[i].datum_num!=''){
+		  				sContent += '<p>资料数量：'+collegesList[i].datum_num+'</p>';
+		  			}
+					if(collegesList[i].enroll_num != null && collegesList[i].enroll_num!=''){
+		  				sContent += '<p>报名培训数量：'+collegesList[i].enroll_num+'</p>';
+		  			}
+//											'<p>师资数量：'+collegesList[i].teachers_num+'</p>'+
+//											'<p>课程数量：'+collegesList[i].course_num+'</p>'+
+//											'<p>资料数量：'+collegesList[i].datum_num+'</p>'+
+//											'<p>报名培训数量：'+collegesList[i].enroll_num+'</p>'+
+//											'<div class="cbtn-w">'+
+					sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
 											'</div>'+
 										'</div>'+
@@ -105,12 +137,25 @@
 	  			  		var sContent = '<div class="wr-w1 sjszy-w2">'+
 											'<div class="mask"></div><div class="closeBtn"></div>'+
 											'<div class="content">'+
-												'<h5>'+collegesList[index].name+'</h5>'+
-												'<p>师资数量：'+collegesList[index].teachers_num+'</p>'+
-												'<p>课程数量：'+collegesList[index].course_num+'</p>'+
-												'<p>资料数量：'+collegesList[index].datum_num+'</p>'+
-												'<p>报名培训数量：'+collegesList[index].enroll_num+'</p>'+
-												'<div class="cbtn-w">'+
+												'<h5>'+collegesList[index].name+'</h5>';
+						if(collegesList[index].teachers_num != null && collegesList[index].teachers_num!=''){
+			  				sContent += '<p>师资数量：'+collegesList[index].teachers_num+'</p>';
+			  			}
+						if(collegesList[index].course_num != null && collegesList[index].course_num!=''){
+			  				sContent += '<p>课程数量：'+collegesList[index].course_num+'</p>';
+			  			}
+						if(collegesList[index].datum_num != null && collegesList[index].datum_num!=''){
+			  				sContent += '<p>资料数量：'+collegesList[index].datum_num+'</p>';
+			  			}
+						if(collegesList[index].enroll_num != null && collegesList[index].enroll_num!=''){
+			  				sContent += '<p>报名培训数量：'+collegesList[index].enroll_num+'</p>';
+			  			}
+//												'<p>师资数量：'+collegesList[index].teachers_num+'</p>'+
+//												'<p>课程数量：'+collegesList[index].course_num+'</p>'+
+//												'<p>资料数量：'+collegesList[index].datum_num+'</p>'+
+//												'<p>报名培训数量：'+collegesList[index].enroll_num+'</p>'+
+//												'<div class="cbtn-w">'+
+						sContent += '<div class="cbtn-w">'+
 													'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
 												'</div>'+
 											'</div>'+
@@ -142,8 +187,15 @@
 		  		  var html="";
 		  		  for(var i = 0; i < lectureList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)"><h3>'+lectureList[i].theme+'</h3>'+
-								'<p>时间：'+lectureList[i].time+'</p><p>地址：'+lectureList[i].address+'</p></a>';
+		  			  html += '<a href="javascript:void(0)"><h3>'+lectureList[i].theme+'</h3>';
+			  			if(lectureList[i].time != null && lectureList[i].time!=''){
+			  				html += '<p>时间：'+lectureList[i].time+'</p>';
+			  			}
+			  			if(lectureList[i].address != null && lectureList[i].address!=''){
+			  				html += '<p>地址：'+lectureList[i].address+'</p>';
+			  			}
+			  			html += '</a>';
+//								'<p>时间：'+lectureList[i].time+'</p><p>地址：'+lectureList[i].address+'</p></a>';
 		  		  }
 		  		  $("#jzlb").empty().append(html);
 		  		  
@@ -158,12 +210,25 @@
 			  			var sContent = '<div class="wr-w1 yx-w1">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+lectureList[index].cname+'</h5>'+
-											'<p>主题：'+lectureList[index].theme+'</p>'+
-											'<p>授课教师：'+lectureList[index].tname+'</p>'+
-											'<p>课程类型：'+lectureList[index].course_type+'</p>'+
-											'<p>课程费用：'+lectureList[index].course_fee+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+lectureList[index].cname+'</h5>';
+			  			if(lectureList[index].theme != null && lectureList[index].theme!=''){
+			  				sContent += '<p>主题：'+lectureList[index].theme+'</p>';
+			  			}
+			  			if(lectureList[index].tname != null && lectureList[index].tname!=''){
+			  				sContent += '<p>授课教师：'+lectureList[index].tname+'</p>';
+			  			}
+			  			if(lectureList[index].course_type != null && lectureList[index].course_type!=''){
+			  				sContent += '<p>课程类型：'+lectureList[index].course_type+'</p>';
+			  			}
+			  			if(lectureList[index].course_fee != null && lectureList[index].course_fee!=''){
+			  				sContent += '<p>课程费用：'+lectureList[index].course_fee+'</p>';
+			  			}
+//											'<p>主题：'+lectureList[index].theme+'</p>'+
+//											'<p>授课教师：'+lectureList[index].tname+'</p>'+
+//											'<p>课程类型：'+lectureList[index].course_type+'</p>'+
+//											'<p>课程费用：'+lectureList[index].course_fee+'</p>'+
+//											'<div class="cbtn-w">'+
+			  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+lectureList[index].details_page+'" class="com-btn jzhdxq"></a>'+
 											'</div>'+
 										'</div>'+
@@ -177,8 +242,19 @@
 		  		  html="";
 		  		  for(var i = 0; i < teacherList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)"><h3>姓名：'+teacherList[i].tname+'</h3><p>所属院校：'+teacherList[i].cname+'</p>'+
-								'<p>工作年限：'+teacherList[i].work_year+'</p><p>课程数量：'+teacherList[i].course_num+'</p></a>';
+		  			  html += '<a href="javascript:void(0)"><h3>姓名：'+teacherList[i].tname+'</h3>';
+			  			if(teacherList[i].cname != null && teacherList[i].cname!=''){
+			  				html += '<p>所属院校：'+teacherList[i].cname+'</p>';
+			  			}
+			  			if(teacherList[i].work_year != null && teacherList[i].work_year!=''){
+			  				html += '<p>工作年限：'+teacherList[i].work_year+'</p>';
+			  			}
+			  			if(teacherList[i].course_num != null && teacherList[i].course_num!=''){
+			  				html += '<p>课程数量：'+teacherList[i].course_num+'</p>';
+			  			}
+			  			html += '</a>';
+//		  			  			'<p>所属院校：'+teacherList[i].cname+'</p>'+
+//								'<p>工作年限：'+teacherList[i].work_year+'</p><p>课程数量：'+teacherList[i].course_num+'</p></a>';
 		  		  }
 		  		  $("#jslb").empty().append(html);
 		  		  
@@ -192,13 +268,29 @@
 			  			
 			  			var sContent = '<div class="wr-w2 yx-w">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
-										'<div class="content">'+
-											'<h5>姓名：'+teacherList[index].tname+'</h5>'+
-											'<p>所属院校：'+teacherList[index].cname+'</p>'+
-											'<p>工作年限：'+teacherList[index].work_year+'</p>'+
-											'<p>课程数量：'+teacherList[index].course_num+'</p>'+
-											'<p>讲师简介：'+teacherList[index].summary+'</p>'+
-											'<div class="cbtn-w">'+
+										'<div class="content">';
+			  			if(teacherList[index].tname != null && teacherList[index].tname!=''){
+			  				sContent += '<h5>姓名：'+teacherList[index].tname+'</h5>';
+			  			}
+			  			if(teacherList[index].cname != null && teacherList[index].cname!=''){
+			  				sContent += '<p>所属院校：'+teacherList[index].cname+'</p>';
+			  			}
+			  			if(teacherList[index].work_year != null && teacherList[index].work_year!=''){
+			  				sContent += '<p>工作年限：'+teacherList[index].work_year+'</p>';
+			  			}
+			  			if(teacherList[index].course_num != null && teacherList[index].course_num!=''){
+			  				sContent += '<p>课程数量：'+teacherList[index].course_num+'</p>';
+			  			}
+			  			if(teacherList[index].summary != null && teacherList[index].summary!=''){
+			  				sContent += '<p>讲师简介：'+teacherList[index].summary+'</p>';
+			  			}
+//											'<h5>姓名：'+teacherList[index].tname+'</h5>'+
+//											'<p>所属院校：'+teacherList[index].cname+'</p>'+
+//											'<p>工作年限：'+teacherList[index].work_year+'</p>'+
+//											'<p>课程数量：'+teacherList[index].course_num+'</p>'+
+//											'<p>讲师简介：'+teacherList[index].summary+'</p>'+
+//											'<div class="cbtn-w">'+
+			  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+teacherList[index].homepage+'" class="com-btn yxzy"></a>'+
 											'</div>'+
 										'</div>'+

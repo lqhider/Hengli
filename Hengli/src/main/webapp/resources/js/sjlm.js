@@ -80,15 +80,23 @@
 		  		  var html="";
 		  		  for(var i = 0; i < companyList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)"><h3>'+companyList[i].name+'</h3>'+
-								'<p>发布需求数量：'+companyList[i].requirement_num+'</p></a>';
+		  			  html += '<a href="javascript:void(0)"><h3>'+companyList[i].name+'</h3>';
+			  			if(companyList[i].requirement_num != null && companyList[i].requirement_num!=''){
+			  				html += '<p>发布需求数量：'+companyList[i].requirement_num+'</p>';
+			  			}
+			  			html += '</a>';
+//								'<p>发布需求数量：'+companyList[i].requirement_num+'</p></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w1 sjszy-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+companyList[i].name+'</h5>'+
-											'<p>发布需求数量：'+companyList[i].requirement_num+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+companyList[i].name+'</h5>';
+		  			if(companyList[i].requirement_num != null && companyList[i].requirement_num!=''){
+		  				sContent += '<p>发布需求数量：'+companyList[i].requirement_num+'</p>';
+		  			}
+//											'<p>发布需求数量：'+companyList[i].requirement_num+'</p>'+
+//											'<div class="cbtn-w">'+
+		  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+companyList[i].demand_hall+'" class="com-btn xqdt"></a>'+
 											'</div>'+
 										'</div>'+
@@ -108,9 +116,13 @@
   			  		var sContent = '<div class="wr-w1 sjszy-w2">'+
 									'<div class="mask"></div><div class="closeBtn"></div>'+
 									'<div class="content">'+
-										'<h5>'+companyList[index].name+'</h5>'+
-										'<p>发布需求数量：'+companyList[index].requirement_num+'</p>'+
-										'<div class="cbtn-w">'+
+										'<h5>'+companyList[index].name+'</h5>';
+	  			  	if(companyList[index].requirement_num != null && companyList[index].requirement_num!=''){
+		  				sContent += '<p>发布需求数量：'+companyList[index].requirement_num+'</p>';
+		  			}
+//										'<p>发布需求数量：'+companyList[index].requirement_num+'</p>'+
+//										'<div class="cbtn-w">'+
+	  			  	sContent += '<div class="cbtn-w">'+
 											'<a target="_blank" href="'+companyList[index].demand_hall+'" class="com-btn xqdt"></a>'+
 										'</div>'+
 									'</div>'+
@@ -125,16 +137,27 @@
 		  		  var html="";
 		  		  for(var i = 0; i < designCompanyList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)" sjsgs="'+designCompanyList[i].id+'"><h3>'+designCompanyList[i].name+'</h3>'+
-								'<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p></a>';
+		  			  html += '<a href="javascript:void(0)" sjsgs="'+designCompanyList[i].id+'"><h3>'+designCompanyList[i].name+'</h3>';
+			  			if(designCompanyList[i].receipt_num != null && designCompanyList[i].receipt_num!=''){
+			  				html += '<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p>';
+			  			}
+			  			html += '</a>';
+//								'<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w2 sjsgs-w">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>'+designCompanyList[i].name+'</h5>'+
-											'<p>领域：'+designCompanyList[i].domain+'</p>'+
-											'<p>资质：'+designCompanyList[i].qualifications+'</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>'+designCompanyList[i].name+'</h5>';
+			  			if(designCompanyList[i].domain != null && designCompanyList[i].domain!=''){
+			  				sContent += '<p>领域：'+designCompanyList[i].domain+'</p>';
+			  			}
+			  			if(designCompanyList[i].qualifications != null && designCompanyList[i].qualifications!=''){
+			  				sContent += '<p>资质：'+designCompanyList[i].qualifications+'</p>';
+			  			}
+//											'<p>领域：'+designCompanyList[i].domain+'</p>'+
+//											'<p>资质：'+designCompanyList[i].qualifications+'</p>'+
+//											'<div class="cbtn-w">'+
+			  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+designCompanyList[i].homepage+'" class="com-btn gszy"></a>'+
 											'</div>'+
 										'</div>'+
@@ -154,10 +177,17 @@
   			  			var sContent = '<div class="wr-w2 sjsgs-w">'+
 									'<div class="mask"></div><div class="closeBtn"></div>'+
 									'<div class="content">'+
-										'<h5>'+designCompanyList[index].name+'</h5>'+
-										'<p>领域：'+designCompanyList[index].domain+'</p>'+
-										'<p>资质：'+designCompanyList[index].qualifications+'</p>'+
-										'<div class="cbtn-w">'+
+										'<h5>'+designCompanyList[index].name+'</h5>';
+	  			  		if(designCompanyList[index].domain != null && designCompanyList[index].domain!=''){
+			  				sContent += '<p>领域：'+designCompanyList[index].domain+'</p>';
+			  			}
+		  			  	if(designCompanyList[index].qualifications != null && designCompanyList[index].qualifications!=''){
+			  				sContent += '<p>资质：'+designCompanyList[index].qualifications+'</p>';
+			  			}
+//										'<p>领域：'+designCompanyList[index].domain+'</p>'+
+//										'<p>资质：'+designCompanyList[index].qualifications+'</p>'+
+//										'<div class="cbtn-w">'+
+		  			  	sContent += '<div class="cbtn-w">'+
 											'<a target="_blank" href="'+designCompanyList[index].homepage+'" class="com-btn gszy"></a>'+
 										'</div>'+
 									'</div>'+
@@ -189,8 +219,15 @@
 		  		  var html="";
 		  		  for(var i = 0; i < designerList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)"><h3>姓名：'+designerList[i].dname+'</h3>'+
-								'<p>所属设计公司：'+designerList[i].dcname+'</p><p>发布设计作品数量：'+designerList[i].publication_num+'</p></a>';
+		  			  html += '<a href="javascript:void(0)"><h3>姓名：'+designerList[i].dname+'</h3>';
+			  			if(designerList[i].dcname != null && designerList[i].dcname!=''){
+			  				html += '<p>所属设计公司：'+designerList[i].dcname+'</p>';
+			  			}
+			  			if(designerList[i].publication_num != null && designerList[i].publication_num!=''){
+			  				html += '<p>发布设计作品数量：'+designerList[i].publication_num+'</p>';
+			  			}
+			  			html += '</a>';
+//								'<p>所属设计公司：'+designerList[i].dcname+'</p><p>发布设计作品数量：'+designerList[i].publication_num+'</p></a>';
 		  		  }
 		  		  $("#sjslb").empty().append(html);
 		  		  
@@ -205,11 +242,21 @@
 			  			var sContent = '<div class="wr-w1 sjszy-w">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
 										'<div class="content">'+
-											'<h5>姓名：'+designerList[index].dname+'</h5>'+
-											'<p>所属设计公司：'+designerList[index].dcname+'</p>'+
-											'<p>资历：'+designerList[index].seniority+'</p>'+
-											'<p>工作经验：'+designerList[index].work_experience+'年</p>'+
-											'<div class="cbtn-w">'+
+											'<h5>姓名：'+designerList[index].dname+'</h5>';
+			  			if(designerList[index].dcname != null && designerList[index].dcname!=''){
+			  				sContent += '<p>所属设计公司：'+designerList[index].dcname+'</p>';
+			  			}
+			  			if(designerList[index].seniority != null && designerList[index].seniority!=''){
+			  				sContent += '<p>资历：'+designerList[index].seniority+'</p>';
+			  			}
+			  			if(designerList[index].work_experience != null && designerList[index].work_experience!=''){
+			  				sContent += '<p>工作经验：'+designerList[index].work_experience+'年</p>';
+			  			}
+//											'<p>所属设计公司：'+designerList[index].dcname+'</p>'+
+//											'<p>资历：'+designerList[index].seniority+'</p>'+
+//											'<p>工作经验：'+designerList[index].work_experience+'年</p>'+
+//											'<div class="cbtn-w">'+
+			  			sContent += '<div class="cbtn-w">'+
 												'<a target="_blank" href="'+designerList[index].homepage+'" class="com-btn sjszy"></a>'+
 											'</div>'+
 										'</div>'+

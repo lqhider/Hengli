@@ -76,8 +76,15 @@
 		  		  var html="";
 		  		  for(var i = 0; i < companyList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)"><h3>'+companyList[i].name+'</h3>'+
-								'<p>难题数量：'+companyList[i].conundrum_number+'</p><p>合作数量：'+companyList[i].cooperate_number+'</p></a>';
+		  			  html += '<a href="javascript:void(0)"><h3>'+companyList[i].name+'</h3>';
+			  			if(companyList[i].conundrum_number != null && companyList[i].conundrum_number!=''){
+			  				html += '<p>难题数量：'+companyList[i].conundrum_number+'</p>';
+			  			}
+			  			if(companyList[i].cooperate_number != null && companyList[i].cooperate_number!=''){
+			  				html += '<p>合作数量：'+companyList[i].cooperate_number+'</p>';
+			  			}
+			  			html += '</a>';
+//								'<p>难题数量：'+companyList[i].conundrum_number+'</p><p>合作数量：'+companyList[i].cooperate_number+'</p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
@@ -108,10 +115,26 @@
 		  		  html = "";
 		  		  for(var i = 0; i < collegesList.length; i ++){
 		  			  
-		  			  html += '<a href="javascript:void(0)"><h3>'+collegesList[i].name+'</h3>'+
-							'<p class="clearfix"><span>专家数量：'+collegesList[i].expert_num+'</span>'+
-							'<span>成果数量：'+collegesList[i].achievement_num+'</span></p>'+
-							'<p class="clearfix"><span>合作数量：'+collegesList[i].cooperate_num+'</span></p></a>';
+		  			  html += '<a href="javascript:void(0)"><h3>'+collegesList[i].name+'</h3>';
+			  			if((collegesList[i].expert_num != null && collegesList[i].expert_num!='') || (collegesList[i].achievement_num != null && collegesList[i].achievement_num!='')){
+			  				html += '<p class="clearfix">';
+			  				
+			  				if(collegesList[i].expert_num != null && collegesList[i].expert_num!=''){
+			  					html += '<span>专家数量：'+collegesList[i].expert_num+'</span>';
+				  			}
+				  			if(collegesList[i].achievement_num != null && collegesList[i].achievement_num!=''){
+				  				html += '<span>成果数量：'+collegesList[i].achievement_num+'</span>';
+				  			}
+				  			
+				  			html += '</p>';
+			  			}
+			  			if(collegesList[i].cooperate_num != null && collegesList[i].cooperate_num!=''){
+		  					html += '<p class="clearfix"><span>合作数量：'+collegesList[i].cooperate_num+'</span></p>';
+			  			}
+			  			html += '</a>';
+//							'<p class="clearfix"><span>专家数量：'+collegesList[i].expert_num+'</span>'+
+//							'<span>成果数量：'+collegesList[i].achievement_num+'</span></p>'+
+//							'<p class="clearfix"><span>合作数量：'+collegesList[i].cooperate_num+'</span></p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
