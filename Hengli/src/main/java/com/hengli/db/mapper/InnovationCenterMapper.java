@@ -13,4 +13,6 @@ public interface InnovationCenterMapper {
 	
 	public int updateInnovationCenter(Map<String,Object> params);
 	
+	public int deleteInnovationCenter();
+	
 }

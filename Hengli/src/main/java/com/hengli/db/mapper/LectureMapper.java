@@ -12,4 +12,6 @@ public interface LectureMapper {
 	
 	public void insertLecture(Map<String,Object> params);
 	
+	public int deleteLecture();
+	
 }

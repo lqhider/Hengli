@@ -15,4 +15,6 @@ public interface DesignCompanyMapper {
 	public void insertDesignCompany(Map<String,Object> params);
 	
 	public int updateDesignCompany(Map<String,Object> params);
+	
+	public int deleteDesignCompany();
 }

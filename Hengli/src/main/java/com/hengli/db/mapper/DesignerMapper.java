@@ -12,4 +12,6 @@ public interface DesignerMapper {
 	
 	public void insertDesigner(Map<String,Object> params);
 	
+	public int deleteDesigner();
+	
 }

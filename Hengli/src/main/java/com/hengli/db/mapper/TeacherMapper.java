@@ -12,4 +12,6 @@ public interface TeacherMapper {
 	
 	public void insertTeacher(Map<String,Object> params);
 	
+	public int deleteTeacher();
+	
 }

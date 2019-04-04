@@ -15,4 +15,6 @@ public interface CollegesMapper {
 	public void insertColleges(Map<String,Object> params);
 	
 	public int updateColleges(Map<String,Object> params);
+	
+	public int deleteColleges();
 }

@@ -19,4 +19,6 @@ public interface CompanyMapper {
 	public void insertCompany(Map<String,Object> params);
 	
 	public int updateCompany(Map<String,Object> params);
+	
+	public int deleteCompany();
 }
