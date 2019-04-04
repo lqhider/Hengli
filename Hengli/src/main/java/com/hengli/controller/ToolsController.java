@@ -19,7 +19,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.hengli.db.mapper.CollegesMapper;
 import com.hengli.db.mapper.CompanyMapper;
 import com.hengli.db.mapper.DesignCompanyMapper;
+import com.hengli.db.mapper.DesignerMapper;
 import com.hengli.db.mapper.InnovationCenterMapper;
+import com.hengli.db.mapper.LectureMapper;
+import com.hengli.db.mapper.TeacherMapper;
 import com.hengli.util.CoordinateUtils;
 import com.hengli.util.PoiUtil;
 import com.hengli.util.PoiUtil.POIResult;
@@ -41,6 +44,15 @@ public class ToolsController {
 	
 	@Autowired
 	public InnovationCenterMapper innovationCenterMapper;
+	
+	@Autowired
+	public TeacherMapper teacherMapper;
+	
+	@Autowired
+	public LectureMapper lectureMapper;
+	
+	@Autowired
+	public DesignerMapper designerMapper;
 	
 	@Autowired
 	private PoiUtil poiUtil;
@@ -149,6 +161,32 @@ public class ToolsController {
 			
 			innovationCenterMapper.updateInnovationCenter(params);
 		}
+		
+		return Utils.returnResult(null);
+	}
+	
+	/**
+	 * 清空数据
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping("/clearData")
+	@ResponseBody
+	public Map<String, Object> clearData() {
+		
+		companyMapper.deleteCompany();
+		
+		innovationCenterMapper.deleteInnovationCenter();
+		
+		collegesMapper.deleteColleges();
+		
+		teacherMapper.deleteTeacher();
+		
+		lectureMapper.deleteLecture();
+		
+		designCompanyMapper.deleteDesignCompany();
+		
+		designerMapper.deleteDesigner();
 		
 		return Utils.returnResult(null);
 	}

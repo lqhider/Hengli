@@ -86,6 +86,10 @@
 									</div>
 						      	</form>
 							</div>
+							
+							<div style="padding-top: 30px">
+								<a id="clearData" style="width: 200px;height: 60px;line-height: 60px;padding: 0 11px;border: 1px #26bbdb solid;border-radius: 3px;display: inline-block;background: #1E90FF;cursor: pointer;outline: none;color: white;font-size: 17px;" href="javascript:void(0)">清空已有数据</a>
+							</div>
 						</div>
 						<div style="padding-top: 60px;text-align:center">
 							<div style="font-size:25px;font-weight:bold;color: #fff">获取经纬度</div>
@@ -150,6 +154,18 @@ var contextPath="${pageContext.request.contextPath }";
 			  		  alert('获取创新中心经纬度执行成功!');
 			  	  }else{
 			  		alert('获取创新中心经纬度执行失败!');
+			  	  }
+			})
+		})
+		
+		//清空数据
+		$("#clearData").click(function(){
+			ajaxFactory('正在清空数据,请稍后',"post",contextPath+"/tools/clearData",null).done(function(result){
+				$("body").mLoading("hide");
+			  	  if(result.status=="true"){
+			  		  alert('清空数据成功!');
+			  	  }else{
+			  		alert('清空数据失败!');
 			  	  }
 			})
 		})
