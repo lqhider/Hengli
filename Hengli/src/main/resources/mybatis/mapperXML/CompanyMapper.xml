@@ -47,6 +47,8 @@
 		LEFT JOIN company ON industrial_area.id = company.industrial_area
 		GROUP BY
 			industrial_area.id
+		ORDER BY
+			CONVERT(industrial_area.id,SIGNED)
 	</select>
 	
 	<!-- 查询企业创新数量 -->
@@ -159,4 +161,11 @@
 		</set>
 		WHERE id = #{id}
 	</update>
+	
+	<!-- 删除企业 -->
+	<delete id="deleteCompany">
+		DELETE
+		FROM
+			company
+	</delete>
 </mapper>  

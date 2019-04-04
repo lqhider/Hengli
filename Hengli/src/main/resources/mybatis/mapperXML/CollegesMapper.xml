@@ -124,4 +124,11 @@
 		</set>
 		WHERE id = #{id}
 	</update>
+	
+	<!-- 删除院校 -->
+	<delete id="deleteColleges">
+		DELETE
+		FROM
+			colleges
+	</delete>
 </mapper>  

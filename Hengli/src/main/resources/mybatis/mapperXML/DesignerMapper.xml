@@ -40,4 +40,11 @@
 		)
 	</insert>
 	
+	<!-- 删除设计师 -->
+	<delete id="deleteDesigner">
+		DELETE
+		FROM
+			designer
+	</delete>
+	
 </mapper>  

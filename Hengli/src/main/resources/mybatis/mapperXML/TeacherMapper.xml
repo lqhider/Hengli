@@ -39,4 +39,10 @@
 		)
 	</insert>
 	
+	<!-- 删除讲师 -->
+	<delete id="deleteTeacher">
+		DELETE
+		FROM
+			teacher
+	</delete>
 </mapper>  

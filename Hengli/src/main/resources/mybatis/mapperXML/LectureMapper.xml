@@ -46,4 +46,10 @@
 		)
 	</insert>
 	
+	<!-- 删除讲座 -->
+	<delete id="deleteLecture">
+		DELETE
+		FROM
+			lecture
+	</delete>
 </mapper>  

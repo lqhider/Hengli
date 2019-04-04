@@ -73,4 +73,11 @@
 		</set>
 		WHERE id = #{id}
 	</update>
+	
+	<!-- 删除创新中心 -->
+	<delete id="deleteInnovationCenter">
+		DELETE
+		FROM
+			innovation_center
+	</delete>
 </mapper>  
