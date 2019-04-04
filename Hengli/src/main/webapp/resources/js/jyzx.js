@@ -75,27 +75,29 @@
 		  		  for(var i = 0; i < collegesList.length; i ++){
 		  			  
 		  			  html += '<a href="javascript:void(0)" yx="'+collegesList[i].id+'"><h3>'+collegesList[i].name+'</h3>';
-			  			if((collegesList[i].teachers_num != null && collegesList[i].teachers_num!='') || (collegesList[i].course_num != null && collegesList[i].course_num!='')){
-			  				html += '<p class="clearfix">';
-			  				
-			  				if(collegesList[i].teachers_num != null && collegesList[i].teachers_num!=''){
-			  					html += '<span>师资数量：'+collegesList[i].teachers_num+'</span>';
-				  			}
-				  			if(collegesList[i].course_num != null && collegesList[i].course_num!=''){
-				  				html += '<span>课程数量：'+collegesList[i].course_num+'</span>';
-				  			}
-				  			
-				  			html += '</p>';
-			  			}
-			  			if(collegesList[i].datum_num != null && collegesList[i].datum_num!=''){
-			  				html += '<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'</span></p>';
-			  			}
-			  			if(collegesList[i].enroll_num != null && collegesList[i].enroll_num!=''){
-			  				html += '<p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p>';
-			  			}
-			  			html += '</a>';
-//								'<p class="clearfix"><span>师资数量：'+collegesList[i].teachers_num+'    </span><span>课程数量：'+collegesList[i].course_num+'</span></p>'+
-//								'<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'   </span></p><p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p></a>';
+//			  			if((collegesList[i].teachers_num != null && collegesList[i].teachers_num!='') || (collegesList[i].course_num != null && collegesList[i].course_num!='')){
+//			  				html += '<p class="clearfix">';
+//			  				
+//			  				if(collegesList[i].teachers_num != null && collegesList[i].teachers_num!=''){
+//			  					html += '<span>师资数量：'+collegesList[i].teachers_num+'</span>';
+//				  			}
+//				  			if(collegesList[i].course_num != null && collegesList[i].course_num!=''){
+//				  				html += '<span>课程数量：'+collegesList[i].course_num+'</span>';
+//				  			}
+//				  			
+//				  			html += '</p>';
+//			  			}
+//			  			if(collegesList[i].datum_num != null && collegesList[i].datum_num!=''){
+//			  				html += '<p class="clearfix"><span>资料数量：'+collegesList[i].datum_num+'</span></p>';
+//			  			}
+//			  			if(collegesList[i].enroll_num != null && collegesList[i].enroll_num!=''){
+//			  				html += '<p class="clearfix"><span class="blo">报名培训数量：'+collegesList[i].enroll_num+'</span></p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p class="clearfix"><span>师资数量：'+(collegesList[i].teachers_num==null?"":collegesList[i].teachers_num)+
+		  					  '</span><span>课程数量：'+(collegesList[i].course_num==null?"":collegesList[i].course_num)+'</span></p>'+
+								'<p class="clearfix"><span>资料数量：'+(collegesList[i].datum_num==null?"":collegesList[i].datum_num)+
+								'</span></p><p class="clearfix"><span class="blo">报名培训数量：'+(collegesList[i].enroll_num==null?"":collegesList[i].enroll_num)+'</span></p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1 sjszy-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
@@ -188,14 +190,15 @@
 		  		  for(var i = 0; i < lectureList.length; i ++){
 		  			  
 		  			  html += '<a href="javascript:void(0)"><h3>'+lectureList[i].theme+'</h3>';
-			  			if(lectureList[i].time != null && lectureList[i].time!=''){
-			  				html += '<p>时间：'+lectureList[i].time+'</p>';
-			  			}
-			  			if(lectureList[i].address != null && lectureList[i].address!=''){
-			  				html += '<p>地址：'+lectureList[i].address+'</p>';
-			  			}
-			  			html += '</a>';
-//								'<p>时间：'+lectureList[i].time+'</p><p>地址：'+lectureList[i].address+'</p></a>';
+//			  			if(lectureList[i].time != null && lectureList[i].time!=''){
+//			  				html += '<p>时间：'+lectureList[i].time+'</p>';
+//			  			}
+//			  			if(lectureList[i].address != null && lectureList[i].address!=''){
+//			  				html += '<p>地址：'+lectureList[i].address+'</p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p>时间：'+(lectureList[i].time==null?"":lectureList[i].time)+
+		  					  '</p><p>地址：'+(lectureList[i].address==null?"":lectureList[i].address)+'</p></a>';
 		  		  }
 		  		  $("#jzlb").empty().append(html);
 		  		  
@@ -243,18 +246,19 @@
 		  		  for(var i = 0; i < teacherList.length; i ++){
 		  			  
 		  			  html += '<a href="javascript:void(0)"><h3>姓名：'+teacherList[i].tname+'</h3>';
-			  			if(teacherList[i].cname != null && teacherList[i].cname!=''){
-			  				html += '<p>所属院校：'+teacherList[i].cname+'</p>';
-			  			}
-			  			if(teacherList[i].work_year != null && teacherList[i].work_year!=''){
-			  				html += '<p>工作年限：'+teacherList[i].work_year+'</p>';
-			  			}
-			  			if(teacherList[i].course_num != null && teacherList[i].course_num!=''){
-			  				html += '<p>课程数量：'+teacherList[i].course_num+'</p>';
-			  			}
-			  			html += '</a>';
-//		  			  			'<p>所属院校：'+teacherList[i].cname+'</p>'+
-//								'<p>工作年限：'+teacherList[i].work_year+'</p><p>课程数量：'+teacherList[i].course_num+'</p></a>';
+//			  			if(teacherList[i].cname != null && teacherList[i].cname!=''){
+//			  				html += '<p>所属院校：'+teacherList[i].cname+'</p>';
+//			  			}
+//			  			if(teacherList[i].work_year != null && teacherList[i].work_year!=''){
+//			  				html += '<p>工作年限：'+teacherList[i].work_year+'</p>';
+//			  			}
+//			  			if(teacherList[i].course_num != null && teacherList[i].course_num!=''){
+//			  				html += '<p>课程数量：'+teacherList[i].course_num+'</p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p>所属院校：'+(teacherList[i].cname==null?"":teacherList[i].cname)+'</p>'+
+								'<p>工作年限：'+(teacherList[i].work_year==null?"":teacherList[i].work_year)+
+								'</p><p>课程数量：'+(teacherList[i].course_num==null?"":teacherList[i].course_num)+'</p></a>';
 		  		  }
 		  		  $("#jslb").empty().append(html);
 		  		  

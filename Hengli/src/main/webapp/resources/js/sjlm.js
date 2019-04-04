@@ -81,11 +81,11 @@
 		  		  for(var i = 0; i < companyList.length; i ++){
 		  			  
 		  			  html += '<a href="javascript:void(0)"><h3>'+companyList[i].name+'</h3>';
-			  			if(companyList[i].requirement_num != null && companyList[i].requirement_num!=''){
-			  				html += '<p>发布需求数量：'+companyList[i].requirement_num+'</p>';
-			  			}
-			  			html += '</a>';
-//								'<p>发布需求数量：'+companyList[i].requirement_num+'</p></a>';
+//			  			if(companyList[i].requirement_num != null && companyList[i].requirement_num!=''){
+//			  				html += '<p>发布需求数量：'+companyList[i].requirement_num+'</p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p>发布需求数量：'+(companyList[i].requirement_num==null?"":companyList[i].requirement_num)+'</p></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w1 sjszy-w2">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
@@ -138,11 +138,11 @@
 		  		  for(var i = 0; i < designCompanyList.length; i ++){
 		  			  
 		  			  html += '<a href="javascript:void(0)" sjsgs="'+designCompanyList[i].id+'"><h3>'+designCompanyList[i].name+'</h3>';
-			  			if(designCompanyList[i].receipt_num != null && designCompanyList[i].receipt_num!=''){
-			  				html += '<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p>';
-			  			}
-			  			html += '</a>';
-//								'<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p></a>';
+//			  			if(designCompanyList[i].receipt_num != null && designCompanyList[i].receipt_num!=''){
+//			  				html += '<p>接单设计任务数量：'+designCompanyList[i].receipt_num+'</p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p>接单设计任务数量：'+(designCompanyList[i].receipt_num==null?"":designCompanyList[i].receipt_num)+'</p></a>';
 		  			  
 		  			  var sContent = '<div class="wr-w2 sjsgs-w">'+
 										'<div class="mask"></div><div class="closeBtn"></div>'+
@@ -220,14 +220,15 @@
 		  		  for(var i = 0; i < designerList.length; i ++){
 		  			  
 		  			  html += '<a href="javascript:void(0)"><h3>姓名：'+designerList[i].dname+'</h3>';
-			  			if(designerList[i].dcname != null && designerList[i].dcname!=''){
-			  				html += '<p>所属设计公司：'+designerList[i].dcname+'</p>';
-			  			}
-			  			if(designerList[i].publication_num != null && designerList[i].publication_num!=''){
-			  				html += '<p>发布设计作品数量：'+designerList[i].publication_num+'</p>';
-			  			}
-			  			html += '</a>';
-//								'<p>所属设计公司：'+designerList[i].dcname+'</p><p>发布设计作品数量：'+designerList[i].publication_num+'</p></a>';
+//			  			if(designerList[i].dcname != null && designerList[i].dcname!=''){
+//			  				html += '<p>所属设计公司：'+designerList[i].dcname+'</p>';
+//			  			}
+//			  			if(designerList[i].publication_num != null && designerList[i].publication_num!=''){
+//			  				html += '<p>发布设计作品数量：'+designerList[i].publication_num+'</p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p>所属设计公司：'+(designerList[i].dcname==null?"":designerList[i].dcname)+
+		  			  			'</p><p>发布设计作品数量：'+(designerList[i].publication_num==null?"":designerList[i].publication_num)+'</p></a>';
 		  		  }
 		  		  $("#sjslb").empty().append(html);
 		  		  

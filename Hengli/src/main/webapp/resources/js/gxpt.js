@@ -78,24 +78,25 @@
 		  			  
 		  			  html += '<a href="javascript:void(0)">'+
 							'<h3>'+companyList[i].name+'</h3>';
-			  			if((companyList[i].product_number != null && companyList[i].product_number!='') || (companyList[i].need_number != null && companyList[i].need_number!='')){
-			  				html += '<p class="clearfix">';
-			  				
-			  				if(companyList[i].product_number != null && companyList[i].product_number!=''){
-			  					html += '<span>供应数量：'+companyList[i].product_number+'</span>';
-				  			}
-				  			if(companyList[i].need_number != null && companyList[i].need_number!=''){
-				  				html += '<span>需求数量：'+companyList[i].need_number+'</span>';
-				  			}
-				  			
-				  			html += '</p>';
-			  			}
-			  			if(companyList[i].custom_service_number != null && companyList[i].custom_service_number!=''){
-			  				html += '<p class="clearfix">定制服务数量：'+companyList[i].custom_service_number+'</p>';
-			  			}
-			  			html += '</a>';
-//							'<p class="clearfix"><span>供应数量：'+companyList[i].product_number+'</span><span>需求数量：'+companyList[i].need_number+'</span></p>'+
-//							'<p class="clearfix">定制服务数量：'+companyList[i].custom_service_number+'</p></a>';
+//			  			if((companyList[i].product_number != null && companyList[i].product_number!='') || (companyList[i].need_number != null && companyList[i].need_number!='')){
+//			  				html += '<p class="clearfix">';
+//			  				
+//			  				if(companyList[i].product_number != null && companyList[i].product_number!=''){
+//			  					html += '<span>供应数量：'+companyList[i].product_number+'</span>';
+//				  			}
+//				  			if(companyList[i].need_number != null && companyList[i].need_number!=''){
+//				  				html += '<span>需求数量：'+companyList[i].need_number+'</span>';
+//				  			}
+//				  			
+//				  			html += '</p>';
+//			  			}
+//			  			if(companyList[i].custom_service_number != null && companyList[i].custom_service_number!=''){
+//			  				html += '<p class="clearfix">定制服务数量：'+companyList[i].custom_service_number+'</p>';
+//			  			}
+//			  			html += '</a>';
+		  			  html += '<p class="clearfix"><span>供应数量：'+(companyList[i].product_number==null?"":companyList[i].product_number)+
+							'</span><span>需求数量：'+(companyList[i].need_number==null?"":companyList[i].need_number)+'</span></p>'+
+							'<p class="clearfix">定制服务数量：'+(companyList[i].custom_service_number==null?"":companyList[i].custom_service_number)+'</p></a>';
 		  			  
 		  			var sContent = '<div class="wr-w1">'
 						+'<div class="mask"></div><div class="closeBtn"></div>'
