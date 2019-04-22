@@ -457,7 +457,7 @@ var contextPath="${pageContext.request.contextPath }";
 	}
 	
 	function clearOverlays(){
-		
+		lastMarker = null;
 		map.clearOverlays();
 	}
 	
