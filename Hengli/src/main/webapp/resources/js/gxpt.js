@@ -115,12 +115,21 @@
 //							+'<p>需求数量：'+companyList[i].need_number+'</p>'
 //							+'<p>定制服务数量：'+companyList[i].custom_service_number+'</p>'
 //							+'<div class="cbtn-w">'
-		  			sContent = sContent + '<div class="cbtn-w">'
-								+'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'
-								+'<a target="_blank" href="'+companyList[i].gxptURL+'" class="com-btn gxpt"></a>'
-							+'</div>'
-						+'</div>'
-					+'</div>';
+		  			sContent = sContent + '<div class="cbtn-w">';
+		  			if(companyList[i].homepage != null && companyList[i].homepage != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>';
+		  			}
+//								+'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'
+		  			if(companyList[i].gxptURL != null && companyList[i].gxptURL != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[i].gxptURL+'" class="com-btn gxpt"></a>';
+		  			}else{
+		  				sContent += '<a target="_blank" href="http://mujuyun.btob.casicloud.com/view/b2b/b2bCapability/list.html" class="com-btn gxpt"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//								+'<a target="_blank" href="'+companyList[i].gxptURL+'" class="com-btn gxpt"></a>'
+//							+'</div>'
+//						+'</div>'
+//					+'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(companyList[i].longitude,companyList[i].latitude,sContent);
@@ -146,11 +155,15 @@
 //											'<p>中心介绍：'+innovationCenterList[i].introduce+'</p>'+
 //											'<p>中心地址：'+innovationCenterList[i].address+'</p>'+
 //											'<div class="cbtn-w">'+
-		  			sContent = sContent + '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+innovationCenterList[i].homepage+'" class="com-btn zxzy"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+		  			sContent = sContent + '<div class="cbtn-w">';
+		  			if(innovationCenterList[i].homepage != null && innovationCenterList[i].homepage != ''){
+		  				sContent += '<a target="_blank" href="'+innovationCenterList[i].homepage+'" class="com-btn zxzy"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+innovationCenterList[i].homepage+'" class="com-btn zxzy"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(innovationCenterList[i].longitude,innovationCenterList[i].latitude,sContent);
@@ -180,12 +193,21 @@
 //											+'<p>需求数量：'+companyList[index].need_number+'</p>'
 //											+'<p>定制服务数量：'+companyList[index].custom_service_number+'</p>'
 //											+'<div class="cbtn-w">'
-			  			sContent = sContent + '<div class="cbtn-w">'
-												+'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'
-												+'<a target="_blank" href="'+companyList[index].gxptURL+'" class="com-btn gxpt"></a>'
-											+'</div>'
-										+'</div>'
-									+'</div>';
+			  			sContent = sContent + '<div class="cbtn-w">';
+			  			if(companyList[index].homepage != null && companyList[index].homepage != ''){
+			  				sContent += '<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>';
+			  			}
+			  			if(companyList[index].gxptURL != null && companyList[index].gxptURL != ''){
+			  				sContent += '<a target="_blank" href="'+companyList[index].gxptURL+'" class="com-btn gxpt"></a>';
+			  			}else{
+			  				sContent += '<a target="_blank" href="http://mujuyun.btob.casicloud.com/view/b2b/b2bCapability/list.html" class="com-btn gxpt"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//												+'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'
+//												+'<a target="_blank" href="'+companyList[index].gxptURL+'" class="com-btn gxpt"></a>'
+//											+'</div>'
+//										+'</div>'
+//									+'</div>';
   			  			
 	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude, sContent);
   			  		})
@@ -210,11 +232,15 @@
 //											'<p>中心介绍：'+innovationCenterList[index].introduce+'</p>'+
 //											'<p>中心地址：'+innovationCenterList[index].address+'</p>'+
 //											'<div class="cbtn-w">'+
-			  			sContent = sContent + '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+innovationCenterList[index].homepage+'" class="com-btn zxzy"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+			  			sContent = sContent + '<div class="cbtn-w">';
+			  			if(innovationCenterList[index].homepage != null && innovationCenterList[index].homepage != ''){
+			  				sContent += '<a target="_blank" href="'+innovationCenterList[index].homepage+'" class="com-btn zxzy"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+innovationCenterList[index].homepage+'" class="com-btn zxzy"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 			  			
 	  					openInfoWindow(innovationCenterList[index].longitude, innovationCenterList[index].latitude, sContent);
   			  		})

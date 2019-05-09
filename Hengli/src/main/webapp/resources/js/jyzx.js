@@ -120,11 +120,15 @@
 //											'<p>资料数量：'+collegesList[i].datum_num+'</p>'+
 //											'<p>报名培训数量：'+collegesList[i].enroll_num+'</p>'+
 //											'<div class="cbtn-w">'+
-					sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+					sContent += '<div class="cbtn-w">';
+					if(collegesList[i].homepage != null && collegesList[i].homepage != ''){
+						sContent += '<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>';
+					}
+					sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(collegesList[i].longitude,collegesList[i].latitude,sContent);
@@ -157,11 +161,15 @@
 //												'<p>资料数量：'+collegesList[index].datum_num+'</p>'+
 //												'<p>报名培训数量：'+collegesList[index].enroll_num+'</p>'+
 //												'<div class="cbtn-w">'+
-						sContent += '<div class="cbtn-w">'+
-													'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
-												'</div>'+
-											'</div>'+
-										'</div>';
+						sContent += '<div class="cbtn-w">';
+						if(collegesList[index].homepage != null && collegesList[index].homepage != ''){
+							sContent += '<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>';
+						}
+						sContent += '</div></div></div>';
+//													'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
+//												'</div>'+
+//											'</div>'+
+//										'</div>';
   			  			
 	  					openInfoWindow(collegesList[index].longitude, collegesList[index].latitude, sContent);
 	  					
@@ -231,11 +239,15 @@
 //											'<p>课程类型：'+lectureList[index].course_type+'</p>'+
 //											'<p>课程费用：'+lectureList[index].course_fee+'</p>'+
 //											'<div class="cbtn-w">'+
-			  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+lectureList[index].details_page+'" class="com-btn jzhdxq"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+			  			sContent += '<div class="cbtn-w">';
+			  			if(lectureList[index].details_page != null && lectureList[index].details_page != ''){
+			  				sContent += '<a target="_blank" href="'+lectureList[index].details_page+'" class="com-btn jzhdxq"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+lectureList[index].details_page+'" class="com-btn jzhdxq"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 			  			
 			  			openInfoWindow(lectureList[index].longitude, lectureList[index].latitude, sContent);
 			  		})
@@ -294,11 +306,15 @@
 //											'<p>课程数量：'+teacherList[index].course_num+'</p>'+
 //											'<p>讲师简介：'+teacherList[index].summary+'</p>'+
 //											'<div class="cbtn-w">'+
-			  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+teacherList[index].homepage+'" class="com-btn yxzy"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+			  			sContent += '<div class="cbtn-w">';
+			  			if(teacherList[index].homepage != null && teacherList[index].homepage != ''){
+			  				sContent += '<a target="_blank" href="'+teacherList[index].homepage+'" class="com-btn yxzy"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+teacherList[index].homepage+'" class="com-btn yxzy"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 			  			
 			  			openInfoWindow(teacherList[index].longitude, teacherList[index].latitude, sContent);
 			  		})

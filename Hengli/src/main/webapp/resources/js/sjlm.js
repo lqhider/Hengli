@@ -96,11 +96,17 @@
 		  			}
 //											'<p>发布需求数量：'+companyList[i].requirement_num+'</p>'+
 //											'<div class="cbtn-w">'+
-		  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+companyList[i].demand_hall+'" class="com-btn xqdt"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+		  			sContent += '<div class="cbtn-w">';
+		  			if(companyList[i].demand_hall != null && companyList[i].demand_hall != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[i].demand_hall+'" class="com-btn xqdt"></a>';
+		  			}else{
+		  				sContent += '<a target="_blank" href="http://mujufw.casicloud.com/view/wants_list.htm" class="com-btn xqdt"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+companyList[i].demand_hall+'" class="com-btn xqdt"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(companyList[i].longitude, companyList[i].latitude, sContent);
@@ -122,11 +128,17 @@
 		  			}
 //										'<p>发布需求数量：'+companyList[index].requirement_num+'</p>'+
 //										'<div class="cbtn-w">'+
-	  			  	sContent += '<div class="cbtn-w">'+
-											'<a target="_blank" href="'+companyList[index].demand_hall+'" class="com-btn xqdt"></a>'+
-										'</div>'+
-									'</div>'+
-								'</div>';
+	  			  	sContent += '<div class="cbtn-w">';
+	  			  	if(companyList[index].demand_hall != null && companyList[index].demand_hall != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[index].demand_hall+'" class="com-btn xqdt"></a>';
+		  			}else{
+		  				sContent += '<a target="_blank" href="http://mujufw.casicloud.com/view/wants_list.htm" class="com-btn xqdt"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//											'<a target="_blank" href="'+companyList[index].demand_hall+'" class="com-btn xqdt"></a>'+
+//										'</div>'+
+//									'</div>'+
+//								'</div>';
   			  			
 	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude, sContent);
   			  		})
@@ -157,11 +169,15 @@
 //											'<p>领域：'+designCompanyList[i].domain+'</p>'+
 //											'<p>资质：'+designCompanyList[i].qualifications+'</p>'+
 //											'<div class="cbtn-w">'+
-			  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+designCompanyList[i].homepage+'" class="com-btn gszy"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+			  			sContent += '<div class="cbtn-w">';
+			  			if(designCompanyList[i].homepage != null && designCompanyList[i].homepage != ''){
+			  				sContent += '<a target="_blank" href="'+designCompanyList[i].homepage+'" class="com-btn gszy"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+designCompanyList[i].homepage+'" class="com-btn gszy"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(designCompanyList[i].longitude, designCompanyList[i].latitude, sContent);
@@ -187,11 +203,15 @@
 //										'<p>领域：'+designCompanyList[index].domain+'</p>'+
 //										'<p>资质：'+designCompanyList[index].qualifications+'</p>'+
 //										'<div class="cbtn-w">'+
-		  			  	sContent += '<div class="cbtn-w">'+
-											'<a target="_blank" href="'+designCompanyList[index].homepage+'" class="com-btn gszy"></a>'+
-										'</div>'+
-									'</div>'+
-								'</div>';
+		  			  	sContent += '<div class="cbtn-w">';
+		  			  	if(designCompanyList[index].homepage != null && designCompanyList[index].homepage != ''){
+		  			  		sContent += '<a target="_blank" href="'+designCompanyList[index].homepage+'" class="com-btn gszy"></a>';
+		  			  	}
+		  			  	sContent += '</div></div></div>';
+//											'<a target="_blank" href="'+designCompanyList[index].homepage+'" class="com-btn gszy"></a>'+
+//										'</div>'+
+//									'</div>'+
+//								'</div>';
   			  			
 	  					openInfoWindow(designCompanyList[index].longitude, designCompanyList[index].latitude, sContent);
 	  					
@@ -257,11 +277,15 @@
 //											'<p>资历：'+designerList[index].seniority+'</p>'+
 //											'<p>工作经验：'+designerList[index].work_experience+'年</p>'+
 //											'<div class="cbtn-w">'+
-			  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+designerList[index].homepage+'" class="com-btn sjszy"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+			  			sContent += '<div class="cbtn-w">';
+			  			if(designerList[index].homepage != null && designerList[index].homepage != ''){
+			  				sContent += '<a target="_blank" href="'+designerList[index].homepage+'" class="com-btn sjszy"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+designerList[index].homepage+'" class="com-btn sjszy"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 			  			
 			  			openInfoWindow(designerList[index].longitude, designerList[index].latitude, sContent);
 			  		})

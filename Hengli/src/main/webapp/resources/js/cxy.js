@@ -100,12 +100,21 @@
 //											'<p>难题数量：'+companyList[i].conundrum_number+'</p>'+
 //											'<p>合作数量：'+companyList[i].cooperate_number+'</p>'+
 //											'<div class="cbtn-w">'+
-		  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'+
-												'<a target="_blank" href="'+companyList[i].conundrum_more+'" class="com-btn gdnt"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+		  			sContent += '<div class="cbtn-w">';
+		  			if(companyList[i].homepage != null && companyList[i].homepage != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>';
+		  			}
+		  			if(companyList[i].conundrum_more != null && companyList[i].conundrum_more != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[i].conundrum_more+'" class="com-btn gdnt"></a>';
+		  			}else{
+		  				sContent += '<a target="_blank" href="http://iur.casicloud.com/view/problem_list.htm" class="com-btn gdnt"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+companyList[i].homepage+'" class="com-btn gszy"></a>'+
+//												'<a target="_blank" href="'+companyList[i].conundrum_more+'" class="com-btn gdnt"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(companyList[i].longitude, companyList[i].latitude, sContent);
@@ -154,12 +163,21 @@
 //											'<p>成果数量：'+collegesList[i].achievement_num+'</p>'+
 //											'<p>合作数量：'+collegesList[i].cooperate_num+'</p>'+
 //											'<div class="cbtn-w">'+
-		  			sContent += '<div class="cbtn-w">'+
-												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
-												'<a target="_blank" href="'+collegesList[i].more_achievement+'" class="com-btn gdcg"></a>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+		  			sContent += '<div class="cbtn-w">';
+		  			if(collegesList[i].homepage != null && collegesList[i].homepage != ''){
+		  				sContent += '<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>';
+		  			}
+		  			if(collegesList[i].more_achievement != null && collegesList[i].more_achievement != ''){
+		  				sContent += '<a target="_blank" href="'+collegesList[i].more_achievement+'" class="com-btn gdcg"></a>';
+		  			}else{
+		  				sContent += '<a target="_blank" href="http://iur.casicloud.com/view/achievement_list.htm" class="com-btn gdcg"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//												'<a target="_blank" href="'+collegesList[i].homepage+'" class="com-btn yxzy"></a>'+
+//												'<a target="_blank" href="'+collegesList[i].more_achievement+'" class="com-btn gdcg"></a>'+
+//											'</div>'+
+//										'</div>'+
+//									'</div>';
 		  			  
 		  			  //地图标注
 		  			  addMarker(collegesList[i].longitude, collegesList[i].latitude, sContent);
@@ -185,12 +203,21 @@
 //										'<p>难题数量：'+companyList[index].conundrum_number+'</p>'+
 //										'<p>合作数量：'+companyList[index].cooperate_number+'</p>'+
 //										'<div class="cbtn-w">'+
-		  			sContent += '<div class="cbtn-w">'+
-											'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'+
-											'<a target="_blank" href="'+companyList[index].conundrum_more+'" class="com-btn gdnt"></a>'+
-										'</div>'+
-									'</div>'+
-								'</div>';
+		  			sContent += '<div class="cbtn-w">';
+		  			if(companyList[index].homepage != null && companyList[index].homepage != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>';
+		  			}
+		  			if(companyList[index].conundrum_more != null && companyList[index].conundrum_more != ''){
+		  				sContent += '<a target="_blank" href="'+companyList[index].conundrum_more+'" class="com-btn gdnt"></a>';
+		  			}else{
+		  				sContent += '<a target="_blank" href="http://iur.casicloud.com/view/problem_list.htm" class="com-btn gdnt"></a>';
+		  			}
+		  			sContent += '</div></div></div>';
+//											'<a target="_blank" href="'+companyList[index].homepage+'" class="com-btn gszy"></a>'+
+//											'<a target="_blank" href="'+companyList[index].conundrum_more+'" class="com-btn gdnt"></a>'+
+//										'</div>'+
+//									'</div>'+
+//								'</div>';
   			  			
 	  					openInfoWindow(companyList[index].longitude, companyList[index].latitude, sContent);
   			  		})
@@ -219,12 +246,21 @@
 //								'<p>成果数量：'+collegesList[index].achievement_num+'</p>'+
 //								'<p>合作数量：'+collegesList[index].cooperate_num+'</p>'+
 //								'<div class="cbtn-w">'+
-			  			sContent += '<div class="cbtn-w">'+
-									'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
-									'<a target="_blank" href="'+collegesList[index].more_achievement+'" class="com-btn gdcg"></a>'+
-								'</div>'+
-							'</div>'+
-						'</div>';
+			  			sContent += '<div class="cbtn-w">';
+			  			if(collegesList[index].homepage != null && collegesList[index].homepage != ''){
+			  				sContent += '<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>';
+			  			}
+			  			if(collegesList[index].more_achievement != null && collegesList[index].more_achievement != ''){
+			  				sContent += '<a target="_blank" href="'+collegesList[index].more_achievement+'" class="com-btn gdcg"></a>';
+			  			}else{
+			  				sContent += '<a target="_blank" href="http://iur.casicloud.com/view/achievement_list.htm" class="com-btn gdcg"></a>';
+			  			}
+			  			sContent += '</div></div></div>';
+//									'<a target="_blank" href="'+collegesList[index].homepage+'" class="com-btn yxzy"></a>'+
+//									'<a target="_blank" href="'+collegesList[index].more_achievement+'" class="com-btn gdcg"></a>'+
+//								'</div>'+
+//							'</div>'+
+//						'</div>';
 			  			
 	  					openInfoWindow(collegesList[index].longitude, collegesList[index].latitude, sContent);
   			  		})
