@@ -424,6 +424,7 @@
   	  			        "topRadius":1,
   	  			        "valueField": "count",
   	  					"labelText": "[[value]]",
+  	  					"showAllValueLabels":true,
   	  			    }],
   	  			    "depth3D": 40,
   	  				"angle": 30,
