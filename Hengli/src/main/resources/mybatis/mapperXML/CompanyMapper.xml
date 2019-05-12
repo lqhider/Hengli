@@ -63,6 +63,8 @@
 		LEFT JOIN company ON industrial_area.id = company.industrial_area
 		GROUP BY
 			industrial_area.id
+		ORDER BY
+			CONVERT(industrial_area.id,SIGNED)
 	</select>
 	
 	<!-- 创建企业 -->
