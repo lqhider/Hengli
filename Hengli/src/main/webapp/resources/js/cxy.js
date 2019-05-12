@@ -398,6 +398,8 @@
 			      	        "type": "column",
 			      	        "valueField": "conundrum_number",
 			      			"labelText": "[[value]]",
+			      			"showAllValueLabels":true,
+			      			"columnWidth":0.7
 			      	    }, {
 			      	        "balloonText": "[[category]] 合作数量 : <b>[[value]]</b>",
 			      	        "fillAlphas": 0.9,
@@ -407,11 +409,15 @@
 			      	        "type": "column",
 			      	        "valueField": "cooperate_number",
 			      			"labelText": "[[value]]",
-			      			
+			      			"showAllValueLabels":true,
+			      			"columnWidth":0.7
 			      	    }],
 			      	    "plotAreaFillAlphas": 0.1,
 			      	    "depth3D": 60,
 			      	    "angle": 30,
+			      	    "chartCursor": {
+			      	    	"oneBalloonOnly":true
+	  	  			    },
 			      	    "categoryField": "industrial_area",
 			      	    "categoryAxis": {
 			      	        "gridPosition": "start"
