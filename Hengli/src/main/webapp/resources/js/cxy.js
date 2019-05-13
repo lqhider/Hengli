@@ -414,10 +414,7 @@
 			      	    }],
 			      	    "plotAreaFillAlphas": 0.1,
 			      	    "depth3D": 60,
-			      	    "angle": 30,
-			      	    "chartCursor": {
-			      	    	"oneBalloonOnly":true
-	  	  			    },
+			      	    "angle": 45,
 			      	    "categoryField": "industrial_area",
 			      	    "categoryAxis": {
 			      	        "gridPosition": "start"
