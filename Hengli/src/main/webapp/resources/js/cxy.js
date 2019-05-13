@@ -424,7 +424,7 @@
 			      	    },
 			      	    "export": {
 			      	    	"enabled": false
-			      	     }
+			      	    }
 			      	});
 			      	jQuery('.chart-input').off().on('input change',function() {
 			      		var property	= jQuery(this).data('property');
