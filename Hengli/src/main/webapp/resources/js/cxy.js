@@ -386,7 +386,9 @@
 			      	        "stackType": "3d",
 			      	        "position": "left",
 			      	        "title": "",
-			      	        "labelsEnabled":false
+			      	        "labelsEnabled":false,
+			      	        "minMaxMultiplier":1.5,
+			      	        "minimum":0
 			      	    }],
 			      	    "startDuration": 1,
 			      	    "graphs": [{
