@@ -401,7 +401,7 @@
 			      	        "valueField": "conundrum_number",
 			      			"labelText": "[[value]]",
 			      			"showAllValueLabels":true,
-			      			"columnWidth":0.7
+			      			"columnWidth":0.4
 			      	    }, {
 			      	        "balloonText": "[[category]] 合作数量 : <b>[[value]]</b>",
 			      	        "fillAlphas": 0.9,
@@ -412,7 +412,7 @@
 			      	        "valueField": "cooperate_number",
 			      			"labelText": "[[value]]",
 			      			"showAllValueLabels":true,
-			      			"columnWidth":0.7
+			      			"columnWidth":0.4
 			      	    }],
 			      	    "plotAreaFillAlphas": 0.1,
 			      	    "depth3D": 60,
